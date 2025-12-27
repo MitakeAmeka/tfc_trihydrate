@@ -1,0 +1,14 @@
+{
+  "itemGroup.tfc_trihydrate": "Example Mod Tab",
+  "block.tfc_trihydrate.example_block": "Example Block",
+  "item.tfc_trihydrate.example_item": "Example Item",
+  "item.tfc_trihydrate.ltk_tool": "LTK tool",
+
+  "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
+  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",
+  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml.title": "TFC Trihydrate Configs",
+  "tfc_trihydrate.configuration.items": "Item List",
+  "tfc_trihydrate.configuration.logDirtBlock": "Log Dirt Block",
+  "tfc_trihydrate.configuration.magicNumberIntroduction": "Magic Number Text",
+  "tfc_trihydrate.configuration.magicNumber": "Magic Number"
+}
