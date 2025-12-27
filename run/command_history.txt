@@ -1,0 +1,50 @@
+/gamemode survival
+/gamemode creative
+/time set day
+/gamerule doDaylightCycle false
+/time set day
+/time set clear
+/time set day
+/time set clear
+/time set day
+/gamemode survival
+/gamemode creative
+/time set day
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/spawnpoint
+/effect give @s minecraft:instant_health infinite
+/effect clear
+/gamemode creative
+/gamemode survival
+/effect give @s minecraft:instant_health infinite
+/effect clear
+/gamemode creative
+/gamemode survival
+/effect give @s minecraft:instant_health 5
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode adventure
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/gamemode survival
+/gamemode creative
+/time set day
+/gamemode survival
+/gamemode creative
