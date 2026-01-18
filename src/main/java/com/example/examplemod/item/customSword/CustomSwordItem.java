@@ -1,8 +1,7 @@
-package com.example.examplemod.customSword;
+package com.example.examplemod.item.customSword;
 
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.component.Tool;
 
 public class CustomSwordItem extends SwordItem {
     

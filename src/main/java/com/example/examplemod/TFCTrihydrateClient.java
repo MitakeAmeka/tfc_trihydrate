@@ -2,14 +2,10 @@ package com.example.examplemod;
 
 import com.example.examplemod.bakedModel.CustomItemExtensions;
 import com.example.examplemod.bakedModel.CustomModel;
-import net.dries007.tfc.common.TFCTiers;
-import net.dries007.tfc.common.items.TFCMaceItem;
+import com.example.examplemod.item.ModItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -22,13 +18,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.event.RenderFrameEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.Map;
 
@@ -57,7 +49,7 @@ public class TFCTrihydrateClient {
                 // The only instance of our IClientItemExtensions, and as such, the only instance of our BEWLR.
                 new CustomItemExtensions(),
                 // A vararg list of items that use this BEWLR.
-                TFCTrihydrate.LTK_TOOL.get()
+                ModItems.LTK_TOOL.get()
         );
     }
 
@@ -68,16 +60,16 @@ public class TFCTrihydrateClient {
     public static void onModelBaked(ModelEvent.ModifyBakingResult event){
         // wrench item model
         Map<ModelResourceLocation, BakedModel> modelRegistry = event.getModels();
-        ModelResourceLocation location = new ModelResourceLocation(BuiltInRegistries.ITEM.getKey(TFCTrihydrate.LTK_TOOL.get()), "inventory");
+        ModelResourceLocation location = new ModelResourceLocation(BuiltInRegistries.ITEM.getKey(ModItems.LTK_TOOL.get()), "inventory");
         BakedModel existingModel = modelRegistry.get(location);
 
         ModelResourceLocation frontLocation = new ModelResourceLocation(ResourceLocation.fromNamespaceAndPath("tfc_trihydrate", "ltk_tool_front"), "inventory");
-        ItemStack itemStack = new ItemStack(TFCTrihydrate.LTK_TOOL.get());
+        ItemStack itemStack = new ItemStack(ModItems.LTK_TOOL.get());
         itemStack.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(1));
 
 
         ModelResourceLocation backLocation = new ModelResourceLocation(ResourceLocation.fromNamespaceAndPath("tfc_trihydrate", "ltk_tool_back"), "inventory");
-        ItemStack itemStack2 = new ItemStack(TFCTrihydrate.LTK_TOOL.get());
+        ItemStack itemStack2 = new ItemStack(ModItems.LTK_TOOL.get());
         itemStack2.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(2));
 
 

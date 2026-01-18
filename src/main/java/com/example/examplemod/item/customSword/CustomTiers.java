@@ -1,4 +1,4 @@
-package com.example.examplemod.customSword;
+package com.example.examplemod.item.customSword;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;

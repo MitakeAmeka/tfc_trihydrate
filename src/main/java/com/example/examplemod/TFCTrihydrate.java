@@ -1,24 +1,14 @@
 package com.example.examplemod;
 
-import com.example.examplemod.customSword.CustomSwordItem;
-import com.example.examplemod.customSword.CustomTiers;
-import net.dries007.tfc.common.items.TFCMaceItem;
-import net.dries007.tfc.compat.jei.JEIIntegration;
+import com.example.examplemod.item.ModItems;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -28,12 +18,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(TFCTrihydrate.MODID)
@@ -58,17 +43,7 @@ public class TFCTrihydrate {
     ///public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
     ///        .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
-    public static final DeferredItem<Item> LTK_TOOL = ITEMS.register("ltk_tool",
-            () -> new CustomSwordItem(
-                    CustomTiers.LTK,
-                    new Item.Properties()
-                            .rarity(Rarity.UNCOMMON)
-                            .stacksTo(1)
-                            .attributes(
-                                    SwordItem.createAttributes(CustomTiers.LTK, 3, -2.4f)
-                            )
-            )
-    );
+
 
 
 
@@ -94,7 +69,8 @@ public class TFCTrihydrate {
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
-        ITEMS.register(modEventBus);
+        /// ITEMS.register(modEventBus);
+        ModItems.init(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         ///CREATIVE_MODE_TABS.register(modEventBus);
 
@@ -126,7 +102,7 @@ public class TFCTrihydrate {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(LTK_TOOL);
+            event.accept(ModItems.LTK_TOOL);
         }
     }
 
