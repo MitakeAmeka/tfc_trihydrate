@@ -22,7 +22,11 @@
 	"overrides": [
 		{"predicate": {"custom_model_data": 1}, "model": "tfc_trihydrate:item/ltk_tool_front"},
 		{"predicate": {"custom_model_data": 2}, "model": "tfc_trihydrate:item/ltk_tool_back"}
-
 	],
-	"display": {}
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [61.54, -11.34, 73.8],
+			"translation": [0.5, -2, 0.5]
+		}
+	}
 }

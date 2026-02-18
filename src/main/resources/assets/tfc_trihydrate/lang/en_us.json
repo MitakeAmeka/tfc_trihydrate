@@ -1,8 +1,93 @@
 {
-  "itemGroup.tfc_trihydrate": "Example Mod Tab",
-  "block.tfc_trihydrate.example_block": "Example Block",
-  "item.tfc_trihydrate.example_item": "Example Item",
+  "itemGroup.tfc_trihydrate": "TFC Trihydrate",
+
   "item.tfc_trihydrate.ltk_tool": "LTK tool",
+  "item.tfc_trihydrate.bucket.simple_flotation_solution": "Simple Flotation Solution Bucket",
+  "block.tfc_trihydrate.fluid.simple_flotation_solution": "Simple Flotation Solution",
+  "fluid.tfc_trihydrate.simple_flotation_solution": "Simple Flotation Solution",
+
+  "item.tfc_trihydrate.bucket.lime_slurry": "Lime Slurry Bucket",
+  "block.tfc_trihydrate.fluid.lime_slurry": "Lime Slurry",
+  "fluid.tfc_trihydrate.lime_slurry": "Lime Slurry",
+
+
+  "item.tfc_trihydrate.crystal_chunk.hematite": "Pure Hematite Chunk",
+  "item.tfc_trihydrate.ore_chunk.hematite": "Hematite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.hematite": "Poor Hematite Chunk",
+
+  "item.tfc_trihydrate.pure_coarse_powder.hematite": "Pure Hematite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.hematite": "Hematite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.hematite": "Dirty Hematite Coarse Powder",
+
+  "item.tfc_trihydrate.concentrate.hematite": "Hematite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.hematite": "Hematite Concentrate Pellet",
+  
+
+  "item.tfc_trihydrate.crystal_chunk.magnetite": "Pure Magnetite Chunk",
+  "item.tfc_trihydrate.ore_chunk.magnetite": "Magnetite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.magnetite": "Poor Magnetite Chunk",
+
+  "item.tfc_trihydrate.pure_coarse_powder.magnetite": "Pure Magnetite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.magnetite": "Magnetite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.magnetite": "Dirty Magnetite Coarse Powder",
+
+  "item.tfc_trihydrate.concentrate.magnetite": "Magnetite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.magnetite": "Magnetite Concentrate Pellet",
+
+
+  "item.tfc_trihydrate.crystal_chunk.limonite": "Pure Limonite Chunk",
+  "item.tfc_trihydrate.ore_chunk.limonite": "Limonite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.limonite": "Poor Limonite Chunk",
+
+  "item.tfc_trihydrate.pure_coarse_powder.limonite": "Pure Limonite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.limonite": "Limonite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.limonite": "Dirty Limonite Coarse Powder",
+
+  "item.tfc_trihydrate.concentrate.limonite": "Limonite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.limonite": "Limonite Concentrate Pellet",
+
+
+  "item.tfc_trihydrate.crystal_chunk.native_copper": "Pure Native Copper Chunk",
+  "item.tfc_trihydrate.ore_chunk.native_copper": "Native Copper Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.native_copper": "Poor Native Copper Chunk",
+
+  "item.tfc_trihydrate.pure_coarse_powder.native_copper": "Pure Native Copper Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.native_copper": "Native Copper Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.native_copper": "Dirty Native Copper Coarse Powder",
+
+  "item.tfc_trihydrate.concentrate.native_copper": "Native Copper Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.native_copper": "Native Copper Concentrate Pellet",
+
+
+  "item.tfc_trihydrate.crystal_chunk.native_silver": "Pure Native Silver Chunk",
+  "item.tfc_trihydrate.ore_chunk.native_silver": "Native Silver Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.native_silver": "Poor Native Silver Chunk",
+
+  "item.tfc_trihydrate.pure_coarse_powder.native_silver": "Pure Native Silver Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.native_silver": "Native Silver Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.native_silver": "Dirty Native Silver Coarse Powder",
+
+  "item.tfc_trihydrate.concentrate.native_silver": "Native Silver Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.native_silver": "Native Silver Concentrate Pellet",
+
+
+  "item.tfc_trihydrate.crystal_chunk.native_gold": "Pure Native Gold Chunk",
+  "item.tfc_trihydrate.ore_chunk.native_gold": "Native Gold Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.native_gold": "Poor Native Gold Chunk",
+
+  "item.tfc_trihydrate.pure_coarse_powder.native_gold": "Pure Native Gold Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.native_gold": "Native Gold Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.native_gold": "Dirty Native Gold Coarse Powder",
+
+  "item.tfc_trihydrate.concentrate.native_gold": "Native Gold Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.native_gold": "Native Gold Concentrate Pellet",
+
+  "effect.tfc_trihydrate.fear": "Fear",
+
+  "tfc_trihydrate.message.fear": "This deep place makes you feel suffocated",
+  "tfc_trihydrate.message.fear2": "You find it hard to catch your breath.",
+
+  "tfc_trihydrate.message.fearless": "You have successfully crafted your first iron. The potential of this metal seems far greater than you imagined, and you find yourself drawn to deeper veins.",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

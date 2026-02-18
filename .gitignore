@@ -24,3 +24,19 @@ runs
 run-data
 
 repo
+/src/main/resources/assets/tfc_trihydrate/textures/item/bacon_burger.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/cat_man.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/cheese_burger.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/classic_burger.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/copper_ore.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_idle.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_small.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_talk.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_talk2.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_talk3.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_talk4.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_talk5.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_talk6.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/ltk_tool.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/pineapple_burger.png
+/src/main/resources/assets/tfc_trihydrate/textures/item/rock.png

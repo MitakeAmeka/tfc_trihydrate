@@ -1,0 +1,27 @@
+{
+  "type": "tfc:advanced_shapeless_crafting",
+  "ingredients": [
+    [
+      {
+        "item": "tfc:ore/normal_limonite"
+      }
+    ],
+    {
+      "tag": "c:tools/hammer"
+    }
+  ],
+  "primary_ingredient": {
+    "tag": "c:tools/hammer"
+  },
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "result": {
+    "count": 2,
+    "id": "tfc_trihydrate:ore_chunk/limonite"
+  }
+}

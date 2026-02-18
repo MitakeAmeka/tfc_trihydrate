@@ -1,0 +1,10 @@
+{
+  "values": [
+    "tfc_trihydrate:concentrate/hematite",
+    "tfc_trihydrate:concentrate/limonite",
+    "tfc_trihydrate:concentrate/magnetite",
+    "tfc_trihydrate:concentrate/native_gold",
+    "tfc_trihydrate:concentrate/native_silver",
+    "tfc_trihydrate:concentrate/native_copper"
+  ]
+}

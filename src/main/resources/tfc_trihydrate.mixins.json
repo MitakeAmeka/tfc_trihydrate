@@ -1,9 +1,10 @@
 {
   "required": true,
-  "package": "com.example.examplemod.mixin",
+  "package": "net.bauxite_ltk.tfc_trihydrate.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "TFCMaceItemMixin"
+    "TFCMaceItemMixin",
+    "TFCBaseRecipeCategoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

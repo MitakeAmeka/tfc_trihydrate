@@ -1,0 +1,15 @@
+{
+  "type": "tfc:barrel_instant",
+  "input_fluid": {
+    "amount": 250,
+    "fluid": "tfc:limewater"
+  },
+  "input_item": {
+    "count": 1,
+    "item": "tfc:powder/lime"
+  },
+  "output_fluid": {
+    "amount": 250,
+    "id": "tfc_trihydrate:lime_slurry"
+  }
+}
