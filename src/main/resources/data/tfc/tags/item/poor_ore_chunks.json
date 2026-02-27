@@ -1,0 +1,13 @@
+{
+  "values": [
+    "tfc_trihydrate:poor_ore_chunk/hematite",
+    "tfc_trihydrate:poor_ore_chunk/limonite",
+    "tfc_trihydrate:poor_ore_chunk/magnetite",
+    "tfc_trihydrate:poor_ore_chunk/malachite",
+    "tfc_trihydrate:poor_ore_chunk/cassiterite",
+    "tfc_trihydrate:poor_ore_chunk/tetrahedrite",
+    "tfc_trihydrate:poor_ore_chunk/native_gold",
+    "tfc_trihydrate:poor_ore_chunk/native_silver",
+    "tfc_trihydrate:poor_ore_chunk/native_copper"
+  ]
+}

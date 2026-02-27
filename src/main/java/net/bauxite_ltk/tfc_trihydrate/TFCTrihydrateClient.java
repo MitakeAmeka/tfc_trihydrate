@@ -1,5 +1,6 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
+import blusunrize.immersiveengineering.common.blocks.multiblocks.BlastFurnaceMultiblock;
 import net.bauxite_ltk.tfc_trihydrate.bakedModel.CustomItemExtensions;
 import net.bauxite_ltk.tfc_trihydrate.bakedModel.CustomItemRender;
 import net.bauxite_ltk.tfc_trihydrate.bakedModel.CustomModel;

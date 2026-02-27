@@ -74,7 +74,6 @@ public class ModCreativeTabs {
                 output.accept(NATIVE_SILVER_COARSE_POWDER.get());
                 output.accept(NATIVE_SILVER_DIRTY_COARSE_POWDER.get());
 
-
                 output.accept(TFCItems.GRADED_ORES.get(Ore.NATIVE_GOLD).get(Ore.Grade.RICH));
                 output.accept(TFCItems.GRADED_ORES.get(Ore.NATIVE_GOLD).get(Ore.Grade.NORMAL));
                 output.accept(TFCItems.GRADED_ORES.get(Ore.NATIVE_GOLD).get(Ore.Grade.POOR));
@@ -84,14 +83,48 @@ public class ModCreativeTabs {
                 output.accept(NATIVE_GOLD_PURE_COARSE_POWDER.get());
                 output.accept(NATIVE_GOLD_COARSE_POWDER.get());
                 output.accept(NATIVE_GOLD_DIRTY_COARSE_POWDER.get());
-                
 
+                output.accept(TFCItems.GRADED_ORES.get(Ore.MALACHITE).get(Ore.Grade.RICH));
+                output.accept(TFCItems.GRADED_ORES.get(Ore.MALACHITE).get(Ore.Grade.NORMAL));
+                output.accept(TFCItems.GRADED_ORES.get(Ore.MALACHITE).get(Ore.Grade.POOR));
+                output.accept(MALACHITE_CRYSTAL_CHUNK.get());
+                output.accept(MALACHITE_ORE_CHUNK.get());
+                output.accept(MALACHITE_POOR_ORE_CHUNK.get());
+                output.accept(MALACHITE_PURE_COARSE_POWDER.get());
+                output.accept(MALACHITE_COARSE_POWDER.get());
+                output.accept(MALACHITE_DIRTY_COARSE_POWDER.get());
+
+                output.accept(TFCItems.GRADED_ORES.get(Ore.TETRAHEDRITE).get(Ore.Grade.RICH));
+                output.accept(TFCItems.GRADED_ORES.get(Ore.TETRAHEDRITE).get(Ore.Grade.NORMAL));
+                output.accept(TFCItems.GRADED_ORES.get(Ore.TETRAHEDRITE).get(Ore.Grade.POOR));
+                output.accept(TETRAHEDRITE_CRYSTAL_CHUNK.get());
+                output.accept(TETRAHEDRITE_ORE_CHUNK.get());
+                output.accept(TETRAHEDRITE_POOR_ORE_CHUNK.get());
+                output.accept(TETRAHEDRITE_PURE_COARSE_POWDER.get());
+                output.accept(TETRAHEDRITE_COARSE_POWDER.get());
+                output.accept(TETRAHEDRITE_DIRTY_COARSE_POWDER.get());
+
+                output.accept(TFCItems.GRADED_ORES.get(Ore.CASSITERITE).get(Ore.Grade.RICH));
+                output.accept(TFCItems.GRADED_ORES.get(Ore.CASSITERITE).get(Ore.Grade.NORMAL));
+                output.accept(TFCItems.GRADED_ORES.get(Ore.CASSITERITE).get(Ore.Grade.POOR));
+                output.accept(CASSITERITE_CRYSTAL_CHUNK.get());
+                output.accept(CASSITERITE_ORE_CHUNK.get());
+                output.accept(CASSITERITE_POOR_ORE_CHUNK.get());
+                output.accept(CASSITERITE_PURE_COARSE_POWDER.get());
+                output.accept(CASSITERITE_COARSE_POWDER.get());
+                output.accept(CASSITERITE_DIRTY_COARSE_POWDER.get());
+                
+                
                 output.accept(HEMATITE_CONCENTRATE.get());
                 output.accept(LIMONITE_CONCENTRATE.get());
                 output.accept(MAGNETITE_CONCENTRATE.get());
                 output.accept(NATIVE_COPPER_CONCENTRATE.get());
                 output.accept(NATIVE_SILVER_CONCENTRATE.get());
                 output.accept(NATIVE_GOLD_CONCENTRATE.get());
+                output.accept(MALACHITE_CONCENTRATE.get());
+                output.accept(TETRAHEDRITE_CONCENTRATE.get());
+                output.accept(CASSITERITE_CONCENTRATE.get());
+                
 
                 output.accept(SIMPLE_FLOTATION_SOLUTION_BUCKET);
                 output.accept(LIME_SLURRY_BUCKET);

@@ -1,0 +1,8 @@
+newmtl mixer
+map_Kd mixer.png
+
+newmtl multiblock_base
+map_Kd multiblock_base.png
+
+newmtl multiblock_components
+map_Kd multiblock_components.png

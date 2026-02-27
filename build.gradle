@@ -145,11 +145,31 @@ dependencies {
     //fg.deobf("curse.maven:terrafirmacraft-302973:${tfc_version}")
     implementation "curse.maven:terrafirmacraft-302973:${tfc_version}"
 
+    implementation "curse.maven:immersive-engineering-231951:${ie_version}"
+
+
+
+
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
 
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
 
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+
+
+    jarJar(implementation("malte0811:BlockModelSplitter")) {
+        version {
+            strictly '[2.0.0,3)'
+            prefer '2.0.1'
+        }
+    }
+    jarJar(implementation("malte0811:DualCodecs")) {
+        version {
+            strictly "[${version_dualcodecs},1)"
+            prefer "${version_dualcodecs}"
+        }
+    }
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

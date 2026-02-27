@@ -3,6 +3,8 @@ package net.bauxite_ltk.tfc_trihydrate.item;
 import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
 import net.bauxite_ltk.tfc_trihydrate.item.customSword.CustomSwordItem;
 import net.bauxite_ltk.tfc_trihydrate.item.customSword.CustomTiers;
+import net.dries007.tfc.common.component.heat.HeatComponent;
+import net.dries007.tfc.common.component.heat.HeatDefinition;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -77,7 +79,29 @@ public class ModItems {
     public static final DeferredItem<Item> NATIVE_GOLD_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/native_gold");
     public static final DeferredItem<Item> NATIVE_GOLD_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/native_gold");
 
+    public static final DeferredItem<Item> MALACHITE_CRYSTAL_CHUNK = ITEMS.registerSimpleItem("crystal_chunk/malachite");
+    public static final DeferredItem<Item> MALACHITE_CONCENTRATE = ITEMS.registerSimpleItem("concentrate/malachite");
+    public static final DeferredItem<Item> MALACHITE_PURE_COARSE_POWDER = ITEMS.registerSimpleItem("pure_coarse_powder/malachite");
+    public static final DeferredItem<Item> MALACHITE_ORE_CHUNK = ITEMS.registerSimpleItem("ore_chunk/malachite");
+    public static final DeferredItem<Item> MALACHITE_COARSE_POWDER = ITEMS.registerSimpleItem("coarse_powder/malachite");
+    public static final DeferredItem<Item> MALACHITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/malachite");
+    public static final DeferredItem<Item> MALACHITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/malachite");
 
+    public static final DeferredItem<Item> TETRAHEDRITE_CRYSTAL_CHUNK = ITEMS.registerSimpleItem("crystal_chunk/tetrahedrite");
+    public static final DeferredItem<Item> TETRAHEDRITE_CONCENTRATE = ITEMS.registerSimpleItem("concentrate/tetrahedrite");
+    public static final DeferredItem<Item> TETRAHEDRITE_PURE_COARSE_POWDER = ITEMS.registerSimpleItem("pure_coarse_powder/tetrahedrite");
+    public static final DeferredItem<Item> TETRAHEDRITE_ORE_CHUNK = ITEMS.registerSimpleItem("ore_chunk/tetrahedrite");
+    public static final DeferredItem<Item> TETRAHEDRITE_COARSE_POWDER = ITEMS.registerSimpleItem("coarse_powder/tetrahedrite");
+    public static final DeferredItem<Item> TETRAHEDRITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/tetrahedrite");
+    public static final DeferredItem<Item> TETRAHEDRITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/tetrahedrite");
+
+    public static final DeferredItem<Item> CASSITERITE_CRYSTAL_CHUNK = ITEMS.registerSimpleItem("crystal_chunk/cassiterite");
+    public static final DeferredItem<Item> CASSITERITE_CONCENTRATE = ITEMS.registerSimpleItem("concentrate/cassiterite");
+    public static final DeferredItem<Item> CASSITERITE_PURE_COARSE_POWDER = ITEMS.registerSimpleItem("pure_coarse_powder/cassiterite");
+    public static final DeferredItem<Item> CASSITERITE_ORE_CHUNK = ITEMS.registerSimpleItem("ore_chunk/cassiterite");
+    public static final DeferredItem<Item> CASSITERITE_COARSE_POWDER = ITEMS.registerSimpleItem("coarse_powder/cassiterite");
+    public static final DeferredItem<Item> CASSITERITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/cassiterite");
+    public static final DeferredItem<Item> CASSITERITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/cassiterite");
 
     public static final DeferredItem<Item> SIMPLE_FLOTATION_SOLUTION_BUCKET =
             ITEMS.register("bucket/simple_flotation_solution",

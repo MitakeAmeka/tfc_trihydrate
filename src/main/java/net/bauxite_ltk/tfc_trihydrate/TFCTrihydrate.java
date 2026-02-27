@@ -1,8 +1,14 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
 import net.bauxite_ltk.tfc_trihydrate.block.ModBlocks;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblocks;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.TFCTHMultiblockBuilder;
+import net.bauxite_ltk.tfc_trihydrate.crafting.TFCTHRecipeSerializers;
+import net.bauxite_ltk.tfc_trihydrate.crafting.TFCTHRecipeType;
 import net.bauxite_ltk.tfc_trihydrate.effect.ModEffects;
 import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
+import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.bauxite_ltk.tfc_trihydrate.item.ModItems;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
@@ -68,13 +74,21 @@ public class TFCTrihydrate {
     public TFCTrihydrate(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
+        TFCTHRecipeSerializers.init(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         ModBlocks.init(modEventBus);
         ModItems.init(modEventBus);
         ModEffects.init(modEventBus);
         ModFluids.init(modEventBus);
         ModCreativeTabs.init(modEventBus);
+
+
+        TFCTHMultiblocks.init();
+        TFCTHMultiblockLogic.init(modEventBus);
+        TFCTHMultiblockBuilder.handleModBusRegistrations(modEventBus);
+
+        TFCTHRecipeType.init(modEventBus);
+        TFCTHMenuTypes.init(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (TFCTrihydrate) to respond directly to events.

@@ -5,7 +5,7 @@
   "item.tfc_trihydrate.bucket.simple_flotation_solution": "Simple Flotation Solution Bucket",
   "block.tfc_trihydrate.fluid.simple_flotation_solution": "Simple Flotation Solution",
   "fluid.tfc_trihydrate.simple_flotation_solution": "Simple Flotation Solution",
-
+  
   "item.tfc_trihydrate.bucket.lime_slurry": "Lime Slurry Bucket",
   "block.tfc_trihydrate.fluid.lime_slurry": "Lime Slurry",
   "fluid.tfc_trihydrate.lime_slurry": "Lime Slurry",
@@ -14,73 +14,104 @@
   "item.tfc_trihydrate.crystal_chunk.hematite": "Pure Hematite Chunk",
   "item.tfc_trihydrate.ore_chunk.hematite": "Hematite Chunk",
   "item.tfc_trihydrate.poor_ore_chunk.hematite": "Poor Hematite Chunk",
-
   "item.tfc_trihydrate.pure_coarse_powder.hematite": "Pure Hematite Coarse Powder",
   "item.tfc_trihydrate.coarse_powder.hematite": "Hematite Coarse Powder",
   "item.tfc_trihydrate.dirty_coarse_powder.hematite": "Dirty Hematite Coarse Powder",
-
   "item.tfc_trihydrate.concentrate.hematite": "Hematite Concentrate Pellet",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.hematite": "Hematite Concentrate Pellet",
-  
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.hematite": "Hematite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.hematite": "Pure Hematite Coarse Powder",
 
   "item.tfc_trihydrate.crystal_chunk.magnetite": "Pure Magnetite Chunk",
   "item.tfc_trihydrate.ore_chunk.magnetite": "Magnetite Chunk",
   "item.tfc_trihydrate.poor_ore_chunk.magnetite": "Poor Magnetite Chunk",
-
   "item.tfc_trihydrate.pure_coarse_powder.magnetite": "Pure Magnetite Coarse Powder",
   "item.tfc_trihydrate.coarse_powder.magnetite": "Magnetite Coarse Powder",
   "item.tfc_trihydrate.dirty_coarse_powder.magnetite": "Dirty Magnetite Coarse Powder",
-
   "item.tfc_trihydrate.concentrate.magnetite": "Magnetite Concentrate Pellet",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.magnetite": "Magnetite Concentrate Pellet",
-
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.magnetite": "Magnetite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.magnetite": "Pure Magnetite Coarse Powder",
 
   "item.tfc_trihydrate.crystal_chunk.limonite": "Pure Limonite Chunk",
   "item.tfc_trihydrate.ore_chunk.limonite": "Limonite Chunk",
   "item.tfc_trihydrate.poor_ore_chunk.limonite": "Poor Limonite Chunk",
-
   "item.tfc_trihydrate.pure_coarse_powder.limonite": "Pure Limonite Coarse Powder",
   "item.tfc_trihydrate.coarse_powder.limonite": "Limonite Coarse Powder",
   "item.tfc_trihydrate.dirty_coarse_powder.limonite": "Dirty Limonite Coarse Powder",
-
   "item.tfc_trihydrate.concentrate.limonite": "Limonite Concentrate Pellet",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.limonite": "Limonite Concentrate Pellet",
-
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.limonite": "Limonite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.limonite": "Pure Limonite Coarse Powder",
 
   "item.tfc_trihydrate.crystal_chunk.native_copper": "Pure Native Copper Chunk",
   "item.tfc_trihydrate.ore_chunk.native_copper": "Native Copper Chunk",
   "item.tfc_trihydrate.poor_ore_chunk.native_copper": "Poor Native Copper Chunk",
-
   "item.tfc_trihydrate.pure_coarse_powder.native_copper": "Pure Native Copper Coarse Powder",
   "item.tfc_trihydrate.coarse_powder.native_copper": "Native Copper Coarse Powder",
   "item.tfc_trihydrate.dirty_coarse_powder.native_copper": "Dirty Native Copper Coarse Powder",
-
   "item.tfc_trihydrate.concentrate.native_copper": "Native Copper Concentrate Pellet",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.native_copper": "Native Copper Concentrate Pellet",
-
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.native_copper": "Native Copper Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.native_copper": "Pure Native Copper Coarse Powder",
 
   "item.tfc_trihydrate.crystal_chunk.native_silver": "Pure Native Silver Chunk",
   "item.tfc_trihydrate.ore_chunk.native_silver": "Native Silver Chunk",
   "item.tfc_trihydrate.poor_ore_chunk.native_silver": "Poor Native Silver Chunk",
-
   "item.tfc_trihydrate.pure_coarse_powder.native_silver": "Pure Native Silver Coarse Powder",
   "item.tfc_trihydrate.coarse_powder.native_silver": "Native Silver Coarse Powder",
   "item.tfc_trihydrate.dirty_coarse_powder.native_silver": "Dirty Native Silver Coarse Powder",
-
   "item.tfc_trihydrate.concentrate.native_silver": "Native Silver Concentrate Pellet",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.native_silver": "Native Silver Concentrate Pellet",
-
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.native_silver": "Native Silver Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.native_silver": "Pure Native Silver Coarse Powder",
 
   "item.tfc_trihydrate.crystal_chunk.native_gold": "Pure Native Gold Chunk",
   "item.tfc_trihydrate.ore_chunk.native_gold": "Native Gold Chunk",
   "item.tfc_trihydrate.poor_ore_chunk.native_gold": "Poor Native Gold Chunk",
-
   "item.tfc_trihydrate.pure_coarse_powder.native_gold": "Pure Native Gold Coarse Powder",
   "item.tfc_trihydrate.coarse_powder.native_gold": "Native Gold Coarse Powder",
   "item.tfc_trihydrate.dirty_coarse_powder.native_gold": "Dirty Native Gold Coarse Powder",
-
   "item.tfc_trihydrate.concentrate.native_gold": "Native Gold Concentrate Pellet",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.native_gold": "Native Gold Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.native_gold": "Native Gold Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.native_gold": "Pure Native Gold Coarse Powder",
+  
+
+
+  "item.tfc_trihydrate.crystal_chunk.malachite": "Pure Malachite Chunk",
+  "item.tfc_trihydrate.ore_chunk.malachite": "Malachite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.malachite": "Poor Malachite Chunk",
+  "item.tfc_trihydrate.pure_coarse_powder.malachite": "Pure Malachite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.malachite": "Malachite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.malachite": "Dirty Malachite Coarse Powder",
+  "item.tfc_trihydrate.concentrate.malachite": "Malachite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.malachite": "Malachite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.malachite": "Malachite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.malachite": "Pure Malachite Coarse Powder",
+
+
+  "item.tfc_trihydrate.crystal_chunk.tetrahedrite": "Pure Tetrahedrite Chunk",
+  "item.tfc_trihydrate.ore_chunk.tetrahedrite": "Tetrahedrite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.tetrahedrite": "Poor Tetrahedrite Chunk",
+  "item.tfc_trihydrate.pure_coarse_powder.tetrahedrite": "Pure Tetrahedrite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.tetrahedrite": "Tetrahedrite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.tetrahedrite": "Dirty Tetrahedrite Coarse Powder",
+  "item.tfc_trihydrate.concentrate.tetrahedrite": "Tetrahedrite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.tetrahedrite": "Tetrahedrite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.tetrahedrite": "Tetrahedrite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.tetrahedrite": "Pure Tetrahedrite Coarse Powder",
+
+  "item.tfc_trihydrate.crystal_chunk.cassiterite": "Pure Cassiterite Chunk",
+  "item.tfc_trihydrate.ore_chunk.cassiterite": "Cassiterite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.cassiterite": "Poor Cassiterite Chunk",
+  "item.tfc_trihydrate.pure_coarse_powder.cassiterite": "Pure Cassiterite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.cassiterite": "Cassiterite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.cassiterite": "Dirty Cassiterite Coarse Powder",
+  "item.tfc_trihydrate.concentrate.cassiterite": "Cassiterite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.cassiterite": "Cassiterite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.cassiterite": "Cassiterite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.cassiterite": "Pure Cassiterite Coarse Powder",
 
   "effect.tfc_trihydrate.fear": "Fear",
 

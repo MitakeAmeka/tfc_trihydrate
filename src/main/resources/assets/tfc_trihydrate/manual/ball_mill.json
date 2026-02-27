@@ -1,0 +1,10 @@
+{
+  "start": {
+    "type": "multiblock",
+    "name": "multiblocks/ball_mill"
+  },
+  "list": {
+    "type": "dynamic_table",
+    "table": "ball_mill"
+  }
+}
