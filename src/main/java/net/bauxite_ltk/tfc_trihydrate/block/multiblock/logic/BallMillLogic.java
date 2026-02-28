@@ -19,6 +19,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.process.TFCTHMultiblockProcessInMachine;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.BallMillShapes;
 import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
 import net.minecraft.core.BlockPos;
@@ -99,8 +100,8 @@ public class BallMillLogic implements
             return;
         final int[] usedInvSlots = new int[NUM_INPUT_SLOTS];
         for(MultiblockProcess<?, ?> process : state.processor.getQueue())
-            if(process instanceof MultiblockProcessInMachine)
-                for(int i : ((MultiblockProcessInMachine<?>)process).getInputSlots())
+            if(process instanceof TFCTHMultiblockProcessInMachine)
+                for(int i : ((TFCTHMultiblockProcessInMachine<?>)process).getInputSlots())
                     usedInvSlots[i]++;
 
         Integer[] preferredSlots = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7};
@@ -114,7 +115,7 @@ public class BallMillLogic implements
             stack.shrink(usedInvSlots[slot]);
             RecipeHolder<BallMillRecipe> recipe = BallMillRecipe.findRecipe(level, stack, inputFluid);
             if(recipe!=null){
-                MultiblockProcessInMachine<BallMillRecipe> process = new MultiblockProcessInMachine<>(recipe, slot);
+                TFCTHMultiblockProcessInMachine<BallMillRecipe> process = new TFCTHMultiblockProcessInMachine<>(recipe, slot);
                 if(!inputFluid.isEmpty()){
                     process.setInputTanks(0);
                 }
@@ -260,7 +261,7 @@ public class BallMillLogic implements
             inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
             processor.fromNBT(
                     nbt.get("processor"),
-                    (getRecipe, data, p) -> new MultiblockProcessInMachine<>(getRecipe, data),
+                    (getRecipe, data, p) -> new TFCTHMultiblockProcessInMachine<>(getRecipe, data),
                     provider
             );
             tanks.readNBT(provider, nbt.getCompound("tanks"));
