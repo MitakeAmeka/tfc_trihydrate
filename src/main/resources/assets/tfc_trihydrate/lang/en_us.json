@@ -113,12 +113,49 @@
   "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.cassiterite": "Cassiterite Coarse Powder",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.cassiterite": "Pure Cassiterite Coarse Powder",
 
+  "item.tfc_trihydrate.crystal_chunk.sphalerite": "Pure Sphalerite Chunk",
+  "item.tfc_trihydrate.ore_chunk.sphalerite": "Sphalerite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.sphalerite": "Poor Sphalerite Chunk",
+  "item.tfc_trihydrate.pure_coarse_powder.sphalerite": "Pure Sphalerite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.sphalerite": "Sphalerite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.sphalerite": "Dirty Sphalerite Coarse Powder",
+  "item.tfc_trihydrate.concentrate.sphalerite": "Sphalerite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.sphalerite": "Sphalerite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.sphalerite": "Sphalerite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.sphalerite": "Pure Sphalerite Coarse Powder",
+
+  "item.tfc_trihydrate.crystal_chunk.bismuthinite": "Pure Bismuthinite Chunk",
+  "item.tfc_trihydrate.ore_chunk.bismuthinite": "Bismuthinite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.bismuthinite": "Poor Bismuthinite Chunk",
+  "item.tfc_trihydrate.pure_coarse_powder.bismuthinite": "Pure Bismuthinite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.bismuthinite": "Bismuthinite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.bismuthinite": "Dirty Bismuthinite Coarse Powder",
+  "item.tfc_trihydrate.concentrate.bismuthinite": "Bismuthinite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.bismuthinite": "Bismuthinite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.bismuthinite": "Bismuthinite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.bismuthinite": "Pure Bismuthinite Coarse Powder",
+
+  "item.tfc_trihydrate.crystal_chunk.garnierite": "Pure Garnierite Chunk",
+  "item.tfc_trihydrate.ore_chunk.garnierite": "Garnierite Chunk",
+  "item.tfc_trihydrate.poor_ore_chunk.garnierite": "Poor Garnierite Chunk",
+  "item.tfc_trihydrate.pure_coarse_powder.garnierite": "Pure Garnierite Coarse Powder",
+  "item.tfc_trihydrate.coarse_powder.garnierite": "Garnierite Coarse Powder",
+  "item.tfc_trihydrate.dirty_coarse_powder.garnierite": "Dirty Garnierite Coarse Powder",
+  "item.tfc_trihydrate.concentrate.garnierite": "Garnierite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.garnierite": "Garnierite Concentrate Pellet",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.garnierite": "Garnierite Coarse Powder",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.garnierite": "Pure Garnierite Coarse Powder",
+
+
+
   "effect.tfc_trihydrate.fear": "Fear",
 
   "tfc_trihydrate.message.fear": "This deep place makes you feel suffocated",
   "tfc_trihydrate.message.fear2": "You find it hard to catch your breath.",
 
   "tfc_trihydrate.message.fearless": "You have successfully crafted your first iron. The potential of this metal seems far greater than you imagined, and you find yourself drawn to deeper veins.",
+
+  "block.tfc_trihydrate.ball_mill": "Ball Mill",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

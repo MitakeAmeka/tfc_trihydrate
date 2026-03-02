@@ -103,6 +103,30 @@ public class ModItems {
     public static final DeferredItem<Item> CASSITERITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/cassiterite");
     public static final DeferredItem<Item> CASSITERITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/cassiterite");
 
+    public static final DeferredItem<Item> SPHALERITE_CRYSTAL_CHUNK = ITEMS.registerSimpleItem("crystal_chunk/sphalerite");
+    public static final DeferredItem<Item> SPHALERITE_CONCENTRATE = ITEMS.registerSimpleItem("concentrate/sphalerite");
+    public static final DeferredItem<Item> SPHALERITE_PURE_COARSE_POWDER = ITEMS.registerSimpleItem("pure_coarse_powder/sphalerite");
+    public static final DeferredItem<Item> SPHALERITE_ORE_CHUNK = ITEMS.registerSimpleItem("ore_chunk/sphalerite");
+    public static final DeferredItem<Item> SPHALERITE_COARSE_POWDER = ITEMS.registerSimpleItem("coarse_powder/sphalerite");
+    public static final DeferredItem<Item> SPHALERITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/sphalerite");
+    public static final DeferredItem<Item> SPHALERITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/sphalerite");
+
+    public static final DeferredItem<Item> BISMUTHINITE_CRYSTAL_CHUNK = ITEMS.registerSimpleItem("crystal_chunk/bismuthinite");
+    public static final DeferredItem<Item> BISMUTHINITE_CONCENTRATE = ITEMS.registerSimpleItem("concentrate/bismuthinite");
+    public static final DeferredItem<Item> BISMUTHINITE_PURE_COARSE_POWDER = ITEMS.registerSimpleItem("pure_coarse_powder/bismuthinite");
+    public static final DeferredItem<Item> BISMUTHINITE_ORE_CHUNK = ITEMS.registerSimpleItem("ore_chunk/bismuthinite");
+    public static final DeferredItem<Item> BISMUTHINITE_COARSE_POWDER = ITEMS.registerSimpleItem("coarse_powder/bismuthinite");
+    public static final DeferredItem<Item> BISMUTHINITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/bismuthinite");
+    public static final DeferredItem<Item> BISMUTHINITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/bismuthinite");
+
+    public static final DeferredItem<Item> GARNIERITE_CRYSTAL_CHUNK = ITEMS.registerSimpleItem("crystal_chunk/garnierite");
+    public static final DeferredItem<Item> GARNIERITE_CONCENTRATE = ITEMS.registerSimpleItem("concentrate/garnierite");
+    public static final DeferredItem<Item> GARNIERITE_PURE_COARSE_POWDER = ITEMS.registerSimpleItem("pure_coarse_powder/garnierite");
+    public static final DeferredItem<Item> GARNIERITE_ORE_CHUNK = ITEMS.registerSimpleItem("ore_chunk/garnierite");
+    public static final DeferredItem<Item> GARNIERITE_COARSE_POWDER = ITEMS.registerSimpleItem("coarse_powder/garnierite");
+    public static final DeferredItem<Item> GARNIERITE_POOR_ORE_CHUNK = ITEMS.registerSimpleItem("poor_ore_chunk/garnierite");
+    public static final DeferredItem<Item> GARNIERITE_DIRTY_COARSE_POWDER = ITEMS.registerSimpleItem("dirty_coarse_powder/garnierite");
+    
     public static final DeferredItem<Item> SIMPLE_FLOTATION_SOLUTION_BUCKET =
             ITEMS.register("bucket/simple_flotation_solution",
                     () -> new BucketItem(

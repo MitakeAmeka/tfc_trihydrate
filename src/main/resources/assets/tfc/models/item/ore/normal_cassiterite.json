@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"2": "tfc:item/ore/normal_cassiterite",
-		"particle": "tfc:item/ore/normal_cassiterite"
+		"2": "tfc:item/ore/cassiterite",
+		"particle": "tfc:item/ore/cassiterite"
 	},
 	"elements": [
 		{

@@ -108,6 +108,39 @@
   "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.cassiterite": "锡石精矿球团",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.cassiterite": "锡石粗粉",
   "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.cassiterite": "纯净锡石粗粉",
+
+  "item.tfc_trihydrate.crystal_chunk.sphalerite": "高纯闪锌矿碎块",
+  "item.tfc_trihydrate.ore_chunk.sphalerite": "闪锌矿碎块",
+  "item.tfc_trihydrate.poor_ore_chunk.sphalerite": "贫瘠闪锌矿碎块",
+  "item.tfc_trihydrate.pure_coarse_powder.sphalerite": "纯净闪锌矿粗粉",
+  "item.tfc_trihydrate.coarse_powder.sphalerite": "闪锌矿粗粉",
+  "item.tfc_trihydrate.dirty_coarse_powder.sphalerite": "污浊闪锌矿粗粉",
+  "item.tfc_trihydrate.concentrate.sphalerite": "闪锌矿精矿球团",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.sphalerite": "闪锌矿精矿球团",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.sphalerite": "闪锌矿粗粉",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.sphalerite": "纯净闪锌矿粗粉",
+
+  "item.tfc_trihydrate.crystal_chunk.bismuthinite": "高纯辉铋矿碎块",
+  "item.tfc_trihydrate.ore_chunk.bismuthinite": "辉铋矿碎块",
+  "item.tfc_trihydrate.poor_ore_chunk.bismuthinite": "贫瘠辉铋矿碎块",
+  "item.tfc_trihydrate.pure_coarse_powder.bismuthinite": "纯净辉铋矿粗粉",
+  "item.tfc_trihydrate.coarse_powder.bismuthinite": "辉铋矿粗粉",
+  "item.tfc_trihydrate.dirty_coarse_powder.bismuthinite": "污浊辉铋矿粗粉",
+  "item.tfc_trihydrate.concentrate.bismuthinite": "辉铋矿精矿球团",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.bismuthinite": "辉铋矿精矿球团",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.bismuthinite": "辉铋矿粗粉",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.bismuthinite": "纯净辉铋矿粗粉",
+
+  "item.tfc_trihydrate.crystal_chunk.garnierite": "高纯绿镍矿碎块",
+  "item.tfc_trihydrate.ore_chunk.garnierite": "绿镍矿碎块",
+  "item.tfc_trihydrate.poor_ore_chunk.garnierite": "贫瘠绿镍矿碎块",
+  "item.tfc_trihydrate.pure_coarse_powder.garnierite": "纯净绿镍矿粗粉",
+  "item.tfc_trihydrate.coarse_powder.garnierite": "绿镍矿粗粉",
+  "item.tfc_trihydrate.dirty_coarse_powder.garnierite": "污浊绿镍矿粗粉",
+  "item.tfc_trihydrate.concentrate.garnierite": "绿镍矿精矿球团",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.concentrate.garnierite": "绿镍矿精矿球团",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.coarse_powder.garnierite": "绿镍矿粗粉",
+  "tfc.recipe.barrel.tfc_trihydrate.barrel.pure_coarse_powder.garnierite": "纯净绿镍矿粗粉",
   
   "effect.tfc_trihydrate.fear": "恐惧",
 
@@ -115,6 +148,8 @@
   "tfc_trihydrate.message.fear2": "\u00a74你的恐惧令你难以呼吸",
 
   "tfc_trihydrate.message.fearless": "\u00a7e你成功制造出了你的第一块铁，这种金属的潜力似乎远超你的想象，你开始向往更加深层的矿脉了。",
+
+  "block.tfc_trihydrate.ball_mill": "球磨机",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",
