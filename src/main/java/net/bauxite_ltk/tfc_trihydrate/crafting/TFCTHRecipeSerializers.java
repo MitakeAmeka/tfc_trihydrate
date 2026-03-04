@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class TFCTHRecipeSerializers {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(
-            BuiltInRegistries.RECIPE_SERIALIZER, ImmersiveEngineering.MODID
+            BuiltInRegistries.RECIPE_SERIALIZER, TFCTrihydrate.MODID
     );
 
     static {

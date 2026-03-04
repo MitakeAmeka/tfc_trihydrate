@@ -6,7 +6,7 @@
     "fluid": "tfc_trihydrate:lime_slurry"
   },
   "input_item": {
-    "count": 3,
+    "count": 5,
     "item": "tfc_trihydrate:pure_coarse_powder/cassiterite"
   },
   "output_item": {

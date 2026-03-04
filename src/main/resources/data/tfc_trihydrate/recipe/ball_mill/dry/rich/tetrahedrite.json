@@ -1,0 +1,11 @@
+{
+  "type": "tfc_trihydrate:ball_mill",
+  "energy": 6400,
+  "result_item": {
+    "count": 3,
+    "id": "tfc:powder/tetrahedrite"
+  },
+  "input_item": {
+    "item": "tfc_trihydrate:pure_coarse_powder/tetrahedrite"
+  }
+}

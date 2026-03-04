@@ -1,10 +1,8 @@
 {
   "forging_temperature": 648.0,
   "heat_capacity": 1,
-  "ingredient": [
-    {
-      "item": "tfc_trihydrate:concentrate/native_copper"
-    }
-  ],
+  "input": {
+    "item": 1
+  },
   "welding_temperature": 864.0
 }

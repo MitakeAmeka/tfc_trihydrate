@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:ore_chunk/native_copper"
   },
   "result_fluid": {
-    "amount": 15,
+    "amount": 10,
     "id": "tfc:metal/copper"
   },
   "temperature": 1080.0

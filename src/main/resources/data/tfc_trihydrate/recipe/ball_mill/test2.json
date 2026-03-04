@@ -1,5 +1,5 @@
 {
-  "type": "immersiveengineering:ball_mill",
+  "type": "tfc_trihydrate:ball_mill",
   "energy": 32000,
   "result_item": {
     "count": 6,

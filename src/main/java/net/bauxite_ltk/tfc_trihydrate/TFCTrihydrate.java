@@ -10,6 +10,7 @@ import net.bauxite_ltk.tfc_trihydrate.effect.ModEffects;
 import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.bauxite_ltk.tfc_trihydrate.item.ModItems;
+import net.bauxite_ltk.tfc_trihydrate.util.ModTags;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import org.slf4j.Logger;
@@ -82,7 +83,6 @@ public class TFCTrihydrate {
         ModFluids.init(modEventBus);
         ModCreativeTabs.init(modEventBus);
 
-
         TFCTHMultiblocks.init();
         TFCTHMultiblockLogic.init(modEventBus);
         TFCTHMultiblockBuilder.handleModBusRegistrations(modEventBus);
@@ -129,10 +129,4 @@ public class TFCTrihydrate {
         LOGGER.info("HELLO from server starting");
     }
 
-    @SubscribeEvent
-    public void onItemAttributeModification(ItemAttributeModifierEvent event) {
-        // 检查物品是否为目标模组的物品
-
-
-    }
 }

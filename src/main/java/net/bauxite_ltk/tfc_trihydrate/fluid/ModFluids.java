@@ -53,6 +53,138 @@ public class ModFluids {
             MixingFluid.Flowing::new
     );
 
+    public static final FluidHolder<BaseFlowingFluid> HEMATITE_SLURRY = register(
+            "hematite_slurry",
+            properties -> properties
+                    .block(ModBlocks.HEMATITE_SLURRY)
+                    .bucket(ModItems.HEMATITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.hematite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> LIMONITE_SLURRY = register(
+            "limonite_slurry",
+            properties -> properties
+                    .block(ModBlocks.LIMONITE_SLURRY)
+                    .bucket(ModItems.LIMONITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.limonite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> MAGNETITE_SLURRY = register(
+            "magnetite_slurry",
+            properties -> properties
+                    .block(ModBlocks.MAGNETITE_SLURRY)
+                    .bucket(ModItems.MAGNETITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.magnetite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> NATIVE_COPPER_SLURRY = register(
+            "native_copper_slurry",
+            properties -> properties
+                    .block(ModBlocks.NATIVE_COPPER_SLURRY)
+                    .bucket(ModItems.NATIVE_COPPER_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.native_copper_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> NATIVE_SILVER_SLURRY = register(
+            "native_silver_slurry",
+            properties -> properties
+                    .block(ModBlocks.NATIVE_SILVER_SLURRY)
+                    .bucket(ModItems.NATIVE_SILVER_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.native_silver_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> NATIVE_GOLD_SLURRY = register(
+            "native_gold_slurry",
+            properties -> properties
+                    .block(ModBlocks.NATIVE_GOLD_SLURRY)
+                    .bucket(ModItems.NATIVE_GOLD_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.native_gold_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> MALACHITE_SLURRY = register(
+            "malachite_slurry",
+            properties -> properties
+                    .block(ModBlocks.MALACHITE_SLURRY)
+                    .bucket(ModItems.MALACHITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.malachite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> TETRAHEDRITE_SLURRY = register(
+            "tetrahedrite_slurry",
+            properties -> properties
+                    .block(ModBlocks.TETRAHEDRITE_SLURRY)
+                    .bucket(ModItems.TETRAHEDRITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.tetrahedrite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> GARNIERITE_SLURRY = register(
+            "garnierite_slurry",
+            properties -> properties
+                    .block(ModBlocks.GARNIERITE_SLURRY)
+                    .bucket(ModItems.GARNIERITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.garnierite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> CASSITERITE_SLURRY = register(
+            "cassiterite_slurry",
+            properties -> properties
+                    .block(ModBlocks.CASSITERITE_SLURRY)
+                    .bucket(ModItems.CASSITERITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.cassiterite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> SPHALERITE_SLURRY = register(
+            "sphalerite_slurry",
+            properties -> properties
+                    .block(ModBlocks.SPHALERITE_SLURRY)
+                    .bucket(ModItems.SPHALERITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.sphalerite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
+    public static final FluidHolder<BaseFlowingFluid> BISMUTHINITE_SLURRY = register(
+            "bismuthinite_slurry",
+            properties -> properties
+                    .block(ModBlocks.BISMUTHINITE_SLURRY)
+                    .bucket(ModItems.BISMUTHINITE_SLURRY_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.bismuthinite_slurry"),
+            MixingFluid.Source::new,
+            MixingFluid.Flowing::new
+    );
+
     private static FluidType.Properties waterLike()
     {
         return FluidType.Properties.create()

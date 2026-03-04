@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:pure_coarse_powder/native_gold"
   },
   "result_fluid": {
-    "amount": 25,
+    "amount": 20,
     "id": "tfc:metal/gold"
   },
   "temperature": 1060.0

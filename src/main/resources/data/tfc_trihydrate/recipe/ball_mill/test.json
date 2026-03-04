@@ -1,5 +1,5 @@
 {
-  "type": "immersiveengineering:ball_mill",
+  "type": "tfc_trihydrate:ball_mill",
   "energy": 6400,
   "result_fluid": {
     "amount": 80,

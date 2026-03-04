@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public class TFCTHRecipeType {
     private static final DeferredRegister<RecipeType<?>> REGISTER = DeferredRegister.create(
-            Registries.RECIPE_TYPE, ImmersiveEngineering.MODID
+            Registries.RECIPE_TYPE, TFCTrihydrate.MODID
     );
 
     public static final IERecipeTypes.TypeWithClass<BallMillRecipe> BALL_MILL = register("ball_mill", BallMillRecipe.class);

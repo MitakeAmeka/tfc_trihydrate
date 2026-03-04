@@ -114,6 +114,54 @@ public class TFCTrihydrateClient {
         event.registerFluidType(
                 new FluidRendererExtension(0xFFb4b3a9, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
                 ModFluids.LIME_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFf18579, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.HEMATITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFc1975c, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.LIMONITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFF979ba8, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.MAGNETITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFe2b198, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.NATIVE_COPPER_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFe4e0dc, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.NATIVE_SILVER_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFf9f4a1, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.NATIVE_GOLD_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFF65a7a2, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.MALACHITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFF95948b, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.TETRAHEDRITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFa1bd90, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.GARNIERITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFF8d8059, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.CASSITERITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFc1d1db, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.SPHALERITE_SLURRY.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFF4f572e, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),
+                ModFluids.BISMUTHINITE_SLURRY.getType());
     }
 
     @SubscribeEvent

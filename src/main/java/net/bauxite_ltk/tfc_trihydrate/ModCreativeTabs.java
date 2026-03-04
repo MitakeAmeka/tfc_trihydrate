@@ -165,11 +165,23 @@ public class ModCreativeTabs {
                 output.accept(BISMUTHINITE_CONCENTRATE.get());
 
 
-                
-                
+
+                output.accept(HEMATITE_SLURRY_BUCKET);
+                output.accept(LIMONITE_SLURRY_BUCKET);
+                output.accept(MAGNETITE_SLURRY_BUCKET);
+                output.accept(NATIVE_COPPER_SLURRY_BUCKET);
+                output.accept(NATIVE_SILVER_SLURRY_BUCKET);
+                output.accept(NATIVE_GOLD_SLURRY_BUCKET);
+                output.accept(MALACHITE_SLURRY_BUCKET);
+                output.accept(TETRAHEDRITE_SLURRY_BUCKET);
+                output.accept(GARNIERITE_SLURRY_BUCKET);
+                output.accept(CASSITERITE_SLURRY_BUCKET);
+                output.accept(SPHALERITE_SLURRY_BUCKET);
+                output.accept(BISMUTHINITE_SLURRY_BUCKET);
 
                 output.accept(SIMPLE_FLOTATION_SOLUTION_BUCKET);
                 output.accept(LIME_SLURRY_BUCKET);
+
                 //output.accept(LTK_TOOL.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
