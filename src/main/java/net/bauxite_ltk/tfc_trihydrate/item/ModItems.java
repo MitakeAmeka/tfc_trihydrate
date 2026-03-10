@@ -240,7 +240,298 @@ public class ModItems {
                     )
             );
 
+    public static final DeferredItem<Item> PROCESSED_HEMATITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_hematite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_HEMATITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
 
+    public static final DeferredItem<Item> PROCESSED_LIMONITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_limonite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_LIMONITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_MAGNETITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_magnetite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_MAGNETITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_NATIVE_COPPER_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_native_copper_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_NATIVE_COPPER_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_NATIVE_SILVER_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_native_silver_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_NATIVE_SILVER_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_NATIVE_GOLD_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_native_gold_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_NATIVE_GOLD_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_MALACHITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_malachite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_MALACHITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_TETRAHEDRITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_tetrahedrite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_TETRAHEDRITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_GARNIERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_garnierite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_GARNIERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_CASSITERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_cassiterite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_CASSITERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_SPHALERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_sphalerite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_SPHALERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> PROCESSED_BISMUTHINITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/processed_bismuthinite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.PROCESSED_BISMUTHINITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+
+
+    public static final DeferredItem<Item> CONCENTRATE_HEMATITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_hematite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_HEMATITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_LIMONITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_limonite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_LIMONITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_MAGNETITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_magnetite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_MAGNETITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_NATIVE_COPPER_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_native_copper_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_NATIVE_COPPER_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_NATIVE_SILVER_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_native_silver_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_NATIVE_SILVER_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_NATIVE_GOLD_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_native_gold_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_NATIVE_GOLD_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_MALACHITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_malachite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_MALACHITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_TETRAHEDRITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_tetrahedrite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_TETRAHEDRITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_GARNIERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_garnierite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_GARNIERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_CASSITERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_cassiterite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_CASSITERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_SPHALERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_sphalerite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_SPHALERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> CONCENTRATE_BISMUTHINITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/concentrate_bismuthinite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.CONCENTRATE_BISMUTHINITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+
+
+
+    public static final DeferredItem<Item> TAILING_HEMATITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_hematite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_HEMATITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_LIMONITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_limonite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_LIMONITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_MAGNETITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_magnetite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_MAGNETITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_NATIVE_COPPER_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_native_copper_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_NATIVE_COPPER_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_NATIVE_SILVER_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_native_silver_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_NATIVE_SILVER_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_NATIVE_GOLD_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_native_gold_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_NATIVE_GOLD_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_MALACHITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_malachite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_MALACHITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_TETRAHEDRITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_tetrahedrite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_TETRAHEDRITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_GARNIERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_garnierite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_GARNIERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_CASSITERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_cassiterite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_CASSITERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_SPHALERITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_sphalerite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_SPHALERITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
+    public static final DeferredItem<Item> TAILING_BISMUTHINITE_SLURRY_BUCKET =
+            ITEMS.register("bucket/tailing_bismuthinite_slurry",
+                    () -> new BucketItem(
+                            ModFluids.TAILING_BISMUTHINITE_SLURRY.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
 
 
     public static void init(IEventBus modEventBus) {

@@ -11,6 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import java.util.function.BiFunction;
@@ -67,6 +70,26 @@ public class TFCTHMultiblockProcessInMachine<R extends MultiblockRecipe>
             final boolean match = ItemStack.isSameItem(s, output);
             if(match&&s.getCount()+output.getCount() <= inv.getSlotLimit(iOutputSlot))
                 return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    protected boolean canOutputFluid(ProcessContext.ProcessContextInMachine<R> context, FluidStack output)
+    {
+        IFluidTank[] tanks = context.getInternalTanks();
+        int[] outputTanks = context.getOutputTanks();
+        for(int iOutputTank : outputTanks){
+            if(tanks[iOutputTank].getFluidAmount() == tanks[iOutputTank].getCapacity()){
+                return false;
+            }
+        }
+
+        for(int iOutputTank : outputTanks) {
+            if (tanks[iOutputTank].fill(output, IFluidHandler.FluidAction.SIMULATE) == output.getAmount()){
+                return true;
+            }
         }
         return false;
     }

@@ -58,6 +58,151 @@
   "block.tfc_trihydrate.fluid.bismuthinite_slurry": "Bismuthinite Slurry",
   "fluid.tfc_trihydrate.bismuthinite_slurry": "Bismuthinite Slurry",
 
+  "item.tfc_trihydrate.bucket.processed_hematite_slurry": "Processed Hematite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_hematite_slurry": "Processed Hematite Slurry",
+  "fluid.tfc_trihydrate.processed_hematite_slurry": "Processed Hematite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_limonite_slurry": "Processed Limonite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_limonite_slurry": "Processed Limonite Slurry",
+  "fluid.tfc_trihydrate.processed_limonite_slurry": "Processed Limonite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_magnetite_slurry": "Processed Magnetite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_magnetite_slurry": "Processed Magnetite Slurry",
+  "fluid.tfc_trihydrate.processed_magnetite_slurry": "Processed Magnetite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_native_copper_slurry": "Processed Native Copper Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_native_copper_slurry": "Processed Native Copper Slurry",
+  "fluid.tfc_trihydrate.processed_native_copper_slurry": "Processed Native Copper Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_native_silver_slurry": "Processed Native Silver Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_native_silver_slurry": "Processed Native Silver Slurry",
+  "fluid.tfc_trihydrate.processed_native_silver_slurry": "Processed Native Silver Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_native_gold_slurry": "Processed Native Gold Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_native_gold_slurry": "Processed Native Gold Slurry",
+  "fluid.tfc_trihydrate.processed_native_gold_slurry": "Processed Native Gold Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_malachite_slurry": "Processed Malachite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_malachite_slurry": "Processed Malachite Slurry",
+  "fluid.tfc_trihydrate.processed_malachite_slurry": "Processed Malachite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_tetrahedrite_slurry": "Processed Tetrahedrite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_tetrahedrite_slurry": "Processed Tetrahedrite Slurry",
+  "fluid.tfc_trihydrate.processed_tetrahedrite_slurry": "Processed Tetrahedrite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_garnierite_slurry": "Processed Garnierite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_garnierite_slurry": "Processed Garnierite Slurry",
+  "fluid.tfc_trihydrate.processed_garnierite_slurry": "Processed Garnierite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_cassiterite_slurry": "Processed Cassiterite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_cassiterite_slurry": "Processed Cassiterite Slurry",
+  "fluid.tfc_trihydrate.processed_cassiterite_slurry": "Processed Cassiterite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_sphalerite_slurry": "Processed Sphalerite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_sphalerite_slurry": "Processed Sphalerite Slurry",
+  "fluid.tfc_trihydrate.processed_sphalerite_slurry": "Processed Sphalerite Slurry",
+
+  "item.tfc_trihydrate.bucket.processed_bismuthinite_slurry": "Processed Bismuthinite Slurry Bucket",
+  "block.tfc_trihydrate.fluid.processed_bismuthinite_slurry": "Processed Bismuthinite Slurry",
+  "fluid.tfc_trihydrate.processed_bismuthinite_slurry": "Processed Bismuthinite Slurry",
+
+  
+  "item.tfc_trihydrate.bucket.concentrate_hematite_slurry": "Hematite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_hematite_slurry": "Hematite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_hematite_slurry": "Hematite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_limonite_slurry": "Limonite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_limonite_slurry": "Limonite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_limonite_slurry": "Limonite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_magnetite_slurry": "Magnetite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_magnetite_slurry": "Magnetite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_magnetite_slurry": "Magnetite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_native_copper_slurry": "Native Copper Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_native_copper_slurry": "Native Copper Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_native_copper_slurry": "Native Copper Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_native_silver_slurry": "Native Silver Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_native_silver_slurry": "Native Silver Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_native_silver_slurry": "Native Silver Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_native_gold_slurry": "Native Gold Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_native_gold_slurry": "Native Gold Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_native_gold_slurry": "Native Gold Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_malachite_slurry": "Malachite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_malachite_slurry": "Malachite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_malachite_slurry": "Malachite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_tetrahedrite_slurry": "Tetrahedrite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_tetrahedrite_slurry": "Tetrahedrite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_tetrahedrite_slurry": "Tetrahedrite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_garnierite_slurry": "Garnierite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_garnierite_slurry": "Garnierite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_garnierite_slurry": "Garnierite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_cassiterite_slurry": "Cassiterite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_cassiterite_slurry": "Cassiterite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_cassiterite_slurry": "Cassiterite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_sphalerite_slurry": "Sphalerite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_sphalerite_slurry": "Sphalerite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_sphalerite_slurry": "Sphalerite Concentrate Slurry",
+
+  "item.tfc_trihydrate.bucket.concentrate_bismuthinite_slurry": "Bismuthinite Concentrate Slurry Bucket",
+  "block.tfc_trihydrate.fluid.concentrate_bismuthinite_slurry": "Bismuthinite Concentrate Slurry",
+  "fluid.tfc_trihydrate.concentrate_bismuthinite_slurry": "Bismuthinite Concentrate Slurry",
+
+
+  "item.tfc_trihydrate.bucket.tailing_hematite_slurry": "Hematite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_hematite_slurry": "Hematite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_hematite_slurry": "Hematite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_limonite_slurry": "Limonite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_limonite_slurry": "Limonite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_limonite_slurry": "Limonite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_magnetite_slurry": "Magnetite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_magnetite_slurry": "Magnetite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_magnetite_slurry": "Magnetite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_native_copper_slurry": "Native Copper Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_native_copper_slurry": "Native Copper Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_native_copper_slurry": "Native Copper Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_native_silver_slurry": "Native Silver Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_native_silver_slurry": "Native Silver Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_native_silver_slurry": "Native Silver Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_native_gold_slurry": "Native Gold Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_native_gold_slurry": "Native Gold Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_native_gold_slurry": "Native Gold Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_malachite_slurry": "Malachite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_malachite_slurry": "Malachite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_malachite_slurry": "Malachite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_tetrahedrite_slurry": "Tetrahedrite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_tetrahedrite_slurry": "Tetrahedrite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_tetrahedrite_slurry": "Tetrahedrite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_garnierite_slurry": "Garnierite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_garnierite_slurry": "Garnierite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_garnierite_slurry": "Garnierite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_cassiterite_slurry": "Cassiterite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_cassiterite_slurry": "Cassiterite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_cassiterite_slurry": "Cassiterite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_sphalerite_slurry": "Sphalerite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_sphalerite_slurry": "Sphalerite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_sphalerite_slurry": "Sphalerite Tailing Slurry",
+
+  "item.tfc_trihydrate.bucket.tailing_bismuthinite_slurry": "Bismuthinite Tailing Slurry Bucket",
+  "block.tfc_trihydrate.fluid.tailing_bismuthinite_slurry": "Bismuthinite Tailing Slurry",
+  "fluid.tfc_trihydrate.tailing_bismuthinite_slurry": "Bismuthinite Tailing Slurry",
 
   "item.tfc_trihydrate.crystal_chunk.hematite": "Pure Hematite Chunk",
   "item.tfc_trihydrate.ore_chunk.hematite": "Hematite Chunk",
@@ -204,6 +349,7 @@
   "tfc_trihydrate.message.fearless": "You have successfully crafted your first iron. The potential of this metal seems far greater than you imagined, and you find yourself drawn to deeper veins.",
 
   "block.tfc_trihydrate.ball_mill": "Ball Mill",
+  "block.tfc_trihydrate.flotation_cell": "Flotation Cell",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

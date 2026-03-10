@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:pure_coarse_powder/tetrahedrite"
   },
   "result_fluid": {
-    "amount": 20,
+    "amount": 10,
     "id": "tfc:metal/copper"
   },
   "temperature": 1080.0

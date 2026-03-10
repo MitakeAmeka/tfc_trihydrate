@@ -1,25 +1,34 @@
 
-Installation information
-=======
+# TFC:Trihydrate 群峦：三水合物
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+## 简介
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+本模组是群峦传说和沉浸工程的附属模组，为群峦传说增添了覆盖前中后期的矿物处理流程，并少许改变了群峦的科技发展线路。
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+除此之外，本模组还修改了一些矿脉生成，添加了一些机制，服务于该模组的科技路线
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+本模组还修改了原版群峦的矿物材质，并附带一套精致的（未完成的）群峦工具模型材质包
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+## 计划
+### 前期(火法冶金为主)
+_生产力低下，矿物处理方法原始，富集矿价值极高，普通矿尚有处理价值，贫瘠矿则毫无价值_
+- [x] 方块物品模型材质资源 (assets)
+- [x] 锤击、手推磨配方 (hammer and handmill recipes)
+- [x] 大桶洗粗粉、凝聚成团配方 (barrel recipes)
+- [x] 可熔炼物品配方 (tfc heating recipe)
+- [x] 未达到锻铁时代时进入较深地下时的恐惧效果 (fear effect in deep underground before Iron Age)
+- [ ] 符合增产倍率的矿脉生成 (proper vein generation)
+
+### 中期（水法冶金为主）
+_随着各种机器的建造，产能(主要是钢铁)开始滚雪球，贫瘠矿数量庞大的潜在价值被发掘_
+- [x] 粉碎机研磨粗粉配方 (crusher recipe)
+- [x] 球磨机 (ball mill)
+- [x] 浮选机 (flotation cell)
+- [ ] 旋流器 (cyclone)
+- [ ] 浓密机 (thickener)
+
+### 后期（高级水法冶金以及电法冶金）
+_产线变得庞大，获得提炼副产物的能力，并最终掌握提炼活泼金属（例如铝）的技术_
+- [ ] 高级浮选剂 (advanced flotation agent)
+- [ ] 尾矿处理 (tailing processing)
+- [ ] 电解冶金 (electrolytic metallurgy)

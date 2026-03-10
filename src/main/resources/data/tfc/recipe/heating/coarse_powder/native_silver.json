@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:coarse_powder/native_silver"
   },
   "result_fluid": {
-    "amount": 5,
+    "amount": 2.5,
     "id": "tfc:metal/silver"
   },
   "temperature": 961.0

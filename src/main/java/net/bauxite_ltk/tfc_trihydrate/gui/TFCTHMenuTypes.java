@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
 import blusunrize.immersiveengineering.common.gui.RefineryMenu;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -33,6 +34,10 @@ public class TFCTHMenuTypes {
     public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(BuiltInRegistries.MENU, TFCTrihydrate.MODID);
     public static final TFCTHMenuTypes.MultiblockContainer<BallMillLogic.State, BallMillMenu> BALL_MILL = registerMultiblock(
             "ball_mill", BallMillMenu::makeServer, BallMillMenu::makeClient
+    );
+
+    public static final TFCTHMenuTypes.MultiblockContainer<FlotationCellLogic.State, FlotationCellMenu> FLOTATION_CELL = registerMultiblock(
+            "flotation_cell", FlotationCellMenu::makeServer, FlotationCellMenu::makeClient
     );
 
 

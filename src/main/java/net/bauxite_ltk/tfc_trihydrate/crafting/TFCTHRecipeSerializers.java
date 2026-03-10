@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.crafting.SqueezerRecipe;
 import blusunrize.immersiveengineering.common.crafting.serializers.SqueezerRecipeSerializer;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
@@ -17,6 +18,10 @@ public class TFCTHRecipeSerializers {
     static {
         BallMillRecipe.SERIALIZER = RECIPE_SERIALIZERS.register(
                 "ball_mill", BallMillRecipeSerializer::new
+        );
+
+        FlotationCellRecipe.SERIALIZER = RECIPE_SERIALIZERS.register(
+                "flotation_cell", FlotationCellRecipeSerializer::new
         );
     }
 

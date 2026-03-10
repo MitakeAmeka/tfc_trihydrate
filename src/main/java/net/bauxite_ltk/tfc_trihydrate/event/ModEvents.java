@@ -21,8 +21,10 @@ import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.effect.ModEffects;
 import net.bauxite_ltk.tfc_trihydrate.gui.BallMillMenu;
 import net.bauxite_ltk.tfc_trihydrate.gui.BallMillScreen;
+import net.bauxite_ltk.tfc_trihydrate.gui.FlotationCellScreen;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.bauxite_ltk.tfc_trihydrate.render.BallMillRender;
+import net.bauxite_ltk.tfc_trihydrate.render.FlotationCellRender;
 import net.bauxite_ltk.tfc_trihydrate.render.TFCTHDynamicModel;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -125,6 +127,7 @@ public class ModEvents {
     public static void registerRenders(EntityRenderersEvent.RegisterRenderers event)
     {
         registerBERenderNoContext(event, TFCTHMultiblockLogic.BALL_MILL.masterBE(), BallMillRender::new);
+        registerBERenderNoContext(event, TFCTHMultiblockLogic.FLOTATION_CELL.masterBE(), FlotationCellRender::new);
     }
 
     private static <T extends BlockEntity>
@@ -147,12 +150,14 @@ public class ModEvents {
     public static void registerModelLoaders(ModelEvent.RegisterGeometryLoaders event)
     {
         BallMillRender.BARREL = new TFCTHDynamicModel(BallMillRender.NAME);
+        FlotationCellRender.BLADE = new TFCTHDynamicModel(FlotationCellRender.NAME);
     }
 
     @SubscribeEvent
     public static void registerContainersAndScreens(RegisterMenuScreensEvent event)
     {
         event.register(TFCTHMenuTypes.BALL_MILL.getType(), BallMillScreen::new);
+        event.register(TFCTHMenuTypes.FLOTATION_CELL.getType(), FlotationCellScreen::new);
 
     }
 

@@ -14,4 +14,15 @@ public class Helper {
 
         poseStack.mulPose(Axis.XP.rotationDegrees((float) degree));
     }
+
+    public static void applyRotationZ(double pivotX, double pivotY, double degree, PoseStack poseStack){
+        double arcDegree = -degree/180 * Math.PI;
+        //transY, transZ are the Y and Z position of the pivot after *directly* applying the rotation.
+        double transX = Math.cos(arcDegree)*pivotX + Math.sin(arcDegree)*pivotY;
+        double transY = -Math.sin(arcDegree)*pivotX + Math.cos(arcDegree)*pivotY;
+        //System.out.println("(" + transY + "," + transZ + ")");
+        poseStack.translate(0, (pivotX-transX)/16, (pivotY-transY)/16);
+
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) degree));
+    }
 }

@@ -4,7 +4,7 @@
     "item": "tfc:powder/cassiterite"
   },
   "result_fluid": {
-    "amount": 10,
+    "amount": 5,
     "id": "tfc:metal/tin"
   },
   "temperature": 230.0

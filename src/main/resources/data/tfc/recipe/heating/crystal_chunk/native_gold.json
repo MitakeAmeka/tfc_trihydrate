@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:crystal_chunk/native_gold"
   },
   "result_fluid": {
-    "amount": 50,
+    "amount": 25,
     "id": "tfc:metal/gold"
   },
   "temperature": 1060.0

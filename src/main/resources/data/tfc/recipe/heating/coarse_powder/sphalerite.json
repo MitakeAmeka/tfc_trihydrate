@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:coarse_powder/sphalerite"
   },
   "result_fluid": {
-    "amount": 5,
+    "amount": 2.5,
     "id": "tfc:metal/zinc"
   },
   "temperature": 420.0

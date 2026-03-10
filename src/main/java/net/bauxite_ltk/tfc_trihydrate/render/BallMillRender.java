@@ -5,10 +5,12 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOri
 import blusunrize.immersiveengineering.client.render.tile.BERenderUtils;
 import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
+import blusunrize.immersiveengineering.client.utils.GuiHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
+import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
 import net.bauxite_ltk.tfc_trihydrate.util.Helper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,6 +18,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.resources.model.BakedModel;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 public class BallMillRender extends IEMultiblockRenderer<BallMillLogic.State> {
@@ -30,8 +33,6 @@ public class BallMillRender extends IEMultiblockRenderer<BallMillLogic.State> {
         final MultiblockOrientation orientation = ctx.getLevel().getOrientation();
 
         matrixStack.pushPose();
-
-
 
         bufferIn = BERenderUtils.mirror(orientation, matrixStack, bufferIn);
         VertexConsumer buffer = bufferIn.getBuffer(RenderType.solid());
@@ -52,6 +53,4 @@ public class BallMillRender extends IEMultiblockRenderer<BallMillLogic.State> {
 
         matrixStack.popPose();
     }
-
-
 }

@@ -1,0 +1,5 @@
+{
+  "loader": "neoforge:fluid_container",
+  "parent": "neoforge:item/bucket",
+  "fluid": "tfc_trihydrate:tailing_bismuthinite_slurry"
+}

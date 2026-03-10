@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:poor_ore_chunk/native_silver"
   },
   "result_fluid": {
-    "amount": 2,
+    "amount": 1,
     "id": "tfc:metal/silver"
   },
   "temperature": 961.0

@@ -10,6 +10,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultibl
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.TFCTHMultiblockBuilder;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,11 +31,19 @@ public class TFCTHMultiblockLogic {
             BuiltInRegistries.BLOCK_ENTITY_TYPE, TFCTrihydrate.MODID
     );
 
-    public static final MultiblockRegistration<BallMillLogic.State> BALL_MILL = metal(new BallMillLogic(), "ball_mill")
+    public static final MultiblockRegistration<BallMillLogic.State> BALL_MILL =
+            metal(new BallMillLogic(), "ball_mill")
             .structure(() -> TFCTHMultiblocks.BALL_MILL)
             .gui(TFCTHMenuTypes.BALL_MILL)
             .redstone(s -> s.rsState, BallMillLogic.REDSTONE_POS)
             .comparator(BallMillLogic.makeComparator())
+            .build();
+
+    public static final MultiblockRegistration<FlotationCellLogic.State> FLOTATION_CELL =
+            metal(new FlotationCellLogic(), "flotation_cell")
+            .structure(() -> TFCTHMultiblocks.FLOTATION_CELL)
+            .gui(TFCTHMenuTypes.FLOTATION_CELL)
+            .redstone(s -> s.rsState, FlotationCellLogic.REDSTONE_POS)
             .build();
 
 

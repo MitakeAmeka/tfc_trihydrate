@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:pure_coarse_powder/bismuthinite"
   },
   "result_fluid": {
-    "amount": 20,
+    "amount": 10,
     "id": "tfc:metal/bismuth"
   },
   "temperature": 270.0

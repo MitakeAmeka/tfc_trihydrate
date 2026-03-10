@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:concentrate/garnierite"
   },
   "result_fluid": {
-    "amount": 100,
+    "amount": 50,
     "id": "tfc:metal/nickel"
   },
   "temperature": 1453.0

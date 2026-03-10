@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:dirty_coarse_powder/native_copper"
   },
   "result_fluid": {
-    "amount": 1,
+    "amount": 0.5,
     "id": "tfc:metal/copper"
   },
   "temperature": 1080.0

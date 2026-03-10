@@ -1,0 +1,10 @@
+{
+  "start": {
+    "type": "multiblock",
+    "name": "multiblocks/flotation_cell"
+  },
+  "list": {
+    "type": "dynamic_table",
+    "table": "flotation_cell"
+  }
+}

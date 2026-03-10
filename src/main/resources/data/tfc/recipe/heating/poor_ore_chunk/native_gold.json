@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:poor_ore_chunk/native_gold"
   },
   "result_fluid": {
-    "amount": 2,
+    "amount": 1,
     "id": "tfc:metal/gold"
   },
   "temperature": 1060.0

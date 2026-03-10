@@ -179,6 +179,46 @@ public class ModCreativeTabs {
                 output.accept(SPHALERITE_SLURRY_BUCKET);
                 output.accept(BISMUTHINITE_SLURRY_BUCKET);
 
+                output.accept(PROCESSED_HEMATITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_LIMONITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_MAGNETITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_NATIVE_COPPER_SLURRY_BUCKET);
+                output.accept(PROCESSED_NATIVE_SILVER_SLURRY_BUCKET);
+                output.accept(PROCESSED_NATIVE_GOLD_SLURRY_BUCKET);
+                output.accept(PROCESSED_MALACHITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_TETRAHEDRITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_GARNIERITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_CASSITERITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_SPHALERITE_SLURRY_BUCKET);
+                output.accept(PROCESSED_BISMUTHINITE_SLURRY_BUCKET);
+
+
+                output.accept(CONCENTRATE_HEMATITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_LIMONITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_MAGNETITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_NATIVE_COPPER_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_NATIVE_SILVER_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_NATIVE_GOLD_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_MALACHITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_TETRAHEDRITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_GARNIERITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_CASSITERITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_SPHALERITE_SLURRY_BUCKET);
+                output.accept(CONCENTRATE_BISMUTHINITE_SLURRY_BUCKET);
+
+                output.accept(TAILING_HEMATITE_SLURRY_BUCKET);
+                output.accept(TAILING_LIMONITE_SLURRY_BUCKET);
+                output.accept(TAILING_MAGNETITE_SLURRY_BUCKET);
+                output.accept(TAILING_NATIVE_COPPER_SLURRY_BUCKET);
+                output.accept(TAILING_NATIVE_SILVER_SLURRY_BUCKET);
+                output.accept(TAILING_NATIVE_GOLD_SLURRY_BUCKET);
+                output.accept(TAILING_MALACHITE_SLURRY_BUCKET);
+                output.accept(TAILING_TETRAHEDRITE_SLURRY_BUCKET);
+                output.accept(TAILING_GARNIERITE_SLURRY_BUCKET);
+                output.accept(TAILING_CASSITERITE_SLURRY_BUCKET);
+                output.accept(TAILING_SPHALERITE_SLURRY_BUCKET);
+                output.accept(TAILING_BISMUTHINITE_SLURRY_BUCKET);
+
                 output.accept(SIMPLE_FLOTATION_SOLUTION_BUCKET);
                 output.accept(LIME_SLURRY_BUCKET);
 

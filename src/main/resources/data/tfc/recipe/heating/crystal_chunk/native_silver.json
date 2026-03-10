@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:crystal_chunk/native_silver"
   },
   "result_fluid": {
-    "amount": 50,
+    "amount": 25,
     "id": "tfc:metal/silver"
   },
   "temperature": 961.0

@@ -13,7 +13,9 @@ import mezz.jei.api.registration.*;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
 import net.bauxite_ltk.tfc_trihydrate.gui.BallMillScreen;
+import net.bauxite_ltk.tfc_trihydrate.gui.FlotationCellScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
@@ -44,7 +46,8 @@ public class JEIHelper implements IModPlugin
         //Recipes
         IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
         registry.addRecipeCategories(
-                new BallMillCategory(guiHelper)
+                new BallMillCategory(guiHelper),
+                new FlotationCellCategory(guiHelper)
         );
 
         slotDrawable = guiHelper.getSlotDrawable();
@@ -54,6 +57,7 @@ public class JEIHelper implements IModPlugin
     public void registerRecipes(IRecipeRegistration registration)
     {
         registration.addRecipes(net.bauxite_ltk.tfc_trihydrate.compat.jei.JEIRecipeTypes.BALL_MILL, getRecipes(BallMillRecipe.RECIPES));
+        registration.addRecipes(JEIRecipeTypes.FLOTATION_CELL, getRecipes(FlotationCellRecipe.RECIPES));
 
     }
 
@@ -80,12 +84,14 @@ public class JEIHelper implements IModPlugin
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
     {
         registration.addRecipeCatalyst(TFCTHMultiblockLogic.BALL_MILL.iconStack(), net.bauxite_ltk.tfc_trihydrate.compat.jei.JEIRecipeTypes.BALL_MILL);
+        registration.addRecipeCatalyst(TFCTHMultiblockLogic.FLOTATION_CELL.iconStack(), JEIRecipeTypes.FLOTATION_CELL);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration)
     {
         registration.addRecipeClickArea(BallMillScreen.class, 36, 57, 72, 13, JEIRecipeTypes.BALL_MILL);
+        registration.addRecipeClickArea(FlotationCellScreen.class, 153, 59, 16, 14, JEIRecipeTypes.FLOTATION_CELL);
 
     }
 }

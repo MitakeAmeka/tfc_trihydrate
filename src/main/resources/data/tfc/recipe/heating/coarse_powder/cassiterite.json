@@ -4,7 +4,7 @@
     "item": "tfc_trihydrate:coarse_powder/cassiterite"
   },
   "result_fluid": {
-    "amount": 5,
+    "amount": 2.5,
     "id": "tfc:metal/tin"
   },
   "temperature": 230.0
