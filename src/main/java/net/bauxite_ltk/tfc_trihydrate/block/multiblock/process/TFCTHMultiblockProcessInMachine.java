@@ -42,8 +42,8 @@ public class TFCTHMultiblockProcessInMachine<R extends MultiblockRecipe>
         {
             final IItemHandlerModifiable inv = context.getInventory();
             ItemStack s = inv.getStackInSlot(iOutputSlot);
-            TFCTrihydrate.LOGGER.info("{}", s);
-            TFCTrihydrate.LOGGER.info("{}", output);
+            //TFCTrihydrate.LOGGER.info("{}", s);
+            //TFCTrihydrate.LOGGER.info("{}", output);
             if(s.isEmpty())
             {
                 inv.setStackInSlot(iOutputSlot, output.copy());

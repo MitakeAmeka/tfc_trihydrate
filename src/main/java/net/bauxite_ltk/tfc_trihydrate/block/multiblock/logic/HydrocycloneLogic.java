@@ -13,7 +13,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.tool.MachineInterfaceHandler;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.*;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.Utils;
@@ -21,8 +22,10 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.process.TFCTHMultiblockProcessInMachine;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.BallMillShapes;
-import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.HydrocycloneShapes;
+import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.HydrocycloneRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.HydrocycloneRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -42,45 +45,40 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class BallMillLogic implements
-        IMultiblockLogic<BallMillLogic.State>,
-        IServerTickableComponent<BallMillLogic.State>,
-        IClientTickableComponent<BallMillLogic.State> {
-    public static final BlockPos MASTER_OFFSET = new BlockPos(3, 1, 1);
-    public static final BlockPos REDSTONE_POS = new BlockPos(3, 1, 2);
-    private static final MultiblockFace OUTPUT_OFFSET = new MultiblockFace(7, 1, 1, RelativeBlockFace.RIGHT);
-    private static final MultiblockFace OUTPUT_FLUID_OFFSET = new MultiblockFace(7, 0, 1, RelativeBlockFace.RIGHT);
-    private static final MultiblockFace INPUT_OFFSET = new MultiblockFace(-1, 1, 1, RelativeBlockFace.LEFT);
+public class HydrocycloneLogic implements
+        IMultiblockLogic<HydrocycloneLogic.State>,
+        IServerTickableComponent<HydrocycloneLogic.State>,
+        IClientTickableComponent<HydrocycloneLogic.State> {
+    public static final BlockPos MASTER_OFFSET = new BlockPos(1, 1, 1);
+    public static final BlockPos REDSTONE_POS = new BlockPos(1, 1, 2);
+    private static final MultiblockFace ITEM_OUTPUT_OFFSET = new MultiblockFace(1, -1, 1, RelativeBlockFace.UP);
+    private static final MultiblockFace FLUID_OUTPUT_OFFSET = new MultiblockFace(3, 0, 1, RelativeBlockFace.RIGHT);
     private static final MultiblockFace INPUT_FLUID_OFFSET = new MultiblockFace(-1, 0, 1, RelativeBlockFace.LEFT);
-    private static final CapabilityPosition OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_OFFSET);
-    private static final CapabilityPosition OUTPUT_FLUID_CAP = CapabilityPosition.opposing(OUTPUT_FLUID_OFFSET);
-    private static final CapabilityPosition INPUT_CAP = CapabilityPosition.opposing(INPUT_OFFSET);
+    private static final CapabilityPosition OUTPUT_CAP = CapabilityPosition.opposing(ITEM_OUTPUT_OFFSET);
+    private static final CapabilityPosition OUTPUT_FLUID_CAP = CapabilityPosition.opposing(FLUID_OUTPUT_OFFSET);
     private static final CapabilityPosition INPUT_FLUID_CAP = CapabilityPosition.opposing(INPUT_FLUID_OFFSET);
-    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(0, 2, 1, RelativeBlockFace.UP);
+    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(0, 2, 2, RelativeBlockFace.UP);
 
-    public static final int NUM_SLOTS = 9;
-    public static final int NUM_INPUT_SLOTS = 8;
-    public static final int OUTPUT_SLOT = NUM_INPUT_SLOTS;
-    public static final int TANK_CAPACITY = 24 * FluidType.BUCKET_VOLUME;
-    public static final int ENERGY_CAPACITY = 96000;
-
+    public static final int NUM_SLOTS = 1;
+    public static final int OUTPUT_SLOT = 0;
+    public static final int TANK_CAPACITY = 8 * FluidType.BUCKET_VOLUME;
+    public static final int ENERGY_CAPACITY = 24000;
 
 
-    public BallMillLogic.State createInitialState(IInitialMultiblockContext<BallMillLogic.State> capabilitySource) {
-        return new BallMillLogic.State(capabilitySource);
+
+    public HydrocycloneLogic.State createInitialState(IInitialMultiblockContext<HydrocycloneLogic.State> capabilitySource) {
+        return new HydrocycloneLogic.State(capabilitySource);
     }
 
     @Override
-    public void tickServer(IMultiblockContext<BallMillLogic.State> context) {
-        final BallMillLogic.State state = context.getState();
+    public void tickServer(IMultiblockContext<HydrocycloneLogic.State> context) {
+        final HydrocycloneLogic.State state = context.getState();
         final boolean active = state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
         if(active!=state.active)
         {
@@ -103,35 +101,18 @@ public class BallMillLogic implements
 
         if(state.energy.getEnergyStored() <= 0||state.processor.getQueueSize() >= state.processor.getMaxQueueSize())
             return;
-        final int[] usedInvSlots = new int[NUM_INPUT_SLOTS];
-        for(MultiblockProcess<?, ?> process : state.processor.getQueue())
-            if(process instanceof TFCTHMultiblockProcessInMachine)
-                for(int i : ((TFCTHMultiblockProcessInMachine<?>)process).getInputSlots())
-                    usedInvSlots[i]++;
-
-        Integer[] preferredSlots = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7};
-        Arrays.sort(preferredSlots, 0, NUM_INPUT_SLOTS, Comparator.comparingInt(arg0 -> usedInvSlots[arg0]));
-        for(int slot : preferredSlots)
-        {
-            ItemStack stack = state.inventory.getStackInSlot(slot);
-            if(stack.getCount() <= usedInvSlots[slot])
-                continue;
-            stack = stack.copy();
-            stack.shrink(usedInvSlots[slot]);
-            RecipeHolder<BallMillRecipe> recipe = BallMillRecipe.findRecipe(level, stack, inputFluid);
-            if(recipe!=null){
-                TFCTHMultiblockProcessInMachine<BallMillRecipe> process = new TFCTHMultiblockProcessInMachine<>(recipe, slot);
-                if(!inputFluid.isEmpty()){
-                    process.setInputTanks(0);
-                }
-                state.processor.addProcessToQueue(process, level, false);
-            }
+        RecipeHolder<HydrocycloneRecipe> recipe = HydrocycloneRecipe.findRecipe(level, inputFluid);
+        if(recipe==null){
+            return;
         }
+        TFCTHMultiblockProcessInMachine<HydrocycloneRecipe> process = new TFCTHMultiblockProcessInMachine<>(recipe);
+        process.setInputTanks(0);
+        state.processor.addProcessToQueue(process, level, false);
     }
 
-    private void handleItemOutput(IMultiblockContext<BallMillLogic.State> ctx)
+    private void handleItemOutput(IMultiblockContext<HydrocycloneLogic.State> ctx)
     {
-        final BallMillLogic.State state = ctx.getState();
+        final HydrocycloneLogic.State state = ctx.getState();
         final ItemStack fullOutputStack = state.inventory.getStackInSlot(OUTPUT_SLOT);
         if(fullOutputStack.isEmpty())
             return;
@@ -145,21 +126,19 @@ public class BallMillLogic implements
     }
 
     @Override
-    public void tickClient(IMultiblockContext<BallMillLogic.State> context) {
-        final BallMillLogic.State state = context.getState();
-        if(state.active)
-            state.barrelAngle = (state.barrelAngle+9)%360;
+    public void tickClient(IMultiblockContext<HydrocycloneLogic.State> context) {
+        final HydrocycloneLogic.State state = context.getState();
         if(!state.isPlayingSound.getAsBoolean())
         {
             final Vec3 soundPos = context.getLevel().toAbsolute(new Vec3(3.5, 1.5, 1.5));
             state.isPlayingSound = MultiblockSound.startSound(
-                    () -> state.active, context.isValid(), soundPos, IESounds.refinery , 0.5f
+                    () -> state.active, context.isValid(), soundPos, IESounds.mixer , 0.5f
             );
         }
     }
 
     @Override
-    public void registerCapabilities(CapabilityRegistrar<BallMillLogic.State> register)
+    public void registerCapabilities(CapabilityRegistrar<HydrocycloneLogic.State> register)
     {
         register.registerAtOrNull(Capabilities.EnergyStorage.BLOCK, ENERGY_INPUT, state -> state.energy);
         register.registerAtOrNull(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_CAP, state -> state.fluidOutputCap);
@@ -167,8 +146,6 @@ public class BallMillLogic implements
         register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
             if(OUTPUT_CAP.equals(position))
                 return state.itemOutputCap;
-            else if(INPUT_CAP.equals(position))
-                return state.itemInputCap;
             else
                 return null;
         });
@@ -184,10 +161,10 @@ public class BallMillLogic implements
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType)
     {
-        return BallMillShapes.SHAPE_GETTER;
+        return HydrocycloneShapes.SHAPE_GETTER;
     }
 
-    public static ComparatorManager<BallMillLogic.State> makeComparator()
+    public static ComparatorManager<HydrocycloneLogic.State> makeComparator()
     {
         return ComparatorManager.makeSimple(
                 state -> Utils.calcRedstoneFromInventory(OUTPUT_SLOT, state.getInventory()), REDSTONE_POS
@@ -196,42 +173,38 @@ public class BallMillLogic implements
 
 
 
-    public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<BallMillRecipe>
+    public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<HydrocycloneRecipe>
     {
         private final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
 
         private boolean active;
         private float barrelAngle;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
-        public final MultiblockProcessor.InMachineProcessor<BallMillRecipe> processor;
+        public final MultiblockProcessor.InMachineProcessor<HydrocycloneRecipe> processor;
         private final SlotwiseItemHandler inventory;
-        public final BallMillTanks tanks = new BallMillTanks();
+        public final HydrocycloneTanks tanks = new HydrocycloneTanks();
 
 
         private final IFluidTank[] tankArray = {tanks.input, tanks.output};
         private final Supplier<@Nullable IItemHandler> itemOutput;
         private final Supplier<@Nullable IFluidHandler> fluidOutput;
-        private final IItemHandler itemInputCap;
         private final IItemHandler itemOutputCap;
         private final IFluidHandler fluidInputCap;
         private final IFluidHandler fluidOutputCap;
         private BooleanSupplier isPlayingSound = () -> false;
         private final MachineInterfaceHandler.IMachineInterfaceConnection mifHandler;
 
-        public State(IInitialMultiblockContext<BallMillLogic.State> ctx)
+        public State(IInitialMultiblockContext<HydrocycloneLogic.State> ctx)
         {
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
             this.inventory = SlotwiseItemHandler.makeWithGroups(List.of(
-                    new SlotwiseItemHandler.IOConstraintGroup(SlotwiseItemHandler.IOConstraint.NO_CONSTRAINT, NUM_INPUT_SLOTS),
                     new SlotwiseItemHandler.IOConstraintGroup(SlotwiseItemHandler.IOConstraint.OUTPUT, 1)
             ), markDirty);
-            this.itemOutput = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, OUTPUT_OFFSET);
-            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_OFFSET);
+            this.itemOutput = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, ITEM_OUTPUT_OFFSET);
+            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_OFFSET);
+            //this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_OFFSET);
             this.processor = new MultiblockProcessor.InMachineProcessor<>(
-                    NUM_INPUT_SLOTS, 0, NUM_INPUT_SLOTS, markDirty, BallMillRecipe.RECIPES::getById
-            );
-            this.itemInputCap = new WrappingItemHandler(
-                    getInventory(), true, false, new WrappingItemHandler.IntRange(0, NUM_INPUT_SLOTS)
+                    1, 0, 1, markDirty, HydrocycloneRecipe.RECIPES::getById
             );
             this.itemOutputCap = new WrappingItemHandler(
                     getInventory(), false, true, new WrappingItemHandler.IntRange(OUTPUT_SLOT, OUTPUT_SLOT+1)
@@ -244,7 +217,6 @@ public class BallMillLogic implements
                     new MachineInterfaceHandler.MachineCheckImplementation<>((BooleanSupplier)() -> this.active, MachineInterfaceHandler.BASIC_ACTIVE),
                     //new MachineInterfaceHandler.MachineCheckImplementation<>(processor, MachineInterfaceHandler.BASIC_ITEM_IN, processor.getMachineInterfaceOptions(true)),
                     new MachineInterfaceHandler.MachineCheckImplementation<>(energy, MachineInterfaceHandler.BASIC_ENERGY),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(itemInputCap, MachineInterfaceHandler.BASIC_ITEM_IN),
                     new MachineInterfaceHandler.MachineCheckImplementation<>(itemOutputCap, MachineInterfaceHandler.BASIC_ITEM_OUT),
                     new MachineInterfaceHandler.MachineCheckImplementation<>(fluidInputCap, MachineInterfaceHandler.BASIC_FLUID_IN),
                     new MachineInterfaceHandler.MachineCheckImplementation<>(fluidOutputCap, MachineInterfaceHandler.BASIC_FLUID_OUT)
@@ -324,12 +296,12 @@ public class BallMillLogic implements
     }
 
 
-    public record BallMillTanks(FluidTank input, FluidTank output)
+    public record HydrocycloneTanks(FluidTank input, FluidTank output)
     {
 
-        public BallMillTanks()
+        public HydrocycloneTanks()
         {
-            this(new FluidTank(TANK_CAPACITY), new FluidTank(TANK_CAPACITY));
+            this(new FluidTank(TANK_CAPACITY), new FluidTank(TANK_CAPACITY/8));
         }
 
         public Tag toNBT(HolderLookup.Provider provider)

@@ -19,10 +19,7 @@ import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.effect.ModEffects;
-import net.bauxite_ltk.tfc_trihydrate.gui.BallMillMenu;
-import net.bauxite_ltk.tfc_trihydrate.gui.BallMillScreen;
-import net.bauxite_ltk.tfc_trihydrate.gui.FlotationCellScreen;
-import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
+import net.bauxite_ltk.tfc_trihydrate.gui.*;
 import net.bauxite_ltk.tfc_trihydrate.render.BallMillRender;
 import net.bauxite_ltk.tfc_trihydrate.render.FlotationCellRender;
 import net.bauxite_ltk.tfc_trihydrate.render.TFCTHDynamicModel;
@@ -158,6 +155,7 @@ public class ModEvents {
     {
         event.register(TFCTHMenuTypes.BALL_MILL.getType(), BallMillScreen::new);
         event.register(TFCTHMenuTypes.FLOTATION_CELL.getType(), FlotationCellScreen::new);
+        event.register(TFCTHMenuTypes.HYDROCYCLONE.getType(), HydrocycloneScreen::new);
 
     }
 

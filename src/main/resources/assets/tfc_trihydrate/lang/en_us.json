@@ -350,6 +350,7 @@
 
   "block.tfc_trihydrate.ball_mill": "Ball Mill",
   "block.tfc_trihydrate.flotation_cell": "Flotation Cell",
+  "block.tfc_trihydrate.hydrocyclone": "Hydrocyclone",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

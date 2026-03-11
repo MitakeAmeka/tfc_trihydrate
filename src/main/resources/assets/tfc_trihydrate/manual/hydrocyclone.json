@@ -1,0 +1,10 @@
+{
+  "start": {
+    "type": "multiblock",
+    "name": "multiblocks/hydrocyclone"
+  },
+  "list": {
+    "type": "dynamic_table",
+    "table": "hydrocyclone"
+  }
+}

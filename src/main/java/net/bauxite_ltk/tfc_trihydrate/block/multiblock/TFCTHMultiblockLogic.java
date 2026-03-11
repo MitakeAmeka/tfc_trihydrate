@@ -11,6 +11,7 @@ import blusunrize.immersiveengineering.common.register.IEBlocks;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.TFCTHMultiblockBuilder;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -46,7 +47,12 @@ public class TFCTHMultiblockLogic {
             .redstone(s -> s.rsState, FlotationCellLogic.REDSTONE_POS)
             .build();
 
-
+    public static final MultiblockRegistration<HydrocycloneLogic.State> HYDROCYCLONE =
+            metal(new HydrocycloneLogic(), "hydrocyclone")
+                    .structure(() -> TFCTHMultiblocks.HYDROCYCLONE)
+                    .gui(TFCTHMenuTypes.HYDROCYCLONE)
+                    .redstone(s -> s.rsState, HydrocycloneLogic.REDSTONE_POS)
+                    .build();
 
     private static <S extends IMultiblockState>
     TFCTHMultiblockBuilder<S> metal(IMultiblockLogic<S> logic, String name)

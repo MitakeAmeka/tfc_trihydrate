@@ -11,6 +11,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
 import com.google.common.collect.ImmutableList;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillMultiblock;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellMultiblock;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneMultiblock;
 import net.minecraft.core.Vec3i;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
@@ -25,6 +26,7 @@ public class TFCTHMultiblocks {
     public static final List<MultiblockHandler.IMultiblock> TFCTH_MULTIBLOCKS = new ArrayList<>();
     public static IETemplateMultiblock BALL_MILL;
     public static IETemplateMultiblock FLOTATION_CELL;
+    public static IETemplateMultiblock HYDROCYCLONE;
 
 
     public static void init()
@@ -97,6 +99,7 @@ public class TFCTHMultiblocks {
         //Init IE multiblocks
         BALL_MILL = register(new BallMillMultiblock());
         FLOTATION_CELL = register(new FlotationCellMultiblock());
+        HYDROCYCLONE = register(new HydrocycloneMultiblock());
 
     }
 

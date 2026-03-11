@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.MixerRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
 import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.HydrocycloneRecipe;
 import net.bauxite_ltk.tfc_trihydrate.crafting.TFCTHRecipeType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 public class JEIRecipeTypes {
     public static final RecipeType<RecipeHolder<BallMillRecipe>> BALL_MILL = create(TFCTHRecipeType.BALL_MILL);
     public static final RecipeType<RecipeHolder<FlotationCellRecipe>> FLOTATION_CELL = create(TFCTHRecipeType.FLOTATION_CELL);
+    public static final RecipeType<RecipeHolder<HydrocycloneRecipe>> HYDROCYCLONE = create(TFCTHRecipeType.HYDROCYCLONE);
 
 
     private static <T extends Recipe<?>>

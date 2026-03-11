@@ -348,6 +348,7 @@
 
   "block.tfc_trihydrate.ball_mill": "球磨机",
   "block.tfc_trihydrate.flotation_cell": "浮选槽",
+  "block.tfc_trihydrate.hydrocyclone": "水力旋流器",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

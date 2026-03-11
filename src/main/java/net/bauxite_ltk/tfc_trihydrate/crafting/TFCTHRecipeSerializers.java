@@ -23,6 +23,10 @@ public class TFCTHRecipeSerializers {
         FlotationCellRecipe.SERIALIZER = RECIPE_SERIALIZERS.register(
                 "flotation_cell", FlotationCellRecipeSerializer::new
         );
+
+        HydrocycloneRecipe.SERIALIZER = RECIPE_SERIALIZERS.register(
+                "hydrocyclone", HydrocycloneRecipeSerializer::new
+        );
     }
 
     public static void init(IEventBus modEventBus){
