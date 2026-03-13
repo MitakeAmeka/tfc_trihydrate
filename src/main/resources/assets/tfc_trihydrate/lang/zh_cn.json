@@ -6,6 +6,10 @@
   "block.tfc_trihydrate.fluid.simple_flotation_solution": "简制浮选液",
   "fluid.tfc_trihydrate.simple_flotation_solution": "简制浮选液",
 
+  "item.tfc_trihydrate.bucket.sodium_ethyl_xanthate": "乙基黄原酸钠溶液桶",
+  "block.tfc_trihydrate.fluid.sodium_ethyl_xanthate": "乙基黄原酸钠溶液",
+  "fluid.tfc_trihydrate.sodium_ethyl_xanthate": "乙基黄原酸钠溶液",
+
   "item.tfc_trihydrate.bucket.lime_slurry": "石灰浆桶",
   "block.tfc_trihydrate.fluid.lime_slurry": "石灰浆",
   "fluid.tfc_trihydrate.lime_slurry": "石灰浆",
@@ -349,6 +353,7 @@
   "block.tfc_trihydrate.ball_mill": "球磨机",
   "block.tfc_trihydrate.flotation_cell": "浮选槽",
   "block.tfc_trihydrate.hydrocyclone": "水力旋流器",
+  "block.tfc_trihydrate.thickener": "矿浆浓密机",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

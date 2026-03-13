@@ -10,6 +10,7 @@ import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneLogic;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.ThickenerLogic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -43,6 +44,10 @@ public class TFCTHMenuTypes {
 
     public static final TFCTHMenuTypes.MultiblockContainer<HydrocycloneLogic.State, HydrocycloneMenu> HYDROCYCLONE = registerMultiblock(
             "hydrocyclone", HydrocycloneMenu::makeServer, HydrocycloneMenu::makeClient
+    );
+
+    public static final TFCTHMenuTypes.MultiblockContainer<ThickenerLogic.State, ThickenerMenu> THICKENER = registerMultiblock(
+            "thickener", ThickenerMenu::makeServer, ThickenerMenu::makeClient
     );
 
 

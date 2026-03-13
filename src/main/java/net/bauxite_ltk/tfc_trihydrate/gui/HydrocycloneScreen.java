@@ -6,6 +6,7 @@ import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import com.google.common.collect.ImmutableList;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,8 @@ public class HydrocycloneScreen extends IEContainerScreen<HydrocycloneMenu> {
             TFCTrihydrate.MODID,"hydrocyclone/tank_overlay");
     private static final ResourceLocation SMALL_TANK = ResourceLocation.fromNamespaceAndPath(
             TFCTrihydrate.MODID,"hydrocyclone/small_tank_overlay");
+    private static final ResourceLocation PROGRESS = ResourceLocation.fromNamespaceAndPath(
+            TFCTrihydrate.MODID,"hydrocyclone/progress");
 
     public HydrocycloneScreen(HydrocycloneMenu container, Inventory inventoryPlayer, Component title) {
         super(container, inventoryPlayer, title, TEXTURE);
@@ -38,5 +41,17 @@ public class HydrocycloneScreen extends IEContainerScreen<HydrocycloneMenu> {
 
     public static ResourceLocation makeTextureLocation(String name) {
         return ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID, "textures/gui/"+name+".png");
+    }
+
+    @Override
+    protected void drawContainerBackgroundPre(@Nonnull GuiGraphics graphics, float f, int mx, int my)
+    {
+        float process = menu.guiProgress.get();
+        TFCTrihydrate.LOGGER.info("progress:{}", process);
+        if(process > 0)
+        {
+            int w = (int)Math.max(1, process*50);
+            graphics.blitSprite(PROGRESS, 31, 50, 0, 0, leftPos+63, topPos+17, 31, w);
+        }
     }
 }

@@ -23,6 +23,7 @@ import net.bauxite_ltk.tfc_trihydrate.gui.*;
 import net.bauxite_ltk.tfc_trihydrate.render.BallMillRender;
 import net.bauxite_ltk.tfc_trihydrate.render.FlotationCellRender;
 import net.bauxite_ltk.tfc_trihydrate.render.TFCTHDynamicModel;
+import net.bauxite_ltk.tfc_trihydrate.render.ThickenerRender;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.commands.Commands;
@@ -125,6 +126,7 @@ public class ModEvents {
     {
         registerBERenderNoContext(event, TFCTHMultiblockLogic.BALL_MILL.masterBE(), BallMillRender::new);
         registerBERenderNoContext(event, TFCTHMultiblockLogic.FLOTATION_CELL.masterBE(), FlotationCellRender::new);
+        registerBERenderNoContext(event, TFCTHMultiblockLogic.THICKENER.masterBE(), ThickenerRender::new);
     }
 
     private static <T extends BlockEntity>
@@ -148,6 +150,7 @@ public class ModEvents {
     {
         BallMillRender.BARREL = new TFCTHDynamicModel(BallMillRender.NAME);
         FlotationCellRender.BLADE = new TFCTHDynamicModel(FlotationCellRender.NAME);
+        ThickenerRender.AGITATOR = new TFCTHDynamicModel(ThickenerRender.NAME);
     }
 
     @SubscribeEvent
@@ -156,6 +159,7 @@ public class ModEvents {
         event.register(TFCTHMenuTypes.BALL_MILL.getType(), BallMillScreen::new);
         event.register(TFCTHMenuTypes.FLOTATION_CELL.getType(), FlotationCellScreen::new);
         event.register(TFCTHMenuTypes.HYDROCYCLONE.getType(), HydrocycloneScreen::new);
+        event.register(TFCTHMenuTypes.THICKENER.getType(), ThickenerScreen::new);
 
     }
 

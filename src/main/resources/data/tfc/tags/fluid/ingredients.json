@@ -38,19 +38,7 @@
     "tfc:red_dye",
     "tfc:black_dye",
     "tfc_trihydrate:simple_flotation_solution",
-    "tfc_trihydrate:lime_slurry",
-    "tfc_trihydrate:hematite_slurry",
-    "tfc_trihydrate:limonite_slurry",
-    "tfc_trihydrate:magnetite_slurry",
-    "tfc_trihydrate:native_copper_slurry",
-    "tfc_trihydrate:native_silver_slurry",
-    "tfc_trihydrate:native_gold_slurry",
-    "tfc_trihydrate:malachite_slurry",
-    "tfc_trihydrate:tetrahedrite_slurry",
-    "tfc_trihydrate:garnierite_slurry",
-    "tfc_trihydrate:cassiterite_slurry",
-    "tfc_trihydrate:sphalerite_slurry",
-    "tfc_trihydrate:bismuthinite_slurry"
+    "tfc_trihydrate:lime_slurry"
 
   ]
 }

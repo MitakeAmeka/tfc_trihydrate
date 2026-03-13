@@ -21,6 +21,7 @@ public class TFCTHRecipeType {
     public static final IERecipeTypes.TypeWithClass<BallMillRecipe> BALL_MILL = register("ball_mill", BallMillRecipe.class);
     public static final IERecipeTypes.TypeWithClass<FlotationCellRecipe> FLOTATION_CELL = register("flotation_cell", FlotationCellRecipe.class);
     public static final IERecipeTypes.TypeWithClass<HydrocycloneRecipe> HYDROCYCLONE = register("hydrocyclone", HydrocycloneRecipe.class);
+    public static final IERecipeTypes.TypeWithClass<ThickenerRecipe> THICKENER = register("thickener", ThickenerRecipe.class);
 
 
 

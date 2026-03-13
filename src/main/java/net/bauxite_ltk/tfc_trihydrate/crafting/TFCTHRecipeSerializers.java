@@ -27,6 +27,10 @@ public class TFCTHRecipeSerializers {
         HydrocycloneRecipe.SERIALIZER = RECIPE_SERIALIZERS.register(
                 "hydrocyclone", HydrocycloneRecipeSerializer::new
         );
+
+        ThickenerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register(
+                "thickener", ThickenerRecipeSerializer::new
+        );
     }
 
     public static void init(IEventBus modEventBus){

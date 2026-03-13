@@ -19,6 +19,7 @@ public class FlotationCellRecipeSerializer extends IERecipeSerializer<FlotationC
             optionalFluidOutput("result_tailing"), r -> r.outputTailing,
             IEDualCodecs.SIZED_FLUID_INGREDIENT.fieldOf("input_ore"), r -> r.inputOre,
             IEDualCodecs.SIZED_FLUID_INGREDIENT.fieldOf("input_add"), r -> r.inputAdd,
+            DualCodecs.INT.fieldOf("time"), MultiblockRecipe::getBaseTime,
             DualCodecs.INT.fieldOf("energy"), MultiblockRecipe::getBaseEnergy,
             FlotationCellRecipe::new
     );

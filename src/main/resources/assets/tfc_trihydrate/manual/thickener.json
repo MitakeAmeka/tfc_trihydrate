@@ -1,0 +1,10 @@
+{
+  "start": {
+    "type": "multiblock",
+    "name": "multiblocks/thickener"
+  },
+  "list": {
+    "type": "dynamic_table",
+    "table": "thickener"
+  }
+}

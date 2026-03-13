@@ -42,6 +42,18 @@ public class ModFluids {
             BaseFlowingFluid.Flowing::new
     );
 
+    public static final FluidHolder<BaseFlowingFluid> SODIUM_ETHYL_XANTHATE = register(
+            "sodium_ethyl_xanthate",
+            properties -> properties
+                    .block(ModBlocks.SODIUM_ETHYL_XANTHATE)
+                    .bucket(ModItems.SODIUM_ETHYL_XANTHATE_BUCKET),
+            waterLike()
+                    .descriptionId("fluid.tfc_trihydrate.sodium_ethyl_xanthate"),
+            BaseFlowingFluid.Source::new,
+            BaseFlowingFluid.Flowing::new
+    );
+
+
     public static final FluidHolder<BaseFlowingFluid> LIME_SLURRY = register(
             "lime_slurry",
             properties -> properties
