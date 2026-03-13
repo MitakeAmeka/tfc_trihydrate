@@ -28,6 +28,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -116,12 +117,32 @@ public class FlotationCellLogic implements
             context.requestMasterBESync();
         }
         tryEnqueueProcesses(state, context.getLevel().getRawLevel());
+        FlotationCellTanks tanks = state.tanks;
+        int totalAmount = tanks.inputOre.getFluidAmount() + tanks.outputTailing.getFluidAmount() + tanks.outputConcentrate.getFluidAmount();
+
+        if(totalAmount >= 48000 && !tanks.outputConcentrate.isEmpty()){
+            FluidStack unitConcentrate = tanks.outputConcentrate().getFluid().copy();
+            int extraAmount = totalAmount-48000;
+            if(extraAmount<=100){
+                unitConcentrate.setAmount(extraAmount);
+            }
+            else{
+                unitConcentrate.setAmount(100);
+            }
+
+
+            if(state.tanks.overflow.fill(unitConcentrate, IFluidHandler.FluidAction.SIMULATE) == unitConcentrate.getAmount()){
+                state.tanks.overflow.fill(unitConcentrate, IFluidHandler.FluidAction.EXECUTE);
+                state.tanks.outputConcentrate.drain(unitConcentrate, IFluidHandler.FluidAction.EXECUTE);
+            }
+
+        }
         boolean output1 = FluidUtils.multiblockFluidOutput(
                 state.fluidOutputTailing.get(), state.tanks.outputTailing,
                 -1, -1,null
         );
         boolean output2 = FluidUtils.multiblockFluidOutput(
-                state.fluidOutputConcentrate.get(), state.tanks.outputConcentrate,
+                state.fluidOutputConcentrate.get(), state.tanks.overflow,
                 -1, -1,null
         );
         if((output1 || output2) && !updateFlag)
@@ -202,7 +223,7 @@ public class FlotationCellLogic implements
         public final FlotationCellTanks tanks = new FlotationCellTanks();
 
 
-        private final IFluidTank[] tankArray = {tanks.inputOre, tanks.inputAdd, tanks.outputConcentrate, tanks.outputTailing };
+        private final IFluidTank[] tankArray = {tanks.inputOre, tanks.inputAdd, tanks.outputConcentrate, tanks.outputTailing, tanks.overflow };
         private final Supplier<@Nullable IFluidHandler> fluidOutputTailing;
         private final Supplier<@Nullable IFluidHandler> fluidOutputConcentrate;
         private final IFluidHandler fluidInputOreCap;
@@ -222,13 +243,13 @@ public class FlotationCellLogic implements
             this.fluidOutputTailing = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_TAILING_OFFSET);
             this.fluidOutputConcentrate = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_CONCENTRATE_OFFSET);
             this.fluidInputOreCap = new ArrayFluidHandler(
-                    false, true, markDirty, tanks.inputOre
+                    true, true, markDirty, tanks.inputOre
             );
             this.fluidInputAddCap = new ArrayFluidHandler(
-                    false, true, markDirty, tanks.inputAdd
+                    true, true, markDirty, tanks.inputAdd
             );
             this.fluidOutputConcentrateCap = new ArrayFluidHandler(
-                    true,false, markDirty, tanks.outputConcentrate
+                    true,false, markDirty, tanks.overflow
             );
             this.fluidOutputTailingCap = new ArrayFluidHandler(
                     true,false, markDirty, tanks.outputTailing
@@ -320,7 +341,7 @@ public class FlotationCellLogic implements
     }
 
 
-    public record FlotationCellTanks(FluidTank inputOre, FluidTank inputAdd, FluidTank outputTailing, FluidTank outputConcentrate)
+    public record FlotationCellTanks(FluidTank inputOre, FluidTank inputAdd, FluidTank outputTailing, FluidTank outputConcentrate, FluidTank overflow)
     {
 
         public FlotationCellTanks()
@@ -328,6 +349,7 @@ public class FlotationCellLogic implements
             this(
                     new FluidTank(ORE_CAPACITY),
                     new FluidTank(ADD_CAPACITY),
+                    new FluidTank(OUTPUT_CAPACITY),
                     new FluidTank(OUTPUT_CAPACITY),
                     new FluidTank(OUTPUT_CAPACITY));
         }
@@ -339,6 +361,7 @@ public class FlotationCellLogic implements
             tag.put("inAdd", inputAdd.writeToNBT(provider, new CompoundTag()));
             tag.put("outTailing", outputTailing.writeToNBT(provider, new CompoundTag()));
             tag.put("outConcentrate", outputConcentrate.writeToNBT(provider, new CompoundTag()));
+            tag.put("overflow", overflow.writeToNBT(provider, new CompoundTag()));
             return tag;
         }
 
@@ -348,6 +371,7 @@ public class FlotationCellLogic implements
             inputAdd.readFromNBT(provider, tag.getCompound("inAdd"));
             outputTailing.readFromNBT(provider, tag.getCompound("outTailing"));
             outputConcentrate.readFromNBT(provider, tag.getCompound("outConcentrate"));
+            overflow.readFromNBT(provider, tag.getCompound("overflow"));
         }
     }
 }

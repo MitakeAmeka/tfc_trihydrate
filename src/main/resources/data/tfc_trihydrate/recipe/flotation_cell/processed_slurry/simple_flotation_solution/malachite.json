@@ -1,6 +1,7 @@
 {
   "type": "tfc_trihydrate:flotation_cell",
   "energy": 640,
+  "time": 2,
   "result_concentrate": {
     "amount": 50,
     "id": "tfc_trihydrate:concentrate_malachite_slurry"

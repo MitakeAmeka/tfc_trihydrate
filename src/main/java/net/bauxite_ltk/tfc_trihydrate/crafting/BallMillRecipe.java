@@ -47,7 +47,7 @@ public class BallMillRecipe extends MultiblockRecipe {
                                                    @Nullable SizedFluidIngredient inputFluid, IngredientWithSize inputItem,
                                                     int energy) {
 
-        super(TagOutput.EMPTY, TFCTHRecipeType.BALL_MILL, 1000, energy, MULTIPLIERS);
+        super(TagOutput.EMPTY, TFCTHRecipeType.BALL_MILL, 100, energy, MULTIPLIERS);
         this.outputFluid = outputFluid;
         this.inputFluid = inputFluid;
         this.inputItem = inputItem;

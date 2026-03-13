@@ -108,7 +108,7 @@ public class FlotationCellRender extends IEMultiblockRenderer<FlotationCellLogic
         matrixStack.scale(baseScale, baseScale, baseScale);
         matrixStack.translate(-24,0,-2);
         matrixStack.translate(0, height,0);
-        Helper.applyRotationX(height,-4,90,matrixStack);
+        Helper.applyRotationX(height,-2,90,matrixStack);
         GuiHelper.drawRepeatedFluidSprite(bufferIn.getBuffer(RenderType.translucent()), matrixStack, fluidStack,
                 0, 0, 64, 39);
         matrixStack.popPose();

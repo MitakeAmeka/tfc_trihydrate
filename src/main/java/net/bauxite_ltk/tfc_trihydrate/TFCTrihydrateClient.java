@@ -67,6 +67,8 @@ public class TFCTrihydrateClient {
         TFCTrihydrate.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.SIMPLE_FLOTATION_SOLUTION.getSource(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.SIMPLE_FLOTATION_SOLUTION.getFlowing(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.SODIUM_ETHYL_XANTHATE.getSource(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.SODIUM_ETHYL_XANTHATE.getFlowing(), RenderType.translucent());
     }
 
     @SubscribeEvent
@@ -90,6 +92,10 @@ public class TFCTrihydrateClient {
         event.registerFluidType(
                 new FluidRendererExtension(0xFF93bcb2, BUBBLE_STILL, BUBBLE_STILL, null, null),
                 ModFluids.SIMPLE_FLOTATION_SOLUTION.getType());
+
+        event.registerFluidType(
+                new FluidRendererExtension(0xFFf4ad00, WATER_STILL, WATER_FLOW, null, null),
+                ModFluids.SODIUM_ETHYL_XANTHATE.getType());
 
         event.registerFluidType(
                 new FluidRendererExtension(0xFFb4b3a9, THICKY_WATER_STILL, THICKY_WATER_FLOW, null, null),

@@ -9,10 +9,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLo
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneLogic;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.TFCTHMultiblockBuilder;
+import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.*;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -52,6 +49,13 @@ public class TFCTHMultiblockLogic {
                     .structure(() -> TFCTHMultiblocks.HYDROCYCLONE)
                     .gui(TFCTHMenuTypes.HYDROCYCLONE)
                     .redstone(s -> s.rsState, HydrocycloneLogic.REDSTONE_POS)
+                    .build();
+
+    public static final MultiblockRegistration<ThickenerLogic.State> THICKENER =
+            metal(new ThickenerLogic(), "thickener")
+                    .structure(() -> TFCTHMultiblocks.THICKENER)
+                    .gui(TFCTHMenuTypes.THICKENER)
+                    .redstone(s -> s.rsState, ThickenerLogic.REDSTONE_POS)
                     .build();
 
     private static <S extends IMultiblockState>

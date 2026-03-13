@@ -220,6 +220,7 @@ public class ModCreativeTabs {
                 output.accept(TAILING_BISMUTHINITE_SLURRY_BUCKET);
 
                 output.accept(SIMPLE_FLOTATION_SOLUTION_BUCKET);
+                output.accept(SODIUM_ETHYL_XANTHATE_BUCKET);
                 output.accept(LIME_SLURRY_BUCKET);
 
                 //output.accept(LTK_TOOL.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event

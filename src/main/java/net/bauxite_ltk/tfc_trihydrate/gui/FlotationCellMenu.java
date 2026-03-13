@@ -56,5 +56,6 @@ public class FlotationCellMenu extends IEContainerMenu {
         addGenericData(GenericContainerData.fluid(tanks.inputAdd()));
         addGenericData(GenericContainerData.fluid(tanks.outputConcentrate()));
         addGenericData(GenericContainerData.fluid(tanks.outputTailing()));
+        addGenericData(GenericContainerData.fluid(tanks.overflow()));
     }
 }

@@ -21,6 +21,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
+import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.process.TFCTHMultiblockProcessInMachine;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.HydrocycloneShapes;
 import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
@@ -92,6 +93,20 @@ public class HydrocycloneLogic implements
                 state.fluidOutput.get(), state.tanks.output,
                 -1, -1,null
         );
+        if(!state.processor.getQueue().isEmpty()){
+            HydrocycloneRecipe recipe = state.processor.getQueue().getFirst().getRecipe(context.getLevel().getRawLevel());
+            if(recipe!= null){
+                int current =  state.processor.getQueue().getFirst().processTick;
+                int total = recipe.getTotalProcessTime();
+                state.recipeProgress = (float) current/total;
+            }
+            else{
+                state.recipeProgress = 0;
+            }
+        }
+        else{
+            state.recipeProgress = 0;
+        }
     }
 
     private void enqueueProcesses(State state, Level level) {
@@ -178,7 +193,7 @@ public class HydrocycloneLogic implements
         private final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
 
         private boolean active;
-        private float barrelAngle;
+        private float recipeProgress = 0;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
         public final MultiblockProcessor.InMachineProcessor<HydrocycloneRecipe> processor;
         private final SlotwiseItemHandler inventory;
@@ -248,12 +263,14 @@ public class HydrocycloneLogic implements
         public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
             nbt.putBoolean("active", active);
+            nbt.putFloat("progress", recipeProgress);
         }
 
         @Override
         public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
             active = nbt.getBoolean("active");
+            recipeProgress = nbt.getFloat("progress");
         }
 
         @Override
@@ -288,11 +305,9 @@ public class HydrocycloneLogic implements
             return active;
         }
 
-        public float getBarrelAngle()
-        {
-            return barrelAngle;
+        public float getRecipeProgress() {
+            return recipeProgress;
         }
-
     }
 
 

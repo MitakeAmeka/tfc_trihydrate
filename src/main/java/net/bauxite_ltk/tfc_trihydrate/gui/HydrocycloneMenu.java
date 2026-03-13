@@ -5,6 +5,8 @@ import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
 import blusunrize.immersiveengineering.common.gui.IESlot;
 import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
+import blusunrize.immersiveengineering.common.gui.sync.GenericDataSerializers;
+import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneLogic;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,6 +19,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class HydrocycloneMenu extends IEContainerMenu {
     public final IMutableEnergyStorage energy;
     public final HydrocycloneLogic.HydrocycloneTanks tanks;
+    public final GetterAndSetter<Float> guiProgress;
 
     public static HydrocycloneMenu makeServer(
             MenuType<?> type, int id, Inventory invPlayer, MultiblockMenuContext<HydrocycloneLogic.State> ctx
@@ -24,7 +27,10 @@ public class HydrocycloneMenu extends IEContainerMenu {
     {
         final HydrocycloneLogic.State state = ctx.mbContext().getState();
         return new HydrocycloneMenu(
-                multiblockCtx(type, id, ctx), invPlayer, state.getInventory(), state.getEnergy(), state.tanks
+                multiblockCtx(type, id, ctx),
+                invPlayer, state.getInventory(),
+                state.getEnergy(), state.tanks,
+                GetterAndSetter.getterOnly(state::getRecipeProgress)
         );
     }
 
@@ -35,17 +41,23 @@ public class HydrocycloneMenu extends IEContainerMenu {
                 invPlayer,
                 new ItemStackHandler(HydrocycloneLogic.NUM_SLOTS),
                 new MutableEnergyStorage(HydrocycloneLogic.ENERGY_CAPACITY),
-                new HydrocycloneLogic.HydrocycloneTanks()
+                new HydrocycloneLogic.HydrocycloneTanks(),
+                GetterAndSetter.standalone(0f)
         );
     }
 
 
     protected HydrocycloneMenu(
             MenuContext ctx,
-            Inventory inventoryPlayer, IItemHandler inv, IMutableEnergyStorage energy, HydrocycloneLogic.HydrocycloneTanks tanks) {
+            Inventory inventoryPlayer,
+            IItemHandler inv,
+            IMutableEnergyStorage energy,
+            HydrocycloneLogic.HydrocycloneTanks tanks,
+            GetterAndSetter<Float> guiProgress) {
         super(ctx);
         this.energy = energy;
         this.tanks = tanks;
+        this.guiProgress = guiProgress;
 
         this.addSlot(new IESlot.NewOutput(inv, 0, 121, 50));
 
@@ -58,6 +70,7 @@ public class HydrocycloneMenu extends IEContainerMenu {
         addGenericData(GenericContainerData.energy(energy));
         addGenericData(GenericContainerData.fluid(tanks.input()));
         addGenericData(GenericContainerData.fluid(tanks.output()));
+        addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, guiProgress));
 
     }
 }

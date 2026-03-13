@@ -45,7 +45,7 @@ public class FlotationCellScreen extends IEContainerScreen<FlotationCellMenu> {
                         new Rect2i(leftPos+43, topPos+22, 70, 47),
                         70, 51, BIG_TANK),
                 new FlotationCellAddFluidInfoArea(menu.tanks.inputAdd(), new Rect2i(leftPos+76, topPos+17, 4, 34), -14, -6,32,58, ADD_TANK),
-                new FluidInfoArea(menu.tanks.outputConcentrate(), new Rect2i(leftPos+131, topPos+12, 16, 25), 20, 29, SMALL_TANK),
+                new FluidInfoArea(menu.tanks.overflow(), new Rect2i(leftPos+131, topPos+12, 16, 25), 20, 29, SMALL_TANK),
                 new FluidInfoArea(menu.tanks.outputTailing(), new Rect2i(leftPos+131, topPos+44, 16, 25), 20, 29, SMALL_TANK),
                 new EnergyInfoArea(leftPos+158, topPos+12, menu.energy)
         );

@@ -5,6 +5,10 @@
   "item.tfc_trihydrate.bucket.simple_flotation_solution": "Simple Flotation Solution Bucket",
   "block.tfc_trihydrate.fluid.simple_flotation_solution": "Simple Flotation Solution",
   "fluid.tfc_trihydrate.simple_flotation_solution": "Simple Flotation Solution",
+
+  "item.tfc_trihydrate.bucket.sodium_ethyl_xanthate": "Sodium Ethyl Xanthate Solution Bucket",
+  "block.tfc_trihydrate.fluid.sodium_ethyl_xanthate": "Sodium Ethyl Xanthate Solution",
+  "fluid.tfc_trihydrate.sodium_ethyl_xanthate": "Sodium Ethyl Xanthate Solution",
   
   "item.tfc_trihydrate.bucket.lime_slurry": "Lime Slurry Bucket",
   "block.tfc_trihydrate.fluid.lime_slurry": "Lime Slurry",
@@ -351,6 +355,7 @@
   "block.tfc_trihydrate.ball_mill": "Ball Mill",
   "block.tfc_trihydrate.flotation_cell": "Flotation Cell",
   "block.tfc_trihydrate.hydrocyclone": "Hydrocyclone",
+  "block.tfc_trihydrate.thickener": "Ore Slurry Thickener",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
   "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",

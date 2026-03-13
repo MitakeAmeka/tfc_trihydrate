@@ -1,17 +1,18 @@
 {
   "type": "tfc_trihydrate:flotation_cell",
   "energy": 640,
+  "time": 2,
   "result_concentrate": {
     "amount": 50,
-    "id": "tfc_trihydrate:concentrate_cassiterite_slurry"
+    "id": "tfc_trihydrate:concentrate_limonite_slurry"
   },
   "result_tailing": {
     "amount": 50,
-    "id": "tfc_trihydrate:tailing_cassiterite_slurry"
+    "id": "tfc_trihydrate:tailing_limonite_slurry"
   },
   "input_ore": {
     "amount": 100,
-    "fluid": "tfc_trihydrate:processed_cassiterite_slurry"
+    "fluid": "tfc_trihydrate:tailing_limonite_slurry"
   },
   "input_add": {
     "amount": 1,

@@ -20,6 +20,7 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
     public static final DeferredBlock<LiquidBlock> SIMPLE_FLOTATION_SOLUTION = registerNoItem("fluid/simple_flotation_solution", () -> new LiquidBlock(ModFluids.SIMPLE_FLOTATION_SOLUTION.getFlowing(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));
+    public static final DeferredBlock<LiquidBlock> SODIUM_ETHYL_XANTHATE = registerNoItem("fluid/sodium_ethyl_xanthate", () -> new LiquidBlock(ModFluids.SODIUM_ETHYL_XANTHATE.getFlowing(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));
     public static final DeferredBlock<LiquidBlock> LIME_SLURRY = registerNoItem("fluid/lime_slurry", () -> new LiquidBlock(ModFluids.LIME_SLURRY.getFlowing(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));
 
     public static final DeferredBlock<LiquidBlock> HEMATITE_SLURRY = registerNoItem("fluid/hematite_slurry", () -> new LiquidBlock(ModFluids.HEMATITE_SLURRY.getFlowing(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));

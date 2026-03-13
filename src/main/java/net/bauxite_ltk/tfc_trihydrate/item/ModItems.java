@@ -135,6 +135,14 @@ public class ModItems {
                     )
             );
 
+    public static final DeferredItem<Item> SODIUM_ETHYL_XANTHATE_BUCKET =
+            ITEMS.register("bucket/sodium_ethyl_xanthate",
+                    () -> new BucketItem(
+                            ModFluids.SODIUM_ETHYL_XANTHATE.getSource(),
+                            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)
+                    )
+            );
+
     public static final DeferredItem<Item> LIME_SLURRY_BUCKET =
             ITEMS.register("bucket/lime_slurry",
                     () -> new BucketItem(

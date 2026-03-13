@@ -33,9 +33,9 @@ public class FlotationCellRecipe extends MultiblockRecipe {
 
     protected <T extends Recipe<?>> FlotationCellRecipe(FluidStack outputConcentrate, FluidStack outputTailing,
                                                         SizedFluidIngredient inputOre, SizedFluidIngredient inputAdd,
-                                                        int energy) {
+                                                        int baseTime, int energy) {
 
-        super(TagOutput.EMPTY, TFCTHRecipeType.FLOTATION_CELL, 10, energy, MULTIPLIERS);
+        super(TagOutput.EMPTY, TFCTHRecipeType.FLOTATION_CELL, baseTime, energy, MULTIPLIERS);
         this.outputConcentrate = outputConcentrate;
         this.outputTailing = outputTailing;
         this.inputOre = inputOre;
