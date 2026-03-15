@@ -1,12 +1,13 @@
 {
   "type": "tfc_trihydrate:ball_mill",
-  "energy": 6400,
+  "energy": 2400,
+  "time": 100,
   "result_fluid": {
     "amount": 250,
     "id": "tfc_trihydrate:malachite_slurry"
   },
   "input_fluid": {
-    "amount": 500,
+    "amount": 250,
     "fluid": "minecraft:water"
   },
   "input_item": {

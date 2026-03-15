@@ -1,12 +1,13 @@
 {
   "type": "tfc_trihydrate:ball_mill",
-  "energy": 6400,
+  "energy": 2400,
+  "time": 50,
   "result_fluid": {
     "amount": 125,
     "id": "tfc_trihydrate:native_gold_slurry"
 },
   "input_fluid": {
-    "amount": 500,
+    "amount": 125,
     "fluid": "minecraft:water"
   },
   "input_item": {

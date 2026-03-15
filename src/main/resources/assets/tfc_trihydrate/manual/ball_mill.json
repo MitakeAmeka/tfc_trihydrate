@@ -1,10 +1,26 @@
 {
-  "start": {
+  "multiblock": {
     "type": "multiblock",
-    "name": "multiblocks/ball_mill"
+    "name": "tfc_trihydrate:multiblocks/ball_mill"
   },
-  "list": {
-    "type": "dynamic_table",
-    "table": "ball_mill"
+  "ball_mill0": {
+    "type": "item_display",
+    "items": [
+      "tfc_trihydrate:dirty_coarse_powder/native_copper",
+      "tfc_trihydrate:coarse_powder/native_copper",
+      "tfc_trihydrate:pure_coarse_powder/native_copper"
+    ]
+  },
+  "ball_mill1": {
+    "type": "item_display",
+    "items": [
+      "tfc:powder/native_copper"
+    ]
+  },
+  "ball_mill2": {
+    "type": "item_display",
+    "items": [
+      "tfc_trihydrate:bucket/native_copper_slurry"
+    ]
   }
 }

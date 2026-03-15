@@ -87,7 +87,7 @@ public class HydrocycloneLogic implements
             context.requestMasterBESync();
         }
         enqueueProcesses(state, context.getLevel().getRawLevel());
-        if(context.getLevel().shouldTickModulo(8))
+        if(context.getLevel().shouldTickModulo(2))
             handleItemOutput(context);
         FluidUtils.multiblockFluidOutput(
                 state.fluidOutput.get(), state.tanks.output,

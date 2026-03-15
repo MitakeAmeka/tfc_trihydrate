@@ -1,6 +1,6 @@
 {
   "type": "tfc_trihydrate:hydrocyclone",
-  "energy": 6400,
+  "energy": 1600,
   "result_fluid": {
     "amount": 250,
     "id": "tfc_trihydrate:processed_limonite_slurry"

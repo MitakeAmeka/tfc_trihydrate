@@ -64,4 +64,9 @@ public class TFCTHDynamicModel
     {
         return name.id();
     }
+
+    public ModelResourceLocation getModelResourceLocation()
+    {
+        return name;
+    }
 }

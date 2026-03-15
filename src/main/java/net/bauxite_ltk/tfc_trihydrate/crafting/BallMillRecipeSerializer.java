@@ -21,6 +21,7 @@ public class BallMillRecipeSerializer extends IERecipeSerializer<BallMillRecipe>
             optionalItemOutput("result_item"), r -> r.outputItem,
             IEDualCodecs.SIZED_FLUID_INGREDIENT.optionalFieldOf("input_fluid"), r -> Optional.ofNullable(r.inputFluid),
             IngredientWithSize.CODECS.fieldOf("input_item"), r -> r.inputItem,
+            DualCodecs.INT.fieldOf("time"), MultiblockRecipe::getBaseTime,
             DualCodecs.INT.fieldOf("energy"), MultiblockRecipe::getBaseEnergy,
             BallMillRecipe::new
     );

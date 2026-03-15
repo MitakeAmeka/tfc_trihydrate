@@ -151,6 +151,7 @@ public class ModEvents {
         BallMillRender.BARREL = new TFCTHDynamicModel(BallMillRender.NAME);
         FlotationCellRender.BLADE = new TFCTHDynamicModel(FlotationCellRender.NAME);
         ThickenerRender.AGITATOR = new TFCTHDynamicModel(ThickenerRender.NAME);
+
     }
 
     @SubscribeEvent

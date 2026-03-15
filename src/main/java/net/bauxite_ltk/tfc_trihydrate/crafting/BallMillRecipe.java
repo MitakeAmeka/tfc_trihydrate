@@ -38,16 +38,15 @@ public class BallMillRecipe extends MultiblockRecipe {
 
     protected <T extends Recipe<?>> BallMillRecipe(FluidStack  outputFluid, TagOutput outputItem,
                                                    Optional<SizedFluidIngredient> inputFluid, IngredientWithSize inputItem,
-                                                   int energy){
-        this(outputFluid, outputItem, inputFluid.orElse(null), inputItem, energy);
+                                                   int time, int energy){
+        this(outputFluid, outputItem, inputFluid.orElse(null), inputItem, time, energy);
     }
 
 
     protected <T extends Recipe<?>> BallMillRecipe(FluidStack outputFluid, @Nonnull TagOutput outputItem,
                                                    @Nullable SizedFluidIngredient inputFluid, IngredientWithSize inputItem,
-                                                    int energy) {
-
-        super(TagOutput.EMPTY, TFCTHRecipeType.BALL_MILL, 100, energy, MULTIPLIERS);
+                                                    int time, int energy) {
+        super(TagOutput.EMPTY, TFCTHRecipeType.BALL_MILL, time, energy, MULTIPLIERS);
         this.outputFluid = outputFluid;
         this.inputFluid = inputFluid;
         this.inputItem = inputItem;

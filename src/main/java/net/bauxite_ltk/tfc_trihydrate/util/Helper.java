@@ -3,7 +3,37 @@ package net.bauxite_ltk.tfc_trihydrate.util;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
+import java.text.DecimalFormat;
+
 public class Helper {
+    static final DecimalFormat FORMATTER = new DecimalFormat("#,###.##");
+
+    public static String fDecimal(byte number){
+        return FORMATTER.format(number);
+    }
+
+    public static String fDecimal(short number){
+        return FORMATTER.format(number);
+    }
+
+    public static String fDecimal(int number){
+        return FORMATTER.format(number);
+    }
+
+    public static String fDecimal(long number){
+        return FORMATTER.format(number);
+    }
+
+    public static String fDecimal(float number){
+        return FORMATTER.format(number);
+    }
+
+    public static String fDecimal(double number){
+        return FORMATTER.format(number);
+    }
+
+
+
     public static void applyRotationX(double pivotY, double pivotZ, double degree, PoseStack poseStack){
         double arcDegree = -degree/180 * Math.PI;
         //transY, transZ are the Y and Z position of the pivot after *directly* applying the rotation.

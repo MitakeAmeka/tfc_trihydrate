@@ -35,7 +35,7 @@ public class ThickenerRecipe extends MultiblockRecipe {
     protected <T extends Recipe<?>> ThickenerRecipe(FluidStack outputFluid, @Nonnull TagOutput outputItem,
                                                     SizedFluidIngredient inputFluid, int energy) {
 
-        super(TagOutput.EMPTY, TFCTHRecipeType.THICKENER, 10, energy, MULTIPLIERS);
+        super(TagOutput.EMPTY, TFCTHRecipeType.THICKENER, 5, energy, MULTIPLIERS);
         this.outputFluid = outputFluid;
         this.inputFluid = inputFluid;
         this.outputItem = outputItem;

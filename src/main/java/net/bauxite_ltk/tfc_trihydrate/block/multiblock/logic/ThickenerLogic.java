@@ -76,6 +76,7 @@ public class ThickenerLogic implements
 
 
     private int tankLastTick = 0;
+    private int outputTankLastTick = 0;
     @Override
     public void tickServer(IMultiblockContext<ThickenerLogic.State> context) {
         final ThickenerLogic.State state = context.getState();
@@ -90,13 +91,17 @@ public class ThickenerLogic implements
             context.requestMasterBESync();
         }
         enqueueProcesses(state, context.getLevel().getRawLevel());
-        if(context.getLevel().shouldTickModulo(8))
+        if(context.getLevel().shouldTickModulo(4))
             handleItemOutput(context);
-        boolean output = FluidUtils.multiblockFluidOutput(
-                state.fluidOutput.get(), state.tanks.output,
-                -1, -1,null
-        );
-        if(output && !updateFlag) {
+        boolean output = false;
+        int totalAmount = context.getState().tanks.output.getFluidAmount() + state.tanks.input.getFluidAmount();
+        if(totalAmount>=129000){
+            output = FluidUtils.multiblockFluidOutput(
+                    state.fluidOutput.get(), state.tanks.output,
+                    -1, -1,null
+            );
+        }
+        if((output || outputTankLastTick!=state.tanks.output.getFluidAmount()) && !updateFlag ) {
             updateFlag = true;
             context.markMasterDirty();
             context.requestMasterBESync();

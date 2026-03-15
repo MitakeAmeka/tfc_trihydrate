@@ -6,7 +6,9 @@ import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
 import blusunrize.immersiveengineering.common.util.compat.jei.IERecipeCategory;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -14,6 +16,11 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
+import net.bauxite_ltk.tfc_trihydrate.util.Helper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidType;
 
@@ -58,5 +65,30 @@ public class BallMillCategory extends IERecipeCategory<BallMillRecipe> {
                     .addIngredient(NeoForgeTypes.FLUID_STACK, recipe.outputFluid)
                     .addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
         }
+    }
+
+
+    @Override
+    public void draw(BallMillRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        IDrawable background = this.getBackground();
+        int bWidth = background.getWidth();
+        int bHeight = background.getHeight();
+        Font font = Minecraft.getInstance().font;
+
+
+        int time = recipe.getTotalProcessTime()/5;
+        int energy = recipe.getTotalProcessEnergy() / time;
+
+        guiGraphics.pose().pushPose();
+        {
+            guiGraphics.pose().translate(-8, 0, 0);
+
+            String text0 = I18n.get("desc.tfc_trihydrate.info.thread_ift", Helper.fDecimal(energy), 8);
+            guiGraphics.drawString(font, text0, bWidth / 2 - font.width(text0) / 2, bHeight - (font.lineHeight * 2), -1, false);
+
+            String text1 = I18n.get("desc.immersiveengineering.info.ticks", Helper.fDecimal(time));
+            guiGraphics.drawString(font, text1, bWidth / 2 - font.width(text1) / 2, bHeight - font.lineHeight, -1, false);
+        }
+        guiGraphics.pose().popPose();
     }
 }

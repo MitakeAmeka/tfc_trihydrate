@@ -1,6 +1,7 @@
 {
   "type": "tfc_trihydrate:ball_mill",
-  "energy": 6400,
+  "energy": 2400,
+  "time": 100,
   "result_item": {
     "count": 1,
     "id": "tfc:powder/sphalerite"
