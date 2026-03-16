@@ -1,5 +1,7 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
+import blusunrize.immersiveengineering.api.utils.SetRestrictedField;
+import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import net.bauxite_ltk.tfc_trihydrate.block.ModBlocks;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblocks;
@@ -12,6 +14,7 @@ import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.bauxite_ltk.tfc_trihydrate.item.ModItems;
 import net.bauxite_ltk.tfc_trihydrate.util.ModTags;
 import net.minecraft.world.item.*;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import org.slf4j.Logger;
 
@@ -100,19 +103,13 @@ public class TFCTrihydrate {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        //populateAPI();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-
-        if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-        }
-
-        LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
-
-        Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
+        LOGGER.info("HELLO FROM TFC:TH COMMON SETUP");
+        populateAPI();
     }
 
     // Add the example block item to the building blocks tab
@@ -121,6 +118,14 @@ public class TFCTrihydrate {
             //event.accept(ModItems.LTK_TOOL);
         }
     }
+
+
+    public static void populateAPI(){
+        Config.MACHINES.populateAPI();
+    }
+
+
+
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent

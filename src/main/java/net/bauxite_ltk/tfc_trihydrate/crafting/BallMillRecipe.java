@@ -24,8 +24,8 @@ import java.util.function.Supplier;
 public class BallMillRecipe extends MultiblockRecipe {
     public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<BallMillRecipe>> SERIALIZER;
     public static final CachedRecipeList<BallMillRecipe> RECIPES = new CachedRecipeList<>(TFCTHRecipeType.BALL_MILL);
-    //TODO Add Multiplier Config TO Ball Mill
-    public static final Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
+
+    public static Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);;
 
 
     public final FluidStack outputFluid;

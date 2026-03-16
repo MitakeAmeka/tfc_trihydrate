@@ -1,7 +1,13 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
 import java.util.List;
+import java.util.function.Supplier;
 
+import blusunrize.immersiveengineering.api.crafting.*;
+import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.HydrocycloneRecipe;
+import net.bauxite_ltk.tfc_trihydrate.crafting.ThickenerRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -11,22 +17,55 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    public static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
-            .comment("Whether to log the dirt block on common setup")
-            .define("logDirtBlock", true);
+    public static final Machines MACHINES = new Machines(BUILDER);
 
-    public static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
+    public static class Machines
+    {
+        public final MultiblockRecipe.RecipeMultiplier ballMillConfig;
+        public final MultiblockRecipe.RecipeMultiplier hydrocycloneConfig;
+        public final MultiblockRecipe.RecipeMultiplier flotationCellConfig;
+        public final MultiblockRecipe.RecipeMultiplier thickenerConfig;
 
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
+        Machines(ModConfigSpec.Builder builder)
+        {
+            builder.push("machines");
 
-    // a list of strings that are treated as resource locations for items
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", Config::validateItemName);
+            ballMillConfig = addMachineEnergyTimeModifiers(builder, "ball mill");
+            hydrocycloneConfig = addMachineEnergyTimeModifiers(builder, "hydrocyclone");
+            flotationCellConfig = addMachineEnergyTimeModifiers(builder, "flotation cell");
+            thickenerConfig = addMachineEnergyTimeModifiers(builder, "thickener");
+
+            builder.pop();
+        }
+
+        private MultiblockRecipe.RecipeMultiplier addMachineEnergyTimeModifiers(ModConfigSpec.Builder builder, String machine)
+        {
+            return addMachineEnergyTimeModifiers(builder, machine, true);
+        }
+
+        private MultiblockRecipe.RecipeMultiplier addMachineEnergyTimeModifiers(ModConfigSpec.Builder builder, String machine, boolean popCategory)
+        {
+            builder.push(machine.replace(' ', '_'));
+            ModConfigSpec.DoubleValue energy = builder
+                    .comment("A modifier to apply to the energy costs of every "+machine+" recipe")
+                    .defineInRange("energyModifier", 1, 1e-3, 1e3);
+            ModConfigSpec.DoubleValue time = builder
+                    .comment("A modifier to apply to the time of every "+machine+" recipe")
+                    .defineInRange("timeModifier", 1, 1e-3, 1e3);
+            if(popCategory)
+                builder.pop();
+            return new MultiblockRecipe.RecipeMultiplier(time::get, energy::get);
+        }
+
+
+        public void populateAPI()
+        {
+            BallMillRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(ballMillConfig.timeModifier(),ballMillConfig.energyModifier());
+            HydrocycloneRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(hydrocycloneConfig.timeModifier(),hydrocycloneConfig.energyModifier());
+            FlotationCellRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(flotationCellConfig.timeModifier(),flotationCellConfig.energyModifier());
+            ThickenerRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(thickenerConfig.timeModifier(),thickenerConfig.energyModifier());
+        }
+    }
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

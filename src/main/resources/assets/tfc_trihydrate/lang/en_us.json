@@ -361,10 +361,13 @@
   "block.tfc_trihydrate.thickener": "Ore Slurry Thickener",
 
   "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
-  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",
-  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml.title": "TFC Trihydrate Configs",
-  "tfc_trihydrate.configuration.items": "Item List",
-  "tfc_trihydrate.configuration.logDirtBlock": "Log Dirt Block",
-  "tfc_trihydrate.configuration.magicNumberIntroduction": "Magic Number Text",
-  "tfc_trihydrate.configuration.magicNumber": "Magic Number"
+  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Common Configs",
+  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml.title": "TFC Trihydrate Common Configs",
+  "tfc_trihydrate.configuration.machines": "Machines",
+  "tfc_trihydrate.configuration.ball_mill": "Ball Mill",
+  "tfc_trihydrate.configuration.hydrocyclone": "Hydrocyclone",
+  "tfc_trihydrate.configuration.flotation_cell": "Flotation Cell",
+  "tfc_trihydrate.configuration.thickener": "Thickener",
+  "tfc_trihydrate.configuration.energyModifier": "Energy Modifier",
+  "tfc_trihydrate.configuration.timeModifier": "Time Modifier"
 }

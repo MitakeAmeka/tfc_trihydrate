@@ -362,11 +362,14 @@
   "block.tfc_trihydrate.hydrocyclone": "水力旋流器",
   "block.tfc_trihydrate.thickener": "矿浆浓密机",
 
-  "tfc_trihydrate.configuration.title": "TFC Trihydrate Configs",
-  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "TFC Trihydrate Configs",
-  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml.title": "TFC Trihydrate Configs",
-  "tfc_trihydrate.configuration.items": "Item List",
-  "tfc_trihydrate.configuration.logDirtBlock": "Log Dirt Block",
-  "tfc_trihydrate.configuration.magicNumberIntroduction": "Magic Number Text",
-  "tfc_trihydrate.configuration.magicNumber": "Magic Number"
+  "tfc_trihydrate.configuration.title": "群峦：三水合物 配置",
+  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml": "群峦：三水合物 通用配置",
+  "tfc_trihydrate.configuration.section.tfc_trihydrate.common.toml.title": "群峦：三水合物 通用配置",
+  "tfc_trihydrate.configuration.machines": "机器",
+  "tfc_trihydrate.configuration.ball_mill": "球磨机",
+  "tfc_trihydrate.configuration.hydrocyclone": "水力旋流器",
+  "tfc_trihydrate.configuration.flotation_cell": "浮选机",
+  "tfc_trihydrate.configuration.thickener": "矿浆浓密机",
+  "tfc_trihydrate.configuration.energyModifier": "配方能耗倍率",
+  "tfc_trihydrate.configuration.timeModifier": "配方耗时倍率"
 }

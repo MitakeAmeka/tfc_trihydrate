@@ -19,8 +19,8 @@ import java.util.function.Supplier;
 public class FlotationCellRecipe extends MultiblockRecipe {
     public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<FlotationCellRecipe>> SERIALIZER;
     public static final CachedRecipeList<FlotationCellRecipe> RECIPES = new CachedRecipeList<>(TFCTHRecipeType.FLOTATION_CELL);
-    //TODO Add Multiplier Config TO Ball Mill
-    public static final Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
+
+    public static Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);;
 
 
     public final FluidStack outputConcentrate;

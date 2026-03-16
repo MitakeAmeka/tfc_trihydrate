@@ -21,7 +21,7 @@ public class ThickenerRecipe extends MultiblockRecipe {
     public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<ThickenerRecipe>> SERIALIZER;
     public static final CachedRecipeList<ThickenerRecipe> RECIPES = new CachedRecipeList<>(TFCTHRecipeType.THICKENER);
     //TODO Add Multiplier Config TO Ball Mill
-    public static final Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
+    public static Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
 
 
     public final FluidStack outputFluid;

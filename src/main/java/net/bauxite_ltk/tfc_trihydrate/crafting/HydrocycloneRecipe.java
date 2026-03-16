@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 public class HydrocycloneRecipe extends MultiblockRecipe {
     public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<HydrocycloneRecipe>> SERIALIZER;
     public static final CachedRecipeList<HydrocycloneRecipe> RECIPES = new CachedRecipeList<>(TFCTHRecipeType.HYDROCYCLONE);
-    //TODO Add Multiplier Config TO Ball Mill
-    public static final Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
+
+    public static Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
 
 
     public final FluidStack outputFluid;
