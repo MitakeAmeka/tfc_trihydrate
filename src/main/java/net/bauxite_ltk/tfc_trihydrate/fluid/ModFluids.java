@@ -335,7 +335,7 @@ public class ModFluids {
                 .adjacentPathType(PathType.WATER)
                 .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                 .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
-                .canConvertToSource(true)
+                .canConvertToSource(false)
                 .canDrown(true)
                 .canExtinguish(true)
                 .canHydrate(true)
