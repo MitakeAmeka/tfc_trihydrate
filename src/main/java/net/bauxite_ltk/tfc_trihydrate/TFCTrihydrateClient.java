@@ -1,6 +1,5 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
-import net.bauxite_ltk.tfc_trihydrate.bakedModel.CustomItemRender;
 import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
 import net.dries007.tfc.client.extensions.FluidRendererExtension;
 import net.dries007.tfc.common.TFCTags;
@@ -71,10 +70,10 @@ public class TFCTrihydrateClient {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.SODIUM_ETHYL_XANTHATE.getFlowing(), RenderType.translucent());
     }
 
-    @SubscribeEvent
-    public static void onClientTicking(ClientTickEvent.Post event){
-        CustomItemRender.aniTicks++;
-    }
+//    @SubscribeEvent
+//    public static void onClientTicking(ClientTickEvent.Post event){
+//        CustomItemRender.aniTicks++;
+//    }
 
 //    @SubscribeEvent
 //    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {

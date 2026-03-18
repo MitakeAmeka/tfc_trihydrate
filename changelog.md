@@ -1,3 +1,10 @@
+### TFC:Trihydrate-1.0.0d
+#### changes
+- clean useless folder in project
+
+---
+
+
 ### TFC:Trihydrate-1.0.0c
 #### changes
 - remaster some textures
