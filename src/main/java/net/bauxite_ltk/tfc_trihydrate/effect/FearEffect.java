@@ -30,7 +30,7 @@ public class FearEffect extends MobEffect {
             player.getAttribute(Attributes.BLOCK_BREAK_SPEED).addOrUpdateTransientModifier(
                     new AttributeModifier(
                             ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID, "fear"),
-                            Math.min(0,((double)player.getOnPos().getY()-16)/80),
+                            Math.min(0,((double)player.getOnPos().getY()-46)/80),
                             AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                     )
             );
@@ -69,7 +69,7 @@ public class FearEffect extends MobEffect {
         else if(fearRate > 0){
             fearRate--;
         }
-
+        TFCTrihydrate.LOGGER.info("FearRate:"+ fearRate);
         //player.sendSystemMessage(Component.literal("相对你脚下坐标 (" + randX + "," + randY + "," + randZ + ") 处亮度为：" + brightness));
         return true;
     }
