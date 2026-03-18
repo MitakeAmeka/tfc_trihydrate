@@ -1,13 +1,17 @@
+### TFC:Trihydrate-1.0.0c
+#### changes
+- remaster some textures
+- change Fear Effect mining speed modifier
+- fix poor tetrahedrite block texture name
+
+---
+
 ### TFC:Trihydrate-1.0.0b
 #### fix
 
 - change common config to server config.
 - fix ore slurry merge to source like water bug.
 - Add Barrel Recipe: Lime Slurry concentrate Ore Powders to Powder Compact.
-
-
-
-
 
 
 ---

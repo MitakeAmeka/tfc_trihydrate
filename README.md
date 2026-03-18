@@ -1,6 +1,46 @@
 
 # TFC:Trihydrate 群峦：三水合物
 
+### [English](#Introduction)
+
+### [中文](#简介) 
+
+
+---
+
+## Introduction
+This mod is an addon for TFC (TerraFirmaCraft) and Immersive Engineering. It introduces mineral processing flows spanning the early, mid, and late game to TFC, and slightly alters TFC's technological progression path.
+
+Furthermore, this mod modifies some ore vein generation and adds new mechanics to support its own tech tree.
+
+It also changes the original TFC ore textures and includes a refined (though unfinished) resource pack with new models and textures for TFC tools.
+## Planned Features
+### Early Game (Primarily Pyrometallurgy)
+_Low productivity, primitive ore processing methods. Rich ores are highly valuable, normal ores are still processable, while poor ores are nearly worthless._
+- [x] Block, item, model, and texture assets
+- [x] Hammer and hand mill recipes
+- [x] Barrel recipes for washing crushed ore and forming briquettes
+- [x] TFC heating recipes
+- [x] Fear effect when venturing deep underground before reaching the Wrought Iron Age
+- [ ] Proper ore vein generation matching yield multipliers
+
+### Mid Game (Primarily Hydrometallurgy)
+_With the construction of various machines, production capacity (mainly for steel) begins to snowball. The latent value of the vast quantities of poor ore is unlocked._
+- [x] Crusher recipes for grinding crushed ore
+- [x] Ball Mill
+- [x] Flotation Cell
+- [x] Cyclone
+- [x] Thickener
+- [ ] Complete mineral processing flow
+
+### Late Game (Advanced Hydrometallurgy and Electrometallurgy)
+_Production lines become extensive, gaining the ability to extract by-products, and finally mastering the technology to refine reactive metals (e.g., Aluminum)._
+- [ ] Advanced flotation agents
+- [ ] Tailing processing
+- [ ] Electrolytic metallurgy
+
+---
+
 ## 简介
 
 本模组是群峦传说和沉浸工程的附属模组，为群峦传说增添了覆盖前中后期的矿物处理流程，并少许改变了群峦的科技发展线路。
