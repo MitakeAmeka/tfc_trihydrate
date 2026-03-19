@@ -1,6 +1,7 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
 import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
+import net.bauxite_ltk.tfc_trihydrate.util.ModTags;
 import net.dries007.tfc.client.extensions.FluidRendererExtension;
 import net.dries007.tfc.common.TFCTags;
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingMenu;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.api.distmarker.Dist;
@@ -357,21 +359,27 @@ public class TFCTrihydrateClient {
 
     @SubscribeEvent
     public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-        // 检查合成的物品是否是你想要的物品
+
         Player player = event.getEntity();
         ItemStack crafting = event.getCrafting();
         Container container = event.getInventory();
         AbstractContainerMenu menu = player.containerMenu;
 
-        if(menu instanceof CraftingMenu craftingMenu){
-            for(int i = 0; i < craftingMenu.slots.size(); i++){
-                ItemStack itemStack = craftingMenu.slots.get(i).getItem();
-                if(itemStack.getTags().anyMatch(tag -> tag.equals(TFCTags.Items.TOOLS_HAMMER))){
-                    player.playSound(SoundEvents.UI_STONECUTTER_TAKE_RESULT);
-                    break;
-                }
-            }
+        ItemStack itemStack = event.getCrafting();
+        TFCTrihydrate.LOGGER.info(itemStack.toString());
+        if(itemStack.getTags().anyMatch(tag -> tag.equals(ModTags.Items.CRYSTAL_CHUNKS))){
+            player.playSound(SoundEvents.SHROOMLIGHT_BREAK);
+            player.playSound(SoundEvents.AMETHYST_BLOCK_BREAK, 0.5f,1f);
+            player.playSound(SoundEvents.AMETHYST_BLOCK_BREAK,0.5f,1f);
+            player.playSound(SoundEvents.AMETHYST_BLOCK_BREAK,0.5f,1f);
         }
+        else if(itemStack.getTags().anyMatch(tag -> tag.equals(ModTags.Items.ORE_CHUNKS))){
+            player.playSound(SoundEvents.SHROOMLIGHT_BREAK);
+        }
+        else if(itemStack.getTags().anyMatch(tag -> tag.equals(ModTags.Items.POOR_ORE_CHUNKS))) {
+            player.playSound(SoundEvents.NETHER_ORE_BREAK);
+        }
+
 
 
     }

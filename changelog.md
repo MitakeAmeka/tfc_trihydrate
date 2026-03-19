@@ -1,3 +1,9 @@
+### TFC:Trihydrate-1.0.0e
+#### changes
+- add English Manual txt (WIP)
+- add Ore Chunks crafting sounds
+---
+
 ### TFC:Trihydrate-1.0.0d
 #### changes
 - clean useless folder in project
