@@ -113,6 +113,5 @@ public class TFCMaceItemMixin {
         } else {
             cir.setReturnValue(0f);
         }
-
-    } 
+    }
 }
