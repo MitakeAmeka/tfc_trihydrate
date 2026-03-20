@@ -1,32 +1,28 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock;
 
-import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLogic;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.*;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class TFCTHMultiblockLogic {
     public static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(
-            BuiltInRegistries.BLOCK, TFCTrihydrate.MODID
+            ForgeRegistries.BLOCKS, TFCTrihydrate.MODID
     );
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(
-            BuiltInRegistries.ITEM, TFCTrihydrate.MODID
+            ForgeRegistries.ITEMS, TFCTrihydrate.MODID
     );
     private static final DeferredRegister<BlockEntityType<?>> BE_REGISTER = DeferredRegister.create(
-            BuiltInRegistries.BLOCK_ENTITY_TYPE, TFCTrihydrate.MODID
+            ForgeRegistries.BLOCK_ENTITY_TYPES, TFCTrihydrate.MODID
     );
 
     public static final MultiblockRegistration<BallMillLogic.State> BALL_MILL =

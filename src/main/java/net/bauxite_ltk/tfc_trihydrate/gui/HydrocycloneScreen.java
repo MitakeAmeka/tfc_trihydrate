@@ -33,9 +33,9 @@ public class HydrocycloneScreen extends IEContainerScreen<HydrocycloneMenu> {
     protected List<InfoArea> makeInfoAreas()
     {
         return ImmutableList.of(
-                new FluidInfoArea(menu.tanks.input(), new Rect2i(leftPos+17, topPos+17, 16, 47), 20, 51, TANK),
-                new FluidInfoArea(menu.tanks.output(), new Rect2i(leftPos+121, topPos+12, 16, 25), 20, 29, SMALL_TANK),
-                new EnergyInfoArea(leftPos+152, topPos+17, menu.energy)
+                new FluidInfoArea(menu.tanks.input(), new Rect2i(leftPos + 17, topPos + 17, 16, 47), 20, 51, 16, 47, TANK),
+                new FluidInfoArea(menu.tanks.output(), new Rect2i(leftPos + 121, topPos + 12, 16, 25), 20, 29, 16, 25, SMALL_TANK),
+                new EnergyInfoArea(leftPos + 152, topPos + 17, menu.energy)
         );
     }
 
@@ -50,8 +50,8 @@ public class HydrocycloneScreen extends IEContainerScreen<HydrocycloneMenu> {
         TFCTrihydrate.LOGGER.info("progress:{}", process);
         if(process > 0)
         {
-            int w = (int)Math.max(1, process*50);
-            graphics.blitSprite(PROGRESS, 31, 50, 0, 0, leftPos+63, topPos+17, 31, w);
+            int w = (int)Math.max(1, process * 50);
+            graphics.blit(PROGRESS, 31, 50, 0, 0, leftPos + 63, topPos + 17, 31, w);
         }
     }
 }

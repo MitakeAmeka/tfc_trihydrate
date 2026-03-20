@@ -4,7 +4,6 @@ import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import blusunrize.immersiveengineering.client.utils.GuiHelper;
 import blusunrize.immersiveengineering.common.fluids.PotionFluid;
-import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,12 +12,11 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static blusunrize.immersiveengineering.api.client.TextUtils.applyFormat;
 import static blusunrize.immersiveengineering.client.ClientUtils.mc;
@@ -54,8 +52,8 @@ public class SeparateMultiTankArea extends InfoArea {
 
         if(!fluid.isEmpty())
             tooltip.accept(applyFormat(
-                    fluid.getHoverName(),
-                    fluid.getFluid().getFluidType().getRarity(fluid).color()
+                    fluid.getDisplayName(),
+                    fluid.getFluid().getFluidType().getRarity(fluid).color
             ));
         else
             tooltip.accept(Component.translatable("gui.immersiveengineering.empty"));
@@ -102,9 +100,11 @@ public class SeparateMultiTankArea extends InfoArea {
         }
         int xOff = (area.getWidth()-overlayWidth)/2;
         int yOff = (area.getHeight()-overlayHeight)/2;
-        graphics.blitSprite(
+        graphics.blit(
                 overlayTexture,
                 area.getX()+xOff, area.getY()+yOff,
+                0, 0,
+                overlayWidth, overlayHeight,
                 overlayWidth, overlayHeight
         );
         graphics.pose().popPose();

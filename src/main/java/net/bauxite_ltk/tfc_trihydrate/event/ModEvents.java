@@ -1,22 +1,5 @@
 package net.bauxite_ltk.tfc_trihydrate.event;
 
-import blusunrize.immersiveengineering.client.ClientProxy;
-import blusunrize.immersiveengineering.client.gui.*;
-import blusunrize.immersiveengineering.client.models.ModelConfigurableSides;
-import blusunrize.immersiveengineering.client.models.ModelConveyor;
-import blusunrize.immersiveengineering.client.models.ModelCoresample;
-import blusunrize.immersiveengineering.client.models.PotionBucketModel;
-import blusunrize.immersiveengineering.client.models.connection.FeedthroughLoader;
-import blusunrize.immersiveengineering.client.models.mirror.MirroredModelLoader;
-import blusunrize.immersiveengineering.client.models.obj.IEOBJLoader;
-import blusunrize.immersiveengineering.client.models.split.SplitModelLoader;
-import blusunrize.immersiveengineering.client.render.conveyor.RedstoneConveyorRender;
-import blusunrize.immersiveengineering.client.render.entity.SawbladeRenderer;
-import blusunrize.immersiveengineering.client.render.tile.*;
-import blusunrize.immersiveengineering.client.utils.BasicClientProperties;
-import blusunrize.immersiveengineering.common.register.IEMenuTypes;
-import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
-import net.bauxite_ltk.tfc_trihydrate.Config;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
 import net.bauxite_ltk.tfc_trihydrate.effect.ModEffects;
@@ -25,50 +8,48 @@ import net.bauxite_ltk.tfc_trihydrate.render.BallMillRender;
 import net.bauxite_ltk.tfc_trihydrate.render.FlotationCellRender;
 import net.bauxite_ltk.tfc_trihydrate.render.TFCTHDynamicModel;
 import net.bauxite_ltk.tfc_trihydrate.render.ThickenerRender;
-import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.registries.RegisterEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.AdvancementEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.Objects;
 import java.util.function.Supplier;
 
-@EventBusSubscriber(modid = TFCTrihydrate.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = TFCTrihydrate.MODID, value = Dist.CLIENT)
 public class ModEvents {
+    @SubscribeEvent
+    public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        Player player = event.getEntity();
+        MobEffectInstance effect = player.getEffect(ModEffects.FEAR_EFFECT.get());
+        if (effect != null) {
+            double multiplier = Math.min(0, ((double) player.getOnPos().getY() - 46) / 80);
+            event.setNewSpeed((float) (event.getNewSpeed() * (1 + multiplier)));
+        }
+    }
 
     @SubscribeEvent
-    public static void addFearEvent(PlayerTickEvent.Post playerTickEvent){
-        Player player = playerTickEvent.getEntity();
-        int y = playerTickEvent.getEntity().getOnPos().getY();
-        boolean isInIronAge = false;
+    public static void addFearEvent(TickEvent.PlayerTickEvent playerTickEvent){
+        Player player = playerTickEvent.player;
+        int y = playerTickEvent.player.getOnPos().getY();
+        boolean isInIronAge;
         if(player instanceof ServerPlayer serverPlayer){
-            AdvancementHolder iron_age_advancement = player.getServer().getAdvancements().get(
+            Advancement iron_age_advancement = Objects.requireNonNull(player.getServer()).getAdvancements().getAdvancement(
                     ResourceLocation.fromNamespaceAndPath("tfc","story/iron_age")
             );
             if(iron_age_advancement!=null){
@@ -79,7 +60,7 @@ public class ModEvents {
             }
             if(y < -10){
                 if(!isInIronAge){
-                    player.addEffect(new MobEffectInstance(ModEffects.FEAR_EFFECT,200,1));
+                    player.addEffect(new MobEffectInstance(ModEffects.FEAR_EFFECT.get(),200,1));
                     player.displayClientMessage(Component.translatable("tfc_trihydrate.message.fear2"),true);
                 }
                 else {
@@ -88,7 +69,7 @@ public class ModEvents {
             }
             else if(y < 30){
                 if(!isInIronAge){
-                    player.addEffect(new MobEffectInstance(ModEffects.FEAR_EFFECT,200, 0));
+                    player.addEffect(new MobEffectInstance(ModEffects.FEAR_EFFECT.get(),200, 0));
                     player.displayClientMessage(Component.translatable("tfc_trihydrate.message.fear"),true);
                 }
                 else{
@@ -99,27 +80,9 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void resetJavalinAttackRange(PlayerTickEvent.Post playerTickEvent){
-        Player player = playerTickEvent.getEntity();
-        ItemStack holdingItem = player.getMainHandItem();
-        if(holdingItem.is(Tags.Items.TOOLS_SPEAR)){
-            player.getAttribute(Attributes.ENTITY_INTERACTION_RANGE).addOrUpdateTransientModifier(
-                    new AttributeModifier(
-                            ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"spear_range"),
-                            0.5,
-                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                    )
-            );
-        }
-        else{
-            player.getAttribute(Attributes.ENTITY_INTERACTION_RANGE).removeModifier(ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"spear_range"));
-        }
-    }
-
-    @SubscribeEvent
     public static void detectIronAgeAdvancement(AdvancementEvent.AdvancementEarnEvent event){
-        AdvancementHolder advancement = event.getAdvancement();
-        if(advancement.id().equals(ResourceLocation.fromNamespaceAndPath("tfc","story/iron_age"))){
+        Advancement advancement = event.getAdvancement();
+        if(advancement.getId().equals(ResourceLocation.fromNamespaceAndPath("tfc","story/iron_age"))){
             event.getEntity().sendSystemMessage(Component.translatable("tfc_trihydrate.message.fearless"));
         }
     }
@@ -154,21 +117,20 @@ public class ModEvents {
         BallMillRender.BARREL = new TFCTHDynamicModel(BallMillRender.NAME);
         FlotationCellRender.BLADE = new TFCTHDynamicModel(FlotationCellRender.NAME);
         ThickenerRender.AGITATOR = new TFCTHDynamicModel(ThickenerRender.NAME);
-
     }
 
     @SubscribeEvent
-    public static void registerContainersAndScreens(RegisterMenuScreensEvent event)
+    public static void onModelBake(ModelEvent.BakingCompleted event)
     {
-        event.register(TFCTHMenuTypes.BALL_MILL.getType(), BallMillScreen::new);
-        event.register(TFCTHMenuTypes.FLOTATION_CELL.getType(), FlotationCellScreen::new);
-        event.register(TFCTHMenuTypes.HYDROCYCLONE.getType(), HydrocycloneScreen::new);
-        event.register(TFCTHMenuTypes.THICKENER.getType(), ThickenerScreen::new);
-
+        BallMillRender.reset();
     }
 
     @SubscribeEvent
-    public static void onConfigReloading(ModConfigEvent.Reloading event){
-        Config.MACHINES.populateAPI();
+    public static void registerContainersAndScreens(FMLClientSetupEvent event)
+    {
+        MenuScreens.register(TFCTHMenuTypes.BALL_MILL.getType(), BallMillScreen::new);
+        MenuScreens.register(TFCTHMenuTypes.FLOTATION_CELL.getType(), FlotationCellScreen::new);
+        MenuScreens.register(TFCTHMenuTypes.HYDROCYCLONE.getType(), HydrocycloneScreen::new);
+        MenuScreens.register(TFCTHMenuTypes.THICKENER.getType(), ThickenerScreen::new);
     }
 }

@@ -1,18 +1,14 @@
 package net.bauxite_ltk.tfc_trihydrate.crafting;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.api.crafting.SqueezerRecipe;
-import blusunrize.immersiveengineering.common.crafting.serializers.SqueezerRecipeSerializer;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class TFCTHRecipeSerializers {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(
-            BuiltInRegistries.RECIPE_SERIALIZER, TFCTrihydrate.MODID
+            ForgeRegistries.RECIPE_SERIALIZERS, TFCTrihydrate.MODID
     );
 
     static {

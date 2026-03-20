@@ -1,53 +1,48 @@
 package net.bauxite_ltk.tfc_trihydrate.render;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.ApiUtils;
-import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = TFCTrihydrate.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = TFCTrihydrate.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class TFCTHDynamicModel
 {
-    private static final List<ModelResourceLocation> MODELS = new ArrayList<>();
+    private static final List<ResourceLocation> MODELS = new ArrayList<>();
 
     @SubscribeEvent
     public static void registerModels(ModelEvent.RegisterAdditional ev)
     {
-        for(ModelResourceLocation model : MODELS)
+        for(ResourceLocation model : MODELS)
             // TODO check if this works
             ev.register(model);
     }
 
-    private final ModelResourceLocation name;
+    private final ResourceLocation name;
 
     public TFCTHDynamicModel(String desc)
     {
         // TODO does this work?
-        this.name = new ModelResourceLocation(
-                ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"dynamic/"+desc),
-                "standalone");
+        this.name = ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID, "dynamic/" + desc);
         MODELS.add(this.name);
     }
 
     public BakedModel get()
     {
         final BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-        return blockRenderer.getBlockModelShaper().getModelManager().getModel(name);
+        BakedModel model = blockRenderer.getBlockModelShaper().getModelManager().getModel(name);
+        return model;
     }
 
     public List<BakedQuad> getNullQuads()
@@ -61,11 +56,6 @@ public class TFCTHDynamicModel
     }
 
     public ResourceLocation getName()
-    {
-        return name.id();
-    }
-
-    public ModelResourceLocation getModelResourceLocation()
     {
         return name;
     }

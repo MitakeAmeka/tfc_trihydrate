@@ -1,9 +1,8 @@
 {
   "required": true,
   "package": "net.bauxite_ltk.tfc_trihydrate.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "TFCMaceItemMixin",
     "TFCBaseRecipeCategoryMixin"
   ],
   "injectors": {

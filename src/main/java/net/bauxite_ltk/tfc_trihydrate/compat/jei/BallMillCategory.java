@@ -1,16 +1,13 @@
 package net.bauxite_ltk.tfc_trihydrate.compat.jei;
 
-import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.api.crafting.SqueezerRecipe;
-import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
 import blusunrize.immersiveengineering.common.util.compat.jei.IERecipeCategory;
+import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
@@ -22,18 +19,17 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.fluids.FluidType;
+import net.minecraftforge.fluids.FluidType;
 
 import java.util.Arrays;
 
 public class BallMillCategory extends IERecipeCategory<BallMillRecipe> {
-
     private final IDrawableStatic tankOverlay;
 
     public BallMillCategory(IGuiHelper helper) {
         super(helper, JEIRecipeTypes.BALL_MILL, "block.tfc_trihydrate.ball_mill");
         ResourceLocation background = ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"textures/gui/ball_mill.png");
-        setBackground(helper.createDrawable(background, 6, 9, 155-5, 73-8));
+        setBackground(helper.createDrawable(background, 6, 9, 155 - 5, 73 - 8));
         setIcon(TFCTHMultiblockLogic.BALL_MILL.iconStack());
         tankOverlay = helper.createDrawable(background, 179, 33, 16, 47);
     }
@@ -46,12 +42,12 @@ public class BallMillCategory extends IERecipeCategory<BallMillRecipe> {
         IRecipeSlotBuilder outputBuilder = builder.addSlot(RecipeIngredientRole.OUTPUT, 132, 44);
         if(recipe.inputFluid!=null)
         {
-            int tankSize = Math.max(FluidType.BUCKET_VOLUME, recipe.inputFluid.amount());
+            int tankSize = Math.max(FluidType.BUCKET_VOLUME, recipe.inputFluid.getAmount());
             builder.addSlot(RecipeIngredientRole.INPUT, 4, 3)
                     .setFluidRenderer(tankSize, false, 16, 47)
                     .setOverlay(tankOverlay, 0, 0)
-                    .addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.inputFluid.getFluids()))
-                    .addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
+                    .addIngredients(ForgeTypes.FLUID_STACK, recipe.inputFluid.getMatchingFluidStacks())
+                    .addTooltipCallback(JEIHelper.fluidTooltipCallback);
         }
 
         if(!recipe.outputItem.get().isEmpty())
@@ -62,11 +58,10 @@ public class BallMillCategory extends IERecipeCategory<BallMillRecipe> {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 112, 3)
                     .setFluidRenderer(tankSize, false, 16, 47)
                     .setOverlay(tankOverlay, 0, 0)
-                    .addIngredient(NeoForgeTypes.FLUID_STACK, recipe.outputFluid)
-                    .addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
+                    .addIngredient(ForgeTypes.FLUID_STACK, recipe.outputFluid)
+                    .addTooltipCallback(JEIHelper.fluidTooltipCallback);
         }
     }
-
 
     @Override
     public void draw(BallMillRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
@@ -75,8 +70,7 @@ public class BallMillCategory extends IERecipeCategory<BallMillRecipe> {
         int bHeight = background.getHeight();
         Font font = Minecraft.getInstance().font;
 
-
-        int time = recipe.getTotalProcessTime()/5;
+        int time = recipe.getTotalProcessTime() / 5;
         int energy = recipe.getTotalProcessEnergy() / time;
 
         guiGraphics.pose().pushPose();

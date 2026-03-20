@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.fluids.IFluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -37,17 +36,17 @@ public class FlotationCellScreen extends IEContainerScreen<FlotationCellMenu> {
     protected List<InfoArea> makeInfoAreas()
     {
         return ImmutableList.of(
-                new FluidInfoArea(menu.tanks.inputOre(), new Rect2i(leftPos+10, topPos+12, 16, 47), 20, 51, TANK),
+                new FluidInfoArea(menu.tanks.inputOre(), new Rect2i(leftPos + 10, topPos + 12, 16, 47), 20, 51, 16, 47, TANK),
                 new SeparateMultiTankArea(
                         List.of(menu.tanks.outputTailing(),
                                 menu.tanks.inputOre(),
                                 menu.tanks.outputConcentrate()),
-                        new Rect2i(leftPos+43, topPos+22, 70, 47),
+                        new Rect2i(leftPos + 43, topPos + 22, 70, 47),
                         70, 51, BIG_TANK),
-                new FlotationCellAddFluidInfoArea(menu.tanks.inputAdd(), new Rect2i(leftPos+76, topPos+17, 4, 34), -14, -6,32,58, ADD_TANK),
-                new FluidInfoArea(menu.tanks.overflow(), new Rect2i(leftPos+131, topPos+12, 16, 25), 20, 29, SMALL_TANK),
-                new FluidInfoArea(menu.tanks.outputTailing(), new Rect2i(leftPos+131, topPos+44, 16, 25), 20, 29, SMALL_TANK),
-                new EnergyInfoArea(leftPos+158, topPos+12, menu.energy)
+                new FlotationCellAddFluidInfoArea(menu.tanks.inputAdd(), new Rect2i(leftPos + 76, topPos + 17, 4, 34), -14, -6,32,58, ADD_TANK),
+                new FluidInfoArea(menu.tanks.overflow(), new Rect2i(leftPos + 131, topPos + 12, 16, 25), 20, 29, 16, 25, SMALL_TANK),
+                new FluidInfoArea(menu.tanks.outputTailing(), new Rect2i(leftPos + 131, topPos + 44, 16, 25), 20, 29, 16, 25, SMALL_TANK),
+                new EnergyInfoArea(leftPos + 158, topPos + 12, menu.energy)
         );
     }
 

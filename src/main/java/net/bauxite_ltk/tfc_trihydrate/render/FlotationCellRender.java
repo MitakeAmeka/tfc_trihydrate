@@ -1,38 +1,33 @@
 package net.bauxite_ltk.tfc_trihydrate.render;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOrientation;
 import blusunrize.immersiveengineering.client.render.tile.BERenderUtils;
-import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
+import blusunrize.immersiveengineering.client.render.tile.IEBlockEntityRenderer;
 import blusunrize.immersiveengineering.client.utils.GuiHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
-import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
 import net.bauxite_ltk.tfc_trihydrate.util.Helper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.IFluidTank;
+import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-public class FlotationCellRender extends IEMultiblockRenderer<FlotationCellLogic.State> {
+public class FlotationCellRender extends IEBlockEntityRenderer<MultiblockBlockEntityMaster<FlotationCellLogic.State>> {
     public static final String NAME = "flotation_cell_blade";
     public static TFCTHDynamicModel BLADE;
     private FluidStack currentOutput = null;
 
-
     @Override
-    public void render(@NotNull IMultiblockContext<FlotationCellLogic.State> ctx, float partialTicks, @NotNull PoseStack matrixStack, @NotNull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(@NotNull MultiblockBlockEntityMaster<FlotationCellLogic.State> be, float partialTicks, @NotNull PoseStack matrixStack, @NotNull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        final IMultiblockContext<FlotationCellLogic.State> ctx = be.getHelper().getContext();
+
         final BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
         BakedModel model = BLADE.get();
         final MultiblockOrientation orientation = ctx.getLevel().getOrientation();
@@ -47,8 +42,6 @@ public class FlotationCellRender extends IEMultiblockRenderer<FlotationCellLogic
 
         Helper.applyRotationX(27,31,-bladeAngle,matrixStack);
 
-
-
         blockRenderer.getModelRenderer().renderModel(
                 matrixStack.last(), buffer, null, model,
                 1, 1, 1,
@@ -57,14 +50,13 @@ public class FlotationCellRender extends IEMultiblockRenderer<FlotationCellLogic
 
         matrixStack.popPose();
 
-
         FlotationCellLogic.FlotationCellTanks tanks = ctx.getState().tanks;
         FluidStack tailing = tanks.outputTailing().getFluid();
         FluidStack concentrate = tanks.outputConcentrate().getFluid();
         FluidStack ore = tanks.inputOre().getFluid();
 
         if(!concentrate.isEmpty()) {
-            if(currentOutput==null){
+            if(currentOutput == null){
                 currentOutput = new FluidStack(concentrate.getFluid(),1000);
             }
             else if(!currentOutput.getFluid().equals(concentrate.getFluid())){

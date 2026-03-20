@@ -4,29 +4,24 @@ import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
-import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.IFluidTank;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.function.BiFunction;
 
 public class TFCTHMultiblockProcessInMachine<R extends MultiblockRecipe>
         extends MultiblockProcessInMachine<R> {
-
-
     public TFCTHMultiblockProcessInMachine(ResourceLocation recipeId, BiFunction<Level, ResourceLocation, R> getRecipe, int... inputSlots) {
         super(recipeId, getRecipe, inputSlots);
     }
 
-    public TFCTHMultiblockProcessInMachine(RecipeHolder<R> recipe, int... inputSlots) {
+    public TFCTHMultiblockProcessInMachine(R recipe, int... inputSlots) {
         super(recipe, inputSlots);
     }
 
@@ -93,5 +88,4 @@ public class TFCTHMultiblockProcessInMachine<R extends MultiblockRecipe>
         }
         return false;
     }
-
 }

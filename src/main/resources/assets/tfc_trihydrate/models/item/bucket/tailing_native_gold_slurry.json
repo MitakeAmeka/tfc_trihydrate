@@ -1,5 +1,5 @@
 {
-  "loader": "neoforge:fluid_container",
-  "parent": "neoforge:item/bucket",
+  "loader": "forge:fluid_container",
+  "parent": "forge:item/bucket",
   "fluid": "tfc_trihydrate:tailing_native_gold_slurry"
 }

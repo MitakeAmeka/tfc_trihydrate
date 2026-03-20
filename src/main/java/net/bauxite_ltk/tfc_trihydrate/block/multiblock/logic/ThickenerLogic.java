@@ -1,6 +1,5 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic;
 
-
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.ComparatorManager;
@@ -12,7 +11,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.tool.MachineInterfaceHandler;
+import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -25,29 +24,29 @@ import net.bauxite_ltk.tfc_trihydrate.block.multiblock.process.TFCTHMultiblockPr
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.ThickenerShapes;
 import net.bauxite_ltk.tfc_trihydrate.crafting.ThickenerRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.IFluidTank;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class ThickenerLogic implements
         IMultiblockLogic<ThickenerLogic.State>,
@@ -68,15 +67,12 @@ public class ThickenerLogic implements
     public static final int TANK_CAPACITY = 128 * FluidType.BUCKET_VOLUME;
     public static final int ENERGY_CAPACITY = 48000;
 
-
-
     public ThickenerLogic.State createInitialState(IInitialMultiblockContext<ThickenerLogic.State> capabilitySource) {
         return new ThickenerLogic.State(capabilitySource);
     }
 
-
     private int tankLastTick = 0;
-    private int outputTankLastTick = 0;
+
     @Override
     public void tickServer(IMultiblockContext<ThickenerLogic.State> context) {
         final ThickenerLogic.State state = context.getState();
@@ -95,13 +91,14 @@ public class ThickenerLogic implements
             handleItemOutput(context);
         boolean output = false;
         int totalAmount = context.getState().tanks.output.getFluidAmount() + state.tanks.input.getFluidAmount();
-        if(totalAmount>=129000){
+        if(totalAmount >= 129000){
             output = FluidUtils.multiblockFluidOutput(
-                    state.fluidOutput.get(), state.tanks.output,
+                    state.fluidOutput, state.tanks.output,
                     -1, -1,null
             );
         }
-        if((output || outputTankLastTick!=state.tanks.output.getFluidAmount()) && !updateFlag ) {
+        int outputTankLastTick = 0;
+        if((output || outputTankLastTick !=state.tanks.output.getFluidAmount()) && !updateFlag ) {
             updateFlag = true;
             context.markMasterDirty();
             context.requestMasterBESync();
@@ -109,13 +106,11 @@ public class ThickenerLogic implements
     }
 
     private void enqueueProcesses(State state, Level level) {
-
         final FluidStack inputFluid = state.tanks.input.getFluid();
-
 
         if(state.energy.getEnergyStored() <= 0||state.processor.getQueueSize() >= state.processor.getMaxQueueSize())
             return;
-        RecipeHolder<ThickenerRecipe> recipe = ThickenerRecipe.findRecipe(level, inputFluid);
+        ThickenerRecipe recipe = ThickenerRecipe.findRecipe(level, inputFluid);
         if(recipe==null){
             return;
         }
@@ -154,25 +149,30 @@ public class ThickenerLogic implements
     }
 
     @Override
-    public void registerCapabilities(CapabilityRegistrar<ThickenerLogic.State> register)
+    public <T> LazyOptional<T> getCapability(IMultiblockContext<ThickenerLogic.State> ctx, CapabilityPosition position, Capability<T> cap)
     {
-        register.registerAtOrNull(Capabilities.EnergyStorage.BLOCK, ENERGY_INPUT, state -> state.energy);
-        register.registerAtOrNull(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_CAP, state -> state.fluidOutputCap);
-        register.registerAtOrNull(Capabilities.FluidHandler.BLOCK, INPUT_FLUID_CAP, state -> state.fluidInputCap);
-        register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
-            if(OUTPUT_CAP.equals(position))
-                return state.itemOutputCap;
-            else
-                return null;
-        });
-        register.registerAtBlockPos(MachineInterfaceHandler.IMachineInterfaceConnection.CAPABILITY, REDSTONE_POS, state -> state.mifHandler);
+        final State state = ctx.getState();
+        if (cap == ForgeCapabilities.ENERGY && ENERGY_INPUT.equalsOrNullFace(position))
+            return state.energyCap.cast(ctx);
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
+        {
+            if (OUTPUT_FLUID_CAP.equals(position))
+                return state.fluidOutputCap.cast(ctx);
+            if (INPUT_FLUID_CAP.equals(position))
+                return state.fluidInputCap.cast(ctx);
+        }
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
+        {
+            if (OUTPUT_CAP.equals(position))
+                return state.itemOutputCap.cast(ctx);
+        }
+        return LazyOptional.empty();
     }
 
     @Override
     public void dropExtraItems(State state, Consumer<ItemStack> drop) {
         MBInventoryUtils.dropItems(state.inventory, drop);
     }
-
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType)
@@ -187,8 +187,6 @@ public class ThickenerLogic implements
         );
     }
 
-
-
     public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<ThickenerRecipe>
     {
         private final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
@@ -201,15 +199,14 @@ public class ThickenerLogic implements
         private final SlotwiseItemHandler inventory;
         public final ThickenerTanks tanks = new ThickenerTanks();
 
-
         private final IFluidTank[] tankArray = {tanks.input, tanks.output};
-        private final Supplier<@Nullable IItemHandler> itemOutput;
-        private final Supplier<@Nullable IFluidHandler> fluidOutput;
-        private final IItemHandler itemOutputCap;
-        private final IFluidHandler fluidInputCap;
-        private final IFluidHandler fluidOutputCap;
+        private final CapabilityReference<@Nullable IItemHandler> itemOutput;
+        private final CapabilityReference<@Nullable IFluidHandler> fluidOutput;
+        private final StoredCapability<IEnergyStorage> energyCap;
+        private final StoredCapability<IItemHandler> itemOutputCap;
+        private final StoredCapability<IFluidHandler> fluidInputCap;
+        private final StoredCapability<IFluidHandler> fluidOutputCap;
         private BooleanSupplier isPlayingSound = () -> false;
-        private final MachineInterfaceHandler.IMachineInterfaceConnection mifHandler;
 
         public State(IInitialMultiblockContext<ThickenerLogic.State> ctx)
         {
@@ -217,66 +214,60 @@ public class ThickenerLogic implements
             this.inventory = SlotwiseItemHandler.makeWithGroups(List.of(
                     new SlotwiseItemHandler.IOConstraintGroup(SlotwiseItemHandler.IOConstraint.OUTPUT, 1)
             ), markDirty);
-            this.itemOutput = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, ITEM_OUTPUT_OFFSET);
-            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_OFFSET);
-            //this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_OFFSET);
+            this.itemOutput = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, ITEM_OUTPUT_OFFSET);
+            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT_OFFSET);
             this.processor = new MultiblockProcessor.InMachineProcessor<>(
                     1, 0, 1, markDirty, ThickenerRecipe.RECIPES::getById
             );
-            this.itemOutputCap = new WrappingItemHandler(
+            this.energyCap = new StoredCapability<>(this.energy);
+            this.itemOutputCap = new StoredCapability<>(new WrappingItemHandler(
                     getInventory(), false, true, new WrappingItemHandler.IntRange(OUTPUT_SLOT, OUTPUT_SLOT+1)
-            );
-            this.fluidInputCap = new ArrayFluidHandler(
+            ));
+            this.fluidInputCap = new StoredCapability<>(new ArrayFluidHandler(
                     false, true, markDirty, tanks.input
-            );
-            this.fluidOutputCap = ArrayFluidHandler.drainOnly(tanks.output, markDirty);
-            this.mifHandler = () -> new MachineInterfaceHandler.MachineCheckImplementation[]{
-                    new MachineInterfaceHandler.MachineCheckImplementation<>((BooleanSupplier)() -> this.active, MachineInterfaceHandler.BASIC_ACTIVE),
-                    //new MachineInterfaceHandler.MachineCheckImplementation<>(processor, MachineInterfaceHandler.BASIC_ITEM_IN, processor.getMachineInterfaceOptions(true)),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(energy, MachineInterfaceHandler.BASIC_ENERGY),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(itemOutputCap, MachineInterfaceHandler.BASIC_ITEM_OUT),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(fluidInputCap, MachineInterfaceHandler.BASIC_FLUID_IN),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(fluidOutputCap, MachineInterfaceHandler.BASIC_FLUID_OUT)
-            };
+            ));
+            this.fluidOutputCap = new StoredCapability<>(ArrayFluidHandler.drainOnly(tanks.output, markDirty));
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void writeSaveNBT(CompoundTag nbt)
         {
-            nbt.put("energy", energy.serializeNBT(provider));
-            nbt.put("inventory", inventory.serializeNBT(provider));
-            nbt.put("tanks", tanks.toNBT(provider));
-            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("energy", energy.serializeNBT());
+            nbt.put("inventory", inventory.serializeNBT());
+            nbt.put("tanks", tanks.toNBT());
+            nbt.put("processor", processor.toNBT());
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            energy.deserializeNBT(provider, nbt.get("energy"));
-            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+        public void readSaveNBT(CompoundTag nbt) {
+            energy.deserializeNBT(nbt.get("energy"));
+            inventory.deserializeNBT(nbt.getCompound("inventory"));
             processor.fromNBT(
                     nbt.get("processor"),
-                    (getRecipe, data, p) -> new TFCTHMultiblockProcessInMachine<>(getRecipe, data),
-                    provider
+                    TFCTHMultiblockProcessInMachine::new
             );
-            tanks.readNBT(provider, nbt.getCompound("tanks"));
+            tanks.readNBT(nbt.getCompound("tanks"));
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void writeSyncNBT(CompoundTag nbt)
         {
             nbt.putBoolean("active", active);
-            nbt.put("tanks", tanks.toNBT(provider));
+            nbt.put("tanks", tanks.toNBT());
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void readSyncNBT(CompoundTag nbt)
         {
             active = nbt.getBoolean("active");
-            tanks.readNBT(provider,nbt.getCompound("tanks"));
+            tanks.readNBT(nbt.getCompound("tanks"));
         }
 
         @Override
-        public AveragingEnergyStorage getEnergy() { return energy; }
+        public AveragingEnergyStorage getEnergy()
+        {
+            return energy;
+        }
 
         @Override
         public IItemHandlerModifiable getInventory()
@@ -302,7 +293,8 @@ public class ThickenerLogic implements
             return new int[]{1};
         }
 
-        public float getAgitatorAngle(){
+        public float getAgitatorAngle()
+        {
             return agitatorAngle;
         }
 
@@ -313,27 +305,25 @@ public class ThickenerLogic implements
         
     }
 
-
     public record ThickenerTanks(FluidTank input, FluidTank output)
     {
-
         public ThickenerTanks()
         {
             this(new FluidTank(TANK_CAPACITY), new FluidTank(TANK_CAPACITY));
         }
 
-        public Tag toNBT(HolderLookup.Provider provider)
+        public Tag toNBT()
         {
             CompoundTag tag = new CompoundTag();
-            tag.put("in", input.writeToNBT(provider, new CompoundTag()));
-            tag.put("out", output.writeToNBT(provider, new CompoundTag()));
+            tag.put("in", input.writeToNBT(new CompoundTag()));
+            tag.put("out", output.writeToNBT(new CompoundTag()));
             return tag;
         }
 
-        public void readNBT(HolderLookup.Provider provider, CompoundTag tag)
+        public void readNBT(CompoundTag tag)
         {
-            input.readFromNBT(provider, tag.getCompound("in"));
-            output.readFromNBT(provider, tag.getCompound("out"));
+            input.readFromNBT(tag.getCompound("in"));
+            output.readFromNBT(tag.getCompound("out"));
         }
     }
 }

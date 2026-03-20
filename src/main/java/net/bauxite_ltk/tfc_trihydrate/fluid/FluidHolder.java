@@ -2,14 +2,13 @@ package net.bauxite_ltk.tfc_trihydrate.fluid;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.registries.RegistryObject;
 
 public record FluidHolder<F extends FlowingFluid>(
-        DeferredHolder<FluidType, FluidType> type,
-        DeferredHolder<Fluid, F> flowing,
-        DeferredHolder<Fluid, F> source
+        RegistryObject<FluidType> type,
+        RegistryObject<F> flowing,
+        RegistryObject<F> source
 ) {
     public F getFlowing()
     {
@@ -23,7 +22,7 @@ public record FluidHolder<F extends FlowingFluid>(
 
     public FluidType getType()
     {
-        return type.value();
+        return type.get();
     }
 
     public BlockState createSourceBlock()

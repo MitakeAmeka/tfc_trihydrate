@@ -1,6 +1,5 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.ComparatorManager;
@@ -8,15 +7,13 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultibl
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.component.MultiblockGui;
-import blusunrize.immersiveengineering.common.register.IEMenuTypes;
 import com.google.common.base.Preconditions;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMenuTypes;
 import net.bauxite_ltk.tfc_trihydrate.gui.TFCTHMultiblockGui;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
+import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +54,7 @@ public class TFCTHMultiblockBuilder<S extends IMultiblockState>
 
     public MultiblockRegistration<S> build()
     {
-        return super.build(LAZY_MOD_BUS_REGISTRATION::add);
+        return super.build();
     }
 
     @Override

@@ -1,12 +1,7 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic;
 
-import blusunrize.immersiveengineering.api.ApiUtils;
-import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLogic;
-import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.TFCTHMultiblockLogic;
@@ -16,25 +11,18 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.data.ModelData;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.function.Consumer;
 
 import static net.bauxite_ltk.tfc_trihydrate.render.BallMillRender.BARREL;
 
-
 public class BallMillMultiblock extends IETemplateMultiblock {
-
     public static final BallMillMultiblock INSTANCE = new BallMillMultiblock();
 
     public BallMillMultiblock() {
@@ -44,7 +32,8 @@ public class BallMillMultiblock extends IETemplateMultiblock {
     }
 
     @Override
-    public float getManualScale() {
+    public float getManualScale()
+    {
         return 12;
     }
 
@@ -53,10 +42,9 @@ public class BallMillMultiblock extends IETemplateMultiblock {
         consumer.accept(new BallMillMultiblockProperties());
     }
 
-
-
     public static class BallMillMultiblockProperties extends TFCTHMultiblockProperties{
-        public BallMillMultiblockProperties(){
+        public BallMillMultiblockProperties()
+        {
             super(INSTANCE, 3.5, 1.5, 1.5);
         }
 
@@ -64,11 +52,11 @@ public class BallMillMultiblock extends IETemplateMultiblock {
         public void renderExtras(PoseStack matrix, MultiBufferSource buffer){
             matrix.pushPose();
             matrix.translate(0, 0, 0);
-            renderObj(BARREL.getModelResourceLocation(), buffer, matrix);
+            renderObj(buffer, matrix);
             matrix.popPose();
         }
 
-        private static void renderObj(ModelResourceLocation modelRL, @Nonnull MultiBufferSource bufferIn, @Nonnull PoseStack matrix){
+        private static void renderObj(@Nonnull MultiBufferSource bufferIn, @Nonnull PoseStack matrix){
             final BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
             BakedModel model = BARREL.get();
             PoseStack.Pose last = matrix.last();

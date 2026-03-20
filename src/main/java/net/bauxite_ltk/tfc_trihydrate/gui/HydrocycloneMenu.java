@@ -7,14 +7,12 @@ import blusunrize.immersiveengineering.common.gui.IESlot;
 import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
 import blusunrize.immersiveengineering.common.gui.sync.GenericDataSerializers;
 import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
-import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneLogic;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class HydrocycloneMenu extends IEContainerMenu {
     public final IMutableEnergyStorage energy;
@@ -64,13 +62,12 @@ public class HydrocycloneMenu extends IEContainerMenu {
         ownSlotCount = 1;
         for(int i = 0; i < 3; i++)
             for(int j = 0; j < 9; j++)
-                addSlot(new Slot(inventoryPlayer, j+i*9+9, 8+j*18, 85+i*18));
+                addSlot(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 85 + i * 18));
         for(int i = 0; i < 9; i++)
-            addSlot(new Slot(inventoryPlayer, i, 8+i*18, 143));
+            addSlot(new Slot(inventoryPlayer, i, 8 + i * 18, 143));
         addGenericData(GenericContainerData.energy(energy));
         addGenericData(GenericContainerData.fluid(tanks.input()));
         addGenericData(GenericContainerData.fluid(tanks.output()));
         addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, guiProgress));
-
     }
 }

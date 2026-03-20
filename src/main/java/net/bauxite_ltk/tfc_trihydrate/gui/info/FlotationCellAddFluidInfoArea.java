@@ -1,36 +1,28 @@
 package net.bauxite_ltk.tfc_trihydrate.gui.info;
 
 import blusunrize.immersiveengineering.api.Lib;
-import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import blusunrize.immersiveengineering.client.utils.GuiHelper;
-import blusunrize.immersiveengineering.client.utils.TransformingVertexBuilder;
 import blusunrize.immersiveengineering.common.fluids.PotionFluid;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.IFluidTank;
-import org.apache.commons.lang3.IntegerRange;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import org.joml.Matrix4f;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 import static blusunrize.immersiveengineering.api.client.TextUtils.applyFormat;
-import static blusunrize.immersiveengineering.client.ClientUtils.getSprite;
 import static blusunrize.immersiveengineering.client.ClientUtils.mc;
 
 public class FlotationCellAddFluidInfoArea extends InfoArea {
@@ -64,8 +56,8 @@ public class FlotationCellAddFluidInfoArea extends InfoArea {
 
         if(!fluid.isEmpty())
             tooltip.accept(applyFormat(
-                    fluid.getHoverName(),
-                    fluid.getFluid().getFluidType().getRarity(fluid).color()
+                    fluid.getDisplayName(),
+                    fluid.getFluid().getFluidType().getRarity(fluid).color
             ));
         else
             tooltip.accept(Component.translatable("gui.immersiveengineering.empty"));
@@ -105,16 +97,16 @@ public class FlotationCellAddFluidInfoArea extends InfoArea {
         {
             int fluidHeight = (int)(area.getHeight()*(fluid.getAmount()/capacity));
             // TODO broken?
-            GuiHelper.drawRepeatedFluidSpriteGui(buffer, graphics.pose(), fluid, area.getX(), area.getY()+area.getHeight()-fluidHeight, area.getWidth(), fluidHeight);
+            GuiHelper.drawRepeatedFluidSpriteGui(buffer, graphics.pose(), fluid, area.getX(), area.getY() + area.getHeight() - fluidHeight, area.getWidth(), fluidHeight);
         }
         VertexConsumer builder = buffer.getBuffer(RenderType.guiOverlay());
-        TextureAtlasSprite sprite = mc().getGuiSprites().getSprite(overlayTexture);
+        TextureAtlasSprite sprite = mc().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(overlayTexture);
 
         RenderSystem.setShaderTexture(0, sprite.atlasLocation());
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.enableBlend();
         drawRepeatedSprite(builder, graphics.pose(),
-                area.getX()+xOff, area.getY()+yOff, overlayWidth, overlayHeight,
+                area.getX() + xOff, area.getY() + yOff, overlayWidth, overlayHeight,
                 sprite.contents().width(), sprite.contents().height(),
                 sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1(),
                 0.5f,0.5f,0.5f,1f);
@@ -161,12 +153,13 @@ public class FlotationCellAddFluidInfoArea extends InfoArea {
             float u0, float u1, float v0, float v1
     ) {
         Matrix4f matrix = transform.last().pose();
-        BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        Tesselator tesselator = Tesselator.getInstance();
+        BufferBuilder bufferbuilder = tesselator.getBuilder();
         // 简化版本，直接使用传入的builder
-        bufferbuilder.addVertex(matrix, x, y + h, 0).setUv(u0,v1);
-        bufferbuilder.addVertex(matrix, x + w, y + h, 0).setUv(u1,v1);
-        bufferbuilder.addVertex(matrix, x + w, y, 0).setUv(u1,v0);
-        bufferbuilder.addVertex(matrix, x, y, 0).setUv(u0,v0);
-        BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+        bufferbuilder.vertex(matrix, x, y + h, 0).uv(u0,v1).endVertex();
+        bufferbuilder.vertex(matrix, x + w, y + h, 0).uv(u1,v1).endVertex();
+        bufferbuilder.vertex(matrix, x + w, y, 0).uv(u1,v0).endVertex();
+        bufferbuilder.vertex(matrix, x, y, 0).uv(u0,v0).endVertex();
+        BufferUploader.drawWithShader(bufferbuilder.end());
     }
 }

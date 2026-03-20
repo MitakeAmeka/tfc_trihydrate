@@ -6,7 +6,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 
 public class ThickenerShapes implements Function<BlockPos, VoxelShape> {
@@ -441,12 +440,12 @@ public class ThickenerShapes implements Function<BlockPos, VoxelShape> {
     }
 
     public VoxelShape center(double sizeX, double sizeY, double sizeZ, double offsetX, double offsetY, double offsetZ){
-        double sx = sizeX/16;
-        double sy= sizeY/16;
-        double sz = sizeZ/16;
-        double ox = offsetX/16;
-        double oy = offsetY/16;
-        double oz = offsetZ/16;
-        return Shapes.box(ox+0.5-sx/2, oy+0.5-sy/2, oz+0.5-sz/2, ox+0.5+sx/2, oy+0.5+sy/2, oz+0.5+sz/2);
+        double sx = sizeX / 16;
+        double sy= sizeY / 16;
+        double sz = sizeZ / 16;
+        double ox = offsetX / 16;
+        double oy = offsetY / 16;
+        double oz = offsetZ / 16;
+        return Shapes.box(ox + 0.5 - sx / 2, oy + 0.5 - sy / 2, oz + 0.5 - sz / 2, ox + 0.5+sx / 2, oy + 0.5+  sy / 2, oz + 0.5 + sz / 2);
     }
 }

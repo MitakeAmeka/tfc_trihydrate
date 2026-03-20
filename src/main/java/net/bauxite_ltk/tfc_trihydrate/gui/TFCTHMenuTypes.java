@@ -1,18 +1,14 @@
 package net.bauxite_ltk.tfc_trihydrate.gui;
 
-import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.RefineryLogic;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
-import blusunrize.immersiveengineering.common.gui.RefineryMenu;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneLogic;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.ThickenerLogic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,9 +19,10 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
 
@@ -33,7 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TFCTHMenuTypes {
-    public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(BuiltInRegistries.MENU, TFCTrihydrate.MODID);
+    public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, TFCTrihydrate.MODID);
     public static final TFCTHMenuTypes.MultiblockContainer<BallMillLogic.State, BallMillMenu> BALL_MILL = registerMultiblock(
             "ball_mill", BallMillMenu::makeServer, BallMillMenu::makeClient
     );
@@ -58,12 +55,12 @@ public class TFCTHMenuTypes {
             TFCTHMenuTypes.ClientContainerConstructor<C> client
     )
     {
-        DeferredHolder<MenuType<?>, MenuType<C>> typeRef = registerType(name, client);
+        RegistryObject<MenuType<C>> typeRef = registerType(name, client);
         return new MultiblockContainer<>(typeRef, container);
     }
 
     private static <C extends IEContainerMenu>
-    DeferredHolder<MenuType<?>, MenuType<C>> registerType(String name, TFCTHMenuTypes.ClientContainerConstructor<C> client)
+    RegistryObject<MenuType<C>> registerType(String name, TFCTHMenuTypes.ClientContainerConstructor<C> client)
     {
         return REGISTER.register(
                 name, () -> {
@@ -77,10 +74,10 @@ public class TFCTHMenuTypes {
 
     public static class ArgContainer<T, C extends IEContainerMenu>
     {
-        private final DeferredHolder<MenuType<?>, MenuType<C>> type;
+        private final RegistryObject<MenuType<C>> type;
         private final TFCTHMenuTypes.ArgContainerConstructor<T, C> factory;
 
-        private ArgContainer(DeferredHolder<MenuType<?>, MenuType<C>> type, TFCTHMenuTypes.ArgContainerConstructor<T, C> factory)
+        private ArgContainer(RegistryObject<MenuType<C>> type, TFCTHMenuTypes.ArgContainerConstructor<T, C> factory)
         {
             this.type = type;
             this.factory = factory;
@@ -124,7 +121,7 @@ public class TFCTHMenuTypes {
             TFCTHMenuTypes.ArgContainer<IEContainerMenu.MultiblockMenuContext<S>, C>
     {
         private MultiblockContainer(
-                DeferredHolder<MenuType<?>, MenuType<C>> type,
+                RegistryObject<MenuType<C>> type,
                 TFCTHMenuTypes.ArgContainerConstructor<IEContainerMenu.MultiblockMenuContext<S>, C> factory
         )
         {
@@ -138,7 +135,7 @@ public class TFCTHMenuTypes {
     }
 
     public record ItemContainerType<C extends AbstractContainerMenu>(
-            DeferredHolder<MenuType<?>, MenuType<C>> type, TFCTHMenuTypes.ItemContainerConstructor<C> factory
+            RegistryObject<MenuType<C>> type, TFCTHMenuTypes.ItemContainerConstructor<C> factory
     )
     {
         public C create(int id, Inventory inv, Level w, EquipmentSlot slot, ItemStack stack)
@@ -153,7 +150,7 @@ public class TFCTHMenuTypes {
     }
 
     public record ItemContainerTypeNew<C extends AbstractContainerMenu>(
-            DeferredHolder<MenuType<?>, MenuType<C>> type, TFCTHMenuTypes.NewItemContainerConstructor<C> factory
+            RegistryObject<MenuType<C>> type, TFCTHMenuTypes.NewItemContainerConstructor<C> factory
     )
     {
         public C create(int id, Inventory inv, EquipmentSlot slot, ItemStack stack)
@@ -192,7 +189,8 @@ public class TFCTHMenuTypes {
         C construct(MenuType<?> type, int windowId, Inventory inventoryPlayer);
     }
 
-    public static void init(IEventBus modEventBus){
+    public static void init(IEventBus modEventBus)
+    {
         REGISTER.register(modEventBus);
     }
 }

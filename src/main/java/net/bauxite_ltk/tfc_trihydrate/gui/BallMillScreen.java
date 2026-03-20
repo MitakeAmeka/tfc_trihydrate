@@ -6,14 +6,10 @@ import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import com.google.common.collect.ImmutableList;
 import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -32,9 +28,9 @@ public class BallMillScreen extends IEContainerScreen<BallMillMenu> {
     protected List<InfoArea> makeInfoAreas()
     {
         return ImmutableList.of(
-                new FluidInfoArea(menu.tanks.input(), new Rect2i(leftPos+10, topPos+12, 16, 47), 20, 51, TANK),
-                new FluidInfoArea(menu.tanks.output(), new Rect2i(leftPos+118, topPos+12, 16, 47), 20, 51, TANK),
-                new EnergyInfoArea(leftPos+158, topPos+12, menu.energy)
+                new FluidInfoArea(menu.tanks.input(), new Rect2i(leftPos + 10, topPos + 12, 16, 47), 20, 51, 16, 47, TANK),
+                new FluidInfoArea(menu.tanks.output(), new Rect2i(leftPos + 118, topPos + 12, 16, 47), 20, 51, 16, 47, TANK),
+                new EnergyInfoArea(leftPos + 158, topPos + 12, menu.energy)
         );
     }
 

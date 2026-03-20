@@ -1,6 +1,5 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic;
 
-
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
@@ -11,38 +10,35 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.tool.MachineInterfaceHandler;
+import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
-import net.bauxite_ltk.tfc_trihydrate.TFCTrihydrate;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.process.TFCTHMultiblockProcessInMachine;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.FlotationCellShapes;
 import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.IFluidTank;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class FlotationCellLogic implements
@@ -60,7 +56,6 @@ public class FlotationCellLogic implements
     private static final CapabilityPosition INPUT_FLUID_ORE_CAP = CapabilityPosition.opposing(INPUT_FLUID_1_OFFSET);
     private static final CapabilityPosition INPUT_FLUID_ADD_CAP = CapabilityPosition.opposing(INPUT_FLUID_2_OFFSET);
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(2, 4, 0, RelativeBlockFace.UP);
-
 
     private static final Set<CapabilityPosition> FLUID_INPUT_CAPS = Set.of(
             INPUT_FLUID_ORE_CAP,
@@ -84,19 +79,6 @@ public class FlotationCellLogic implements
     public static final int ADD_CAPACITY = FluidType.BUCKET_VOLUME;
     public static final int OUTPUT_CAPACITY = 12 * FluidType.BUCKET_VOLUME;
     public static final int ENERGY_CAPACITY = 96000;
-
-    public static ResourceLocation MIF_CONDITION_FLUID_ORE = ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"flotation_cell/tank_ore");
-    public static ResourceLocation MIF_CONDITION_FLUID_ADD = ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"flotation_cell/tank_add");
-    public static ResourceLocation MIF_CONDITION_FLUID_CONCENTRATE = ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"flotation_cell/tank_concentrate");
-    public static ResourceLocation MIF_CONDITION_FLUID_TAILING = ResourceLocation.fromNamespaceAndPath(TFCTrihydrate.MODID,"flotation_cell/tank_tailing");
-
-    static
-    {
-        MachineInterfaceHandler.copyOptions(MIF_CONDITION_FLUID_ORE, MachineInterfaceHandler.BASIC_FLUID_IN);
-        MachineInterfaceHandler.copyOptions(MIF_CONDITION_FLUID_ADD, MachineInterfaceHandler.BASIC_FLUID_IN);
-        MachineInterfaceHandler.copyOptions(MIF_CONDITION_FLUID_CONCENTRATE, MachineInterfaceHandler.BASIC_FLUID_OUT);
-        MachineInterfaceHandler.copyOptions(MIF_CONDITION_FLUID_TAILING, MachineInterfaceHandler.BASIC_FLUID_OUT);
-    }
 
     public FlotationCellLogic.State createInitialState(IInitialMultiblockContext<FlotationCellLogic.State> capabilitySource) {
         return new FlotationCellLogic.State(capabilitySource);
@@ -122,14 +104,8 @@ public class FlotationCellLogic implements
 
         if(totalAmount >= 48000 && !tanks.outputConcentrate.isEmpty()){
             FluidStack unitConcentrate = tanks.outputConcentrate().getFluid().copy();
-            int extraAmount = totalAmount-48000;
-            if(extraAmount<=100){
-                unitConcentrate.setAmount(extraAmount);
-            }
-            else{
-                unitConcentrate.setAmount(100);
-            }
-
+            int extraAmount = totalAmount - 48000;
+            unitConcentrate.setAmount(Math.min(extraAmount, 100));
 
             if(state.tanks.overflow.fill(unitConcentrate, IFluidHandler.FluidAction.SIMULATE) == unitConcentrate.getAmount()){
                 state.tanks.overflow.fill(unitConcentrate, IFluidHandler.FluidAction.EXECUTE);
@@ -138,11 +114,11 @@ public class FlotationCellLogic implements
 
         }
         boolean output1 = FluidUtils.multiblockFluidOutput(
-                state.fluidOutputTailing.get(), state.tanks.outputTailing,
+                state.fluidOutputTailing, state.tanks.outputTailing,
                 -1, -1,null
         );
         boolean output2 = FluidUtils.multiblockFluidOutput(
-                state.fluidOutputConcentrate.get(), state.tanks.overflow,
+                state.fluidOutputConcentrate, state.tanks.overflow,
                 -1, -1,null
         );
         if((output1 || output2) && !updateFlag)
@@ -160,7 +136,7 @@ public class FlotationCellLogic implements
         final FluidStack inputAdd = state.tanks.inputAdd.getFluid();
         if(inputOre.isEmpty()&&inputAdd.isEmpty())
             return;
-        RecipeHolder<FlotationCellRecipe> recipe = FlotationCellRecipe.findRecipe(level, inputOre, inputAdd);
+        FlotationCellRecipe recipe = FlotationCellRecipe.findRecipe(level, inputOre, inputAdd);
         if(recipe==null){
             return;
         }
@@ -168,7 +144,6 @@ public class FlotationCellLogic implements
         process.setInputTanks(0, 1);
         state.processor.addProcessToQueue(process, level, false);
     }
-
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
@@ -185,32 +160,30 @@ public class FlotationCellLogic implements
     }
 
     @Override
-    public void registerCapabilities(CapabilityRegistrar<FlotationCellLogic.State> register)
+    public <T> LazyOptional<T> getCapability(IMultiblockContext<FlotationCellLogic.State> ctx, CapabilityPosition position, Capability<T> cap)
     {
-        register.registerAtOrNull(Capabilities.EnergyStorage.BLOCK, ENERGY_INPUT, state -> state.energy);
-        register.register(Capabilities.FluidHandler.BLOCK, (state,position) -> {
-            if(OUTPUT_FLUID_TAILING_CAP.equals(position))
-                return state.fluidOutputTailingCap;
-            else if(OUTPUT_FLUID_CONCENTRATE_CAP.equals(position))
-                return state.fluidOutputConcentrateCap;
-            else if(INPUT_FLUID_ORE_CAP.equals(position))
-                return state.fluidInputOreCap;
-            else if(INPUT_FLUID_ADD_CAP.equals(position))
-                return state.fluidInputAddCap;
-            else
-                return null;
-
-        });
-        register.registerAtBlockPos(MachineInterfaceHandler.IMachineInterfaceConnection.CAPABILITY, REDSTONE_POS, state -> state.mifHandler);
+        final State state = ctx.getState();
+        if (cap == ForgeCapabilities.ENERGY && ENERGY_INPUT.equalsOrNullFace(position))
+            return state.energyCap.cast(ctx);
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
+        {
+            if (OUTPUT_FLUID_TAILING_CAP.equals(position))
+                return state.fluidOutputTailingCap.cast(ctx);
+            if (OUTPUT_FLUID_CONCENTRATE_CAP.equals(position))
+                return state.fluidOutputConcentrateCap.cast(ctx);
+            if (INPUT_FLUID_ORE_CAP.equals(position))
+                return state.fluidInputOreCap.cast(ctx);
+            if (INPUT_FLUID_ADD_CAP.equals(position))
+                return state.fluidInputAddCap.cast(ctx);
+        }
+        return LazyOptional.empty();
     }
-
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType)
     {
         return FlotationCellShapes.SHAPE_GETTER;
     }
-
 
     public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<FlotationCellRecipe>
     {
@@ -222,89 +195,79 @@ public class FlotationCellLogic implements
         public final MultiblockProcessor.InMachineProcessor<FlotationCellRecipe> processor;
         public final FlotationCellTanks tanks = new FlotationCellTanks();
 
-
         private final IFluidTank[] tankArray = {tanks.inputOre, tanks.inputAdd, tanks.outputConcentrate, tanks.outputTailing, tanks.overflow };
-        private final Supplier<@Nullable IFluidHandler> fluidOutputTailing;
-        private final Supplier<@Nullable IFluidHandler> fluidOutputConcentrate;
-        private final IFluidHandler fluidInputOreCap;
-        private final IFluidHandler fluidInputAddCap;
-        private final IFluidHandler fluidOutputConcentrateCap;
-        private final IFluidHandler fluidOutputTailingCap;
+        private final CapabilityReference<@Nullable IFluidHandler> fluidOutputTailing;
+        private final CapabilityReference<@Nullable IFluidHandler> fluidOutputConcentrate;
+        private final StoredCapability<IEnergyStorage> energyCap;
+        private final StoredCapability<IFluidHandler> fluidInputOreCap;
+        private final StoredCapability<IFluidHandler> fluidInputAddCap;
+        private final StoredCapability<IFluidHandler> fluidOutputConcentrateCap;
+        private final StoredCapability<IFluidHandler> fluidOutputTailingCap;
         private BooleanSupplier isPlayingSound = () -> false;
-        private final MachineInterfaceHandler.IMachineInterfaceConnection mifHandler;
 
         public State(IInitialMultiblockContext<FlotationCellLogic.State> ctx)
         {
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
-            //this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_OFFSET);
             this.processor = new MultiblockProcessor.InMachineProcessor<>(
                     1, 0, 1, markDirty, FlotationCellRecipe.RECIPES::getById
             );
-            this.fluidOutputTailing = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_TAILING_OFFSET);
-            this.fluidOutputConcentrate = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_CONCENTRATE_OFFSET);
-            this.fluidInputOreCap = new ArrayFluidHandler(
+            this.energyCap = new StoredCapability<>(this.energy);
+            this.fluidOutputTailing = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT_TAILING_OFFSET);
+            this.fluidOutputConcentrate = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT_CONCENTRATE_OFFSET);
+            this.fluidInputOreCap = new StoredCapability<>(new ArrayFluidHandler(
                     true, true, markDirty, tanks.inputOre
-            );
-            this.fluidInputAddCap = new ArrayFluidHandler(
+            ));
+            this.fluidInputAddCap = new StoredCapability<>(new ArrayFluidHandler(
                     true, true, markDirty, tanks.inputAdd
-            );
-            this.fluidOutputConcentrateCap = new ArrayFluidHandler(
+            ));
+            this.fluidOutputConcentrateCap = new StoredCapability<>(new ArrayFluidHandler(
                     true,false, markDirty, tanks.overflow
-            );
-            this.fluidOutputTailingCap = new ArrayFluidHandler(
+            ));
+            this.fluidOutputTailingCap = new StoredCapability<>(new ArrayFluidHandler(
                     true,false, markDirty, tanks.outputTailing
-            );
-            this.mifHandler = () -> new MachineInterfaceHandler.MachineCheckImplementation[]{
-                    new MachineInterfaceHandler.MachineCheckImplementation<>((BooleanSupplier)() -> this.active, MachineInterfaceHandler.BASIC_ACTIVE),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(energy, MachineInterfaceHandler.BASIC_ENERGY),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(tanks.inputOre, MIF_CONDITION_FLUID_ORE),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(tanks.inputAdd, MIF_CONDITION_FLUID_ADD),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(tanks.outputTailing, MIF_CONDITION_FLUID_TAILING),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(tanks.outputConcentrate, MIF_CONDITION_FLUID_CONCENTRATE)
-            };
+            ));
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void writeSaveNBT(CompoundTag nbt)
         {
-            nbt.put("energy", energy.serializeNBT(provider));
-            nbt.put("tanks", tanks.toNBT(provider));
-            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("energy", energy.serializeNBT());
+            nbt.put("tanks", tanks.toNBT());
+            nbt.put("processor", processor.toNBT());
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            energy.deserializeNBT(provider, nbt.get("energy"));
+        public void readSaveNBT(CompoundTag nbt) {
+            energy.deserializeNBT(nbt.get("energy"));
             processor.fromNBT(
                     nbt.get("processor"),
-                    (getRecipe, data, p) -> new TFCTHMultiblockProcessInMachine<>(getRecipe, data),
-                    provider
+                    TFCTHMultiblockProcessInMachine::new
             );
-            tanks.readNBT(provider, nbt.getCompound("tanks"));
+            tanks.readNBT(nbt.getCompound("tanks"));
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void writeSyncNBT(CompoundTag nbt)
         {
 
             nbt.putBoolean("active", active);
-            nbt.put("tanks", tanks.toNBT(provider));
+            nbt.put("tanks", tanks.toNBT());
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void readSyncNBT(CompoundTag nbt)
         {
 
             active = nbt.getBoolean("active");
             //TODO THIS IS IMPORTANT WHEN GETTING DATA OUTSIDE FROM CTX
-            tanks.readNBT(provider,nbt.getCompound("tanks"));
+            tanks.readNBT(nbt.getCompound("tanks"));
         }
 
-
-
         @Override
-        public AveragingEnergyStorage getEnergy() { return energy; }
-
+        public AveragingEnergyStorage getEnergy()
+        {
+            return energy;
+        }
 
         @Override
         public IFluidTank[] getInternalTanks()
@@ -316,7 +279,7 @@ public class FlotationCellLogic implements
         @Override
         public int[] getOutputTanks()
         {
-            return new int[]{2,3};
+            return new int[]{2, 3};
         }
 
         public boolean shouldRenderActive()
@@ -334,16 +297,15 @@ public class FlotationCellLogic implements
             return bladeAngle;
         }
 
-        public FluidStack getInputOreTankFluid(){
+        public FluidStack getInputOreTankFluid()
+        {
             return tanks.inputOre.getFluid();
         }
-
     }
 
 
     public record FlotationCellTanks(FluidTank inputOre, FluidTank inputAdd, FluidTank outputTailing, FluidTank outputConcentrate, FluidTank overflow)
     {
-
         public FlotationCellTanks()
         {
             this(
@@ -354,24 +316,24 @@ public class FlotationCellLogic implements
                     new FluidTank(OUTPUT_CAPACITY));
         }
 
-        public Tag toNBT(HolderLookup.Provider provider)
+        public Tag toNBT()
         {
             CompoundTag tag = new CompoundTag();
-            tag.put("inOre", inputOre.writeToNBT(provider, new CompoundTag()));
-            tag.put("inAdd", inputAdd.writeToNBT(provider, new CompoundTag()));
-            tag.put("outTailing", outputTailing.writeToNBT(provider, new CompoundTag()));
-            tag.put("outConcentrate", outputConcentrate.writeToNBT(provider, new CompoundTag()));
-            tag.put("overflow", overflow.writeToNBT(provider, new CompoundTag()));
+            tag.put("inOre", inputOre.writeToNBT(new CompoundTag()));
+            tag.put("inAdd", inputAdd.writeToNBT(new CompoundTag()));
+            tag.put("outTailing", outputTailing.writeToNBT(new CompoundTag()));
+            tag.put("outConcentrate", outputConcentrate.writeToNBT(new CompoundTag()));
+            tag.put("overflow", overflow.writeToNBT(new CompoundTag()));
             return tag;
         }
 
-        public void readNBT(HolderLookup.Provider provider, CompoundTag tag)
+        public void readNBT(CompoundTag tag)
         {
-            inputOre.readFromNBT(provider, tag.getCompound("inOre"));
-            inputAdd.readFromNBT(provider, tag.getCompound("inAdd"));
-            outputTailing.readFromNBT(provider, tag.getCompound("outTailing"));
-            outputConcentrate.readFromNBT(provider, tag.getCompound("outConcentrate"));
-            overflow.readFromNBT(provider, tag.getCompound("overflow"));
+            inputOre.readFromNBT(tag.getCompound("inOre"));
+            inputAdd.readFromNBT(tag.getCompound("inAdd"));
+            outputTailing.readFromNBT(tag.getCompound("outTailing"));
+            outputConcentrate.readFromNBT(tag.getCompound("outConcentrate"));
+            overflow.readFromNBT(tag.getCompound("overflow"));
         }
     }
 }

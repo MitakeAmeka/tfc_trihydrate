@@ -1,49 +1,42 @@
 package net.bauxite_ltk.tfc_trihydrate.crafting;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
-import blusunrize.immersiveengineering.api.crafting.TagOutput;
-import blusunrize.immersiveengineering.api.crafting.TagOutputList;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.google.common.collect.Lists;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
-import java.util.function.Supplier;
 
 public class ThickenerRecipe extends MultiblockRecipe {
-    public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<ThickenerRecipe>> SERIALIZER;
+    public static RegistryObject<IERecipeSerializer<ThickenerRecipe>> SERIALIZER;
     public static final CachedRecipeList<ThickenerRecipe> RECIPES = new CachedRecipeList<>(TFCTHRecipeType.THICKENER);
-    //TODO Add Multiplier Config TO Ball Mill
-    public static Supplier<RecipeMultiplier> MULTIPLIERS = () -> new RecipeMultiplier(()->1.0, ()->1.0);
-
 
     public final FluidStack outputFluid;
     @Nonnull
-    public TagOutput outputItem;
+    public Lazy<ItemStack> outputItem;
+    public final FluidTagInput inputFluid;
 
-    public final SizedFluidIngredient inputFluid;
-
-
-
-    protected <T extends Recipe<?>> ThickenerRecipe(FluidStack outputFluid, @Nonnull TagOutput outputItem,
-                                                    SizedFluidIngredient inputFluid, int energy) {
-
-        super(TagOutput.EMPTY, TFCTHRecipeType.THICKENER, 5, energy, MULTIPLIERS);
+    protected <T extends Recipe<?>> ThickenerRecipe(ResourceLocation id,
+                                                    FluidStack outputFluid,
+                                                    @Nonnull ItemStack outputItem,
+                                                    FluidTagInput inputFluid,
+                                                    int energy) {
+        super(LAZY_EMPTY, TFCTHRecipeType.THICKENER, id);
         this.outputFluid = outputFluid;
         this.inputFluid = inputFluid;
-        this.outputItem = outputItem;
-
-        this.outputList = new TagOutputList(this.outputItem);
+        this.outputItem = Lazy.of(() -> outputItem);
+        this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.outputItem.get()));
         this.fluidInputList = Lists.newArrayList(this.inputFluid);
         this.fluidOutputList = Lists.newArrayList(this.outputFluid);
-
     }
 
     @Override
@@ -51,13 +44,12 @@ public class ThickenerRecipe extends MultiblockRecipe {
         return SERIALIZER.get();
     }
 
-
-    public static RecipeHolder<ThickenerRecipe> findRecipe(Level level, FluidStack inputFluid)
+    public static ThickenerRecipe findRecipe(Level level, FluidStack inputFluid)
     {
         if(inputFluid.isEmpty())
             return null;
-        for(RecipeHolder<ThickenerRecipe> recipe : RECIPES.getRecipes(level)){
-            if(recipe.value().inputFluid.test(inputFluid)){
+        for(ThickenerRecipe recipe : RECIPES.getRecipes(level)){
+            if(recipe.inputFluid != null && recipe.inputFluid.test(inputFluid)){
                 return recipe;
             }
         }

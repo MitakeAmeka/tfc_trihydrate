@@ -1,56 +1,50 @@
 package net.bauxite_ltk.tfc_trihydrate.render;
 
+import blusunrize.immersiveengineering.api.client.IVertexBufferHolder;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOrientation;
 import blusunrize.immersiveengineering.client.render.tile.BERenderUtils;
-import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
-import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
-import blusunrize.immersiveengineering.client.utils.GuiHelper;
+import blusunrize.immersiveengineering.client.render.tile.IEBlockEntityRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillLogic;
-import net.bauxite_ltk.tfc_trihydrate.fluid.ModFluids;
 import net.bauxite_ltk.tfc_trihydrate.util.Helper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.resources.model.BakedModel;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 
-public class BallMillRender extends IEMultiblockRenderer<BallMillLogic.State> {
+public class BallMillRender extends IEBlockEntityRenderer<MultiblockBlockEntityMaster<BallMillLogic.State>> {
     public static final String NAME = "ball_mill_barrel";
     public static TFCTHDynamicModel BARREL;
-
+    private static final IVertexBufferHolder BARREL_BUFFER = IVertexBufferHolder.create(() -> BARREL.getNullQuads());
 
     @Override
-    public void render(@NotNull IMultiblockContext<BallMillLogic.State> ctx, float partialTicks, @NotNull PoseStack matrixStack, @NotNull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        final BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-        BakedModel model = BARREL.get();
+    public void render(@NotNull MultiblockBlockEntityMaster<BallMillLogic.State> be, float partialTicks,
+                       @NotNull PoseStack matrixStack, @NotNull MultiBufferSource bufferIn,
+                       int combinedLightIn, int combinedOverlayIn) {
+
+        final IMultiblockContext<BallMillLogic.State> ctx = be.getHelper().getContext();
+        final BallMillLogic.State state = ctx.getState();
         final MultiblockOrientation orientation = ctx.getLevel().getOrientation();
+        Direction facing = orientation.front();
+
+        boolean active = state.shouldRenderActive();
+        float barrelAngle = state.getBarrelAngle() + (active ? 9 * partialTicks : 0);
+        bufferIn = BERenderUtils.mirror(orientation, matrixStack, bufferIn);
 
         matrixStack.pushPose();
 
-        bufferIn = BERenderUtils.mirror(orientation, matrixStack, bufferIn);
-        VertexConsumer buffer = bufferIn.getBuffer(RenderType.solid());
-        rotateForFacing(matrixStack, orientation.front());
+        rotateForFacing(matrixStack, facing);
+        Helper.applyRotationX(14, 0, barrelAngle, matrixStack);
 
-        boolean active = ctx.getState().shouldRenderActive();
-        float barrelAngle = ctx.getState().getBarrelAngle()+ (active? 9 * partialTicks: 0);
-
-        Helper.applyRotationX(14,0,barrelAngle,matrixStack);
-
-
-
-        blockRenderer.getModelRenderer().renderModel(
-                matrixStack.last(), buffer, null, model,
-                1, 1, 1,
-                combinedLightIn, combinedOverlayIn, ModelData.EMPTY, RenderType.solid()
-        );
+        BARREL_BUFFER.render(RenderType.solid(), combinedLightIn, combinedOverlayIn,
+                bufferIn, matrixStack, orientation.mirrored());
 
         matrixStack.popPose();
+    }
+
+    public static void reset() {
+        BARREL_BUFFER.reset();
     }
 }

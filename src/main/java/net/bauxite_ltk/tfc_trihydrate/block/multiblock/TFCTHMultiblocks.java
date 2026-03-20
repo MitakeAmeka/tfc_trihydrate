@@ -1,19 +1,15 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
-import blusunrize.immersiveengineering.common.blocks.generic.WindowBlock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.*;
 import com.google.common.collect.ImmutableList;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.BallMillMultiblock;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.FlotationCellMultiblock;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.HydrocycloneMultiblock;
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic.ThickenerMultiblock;
-import net.minecraft.core.Vec3i;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -77,18 +73,18 @@ public class TFCTHMultiblocks {
         });
         //Ignore sculk sensor properties
         BlockMatcher.addPreprocessor((expected, found, world, pos) -> {
-            if(expected.getBlock()==Blocks.CALIBRATED_SCULK_SENSOR&&found.getBlock()==Blocks.CALIBRATED_SCULK_SENSOR)
+            if(expected.getBlock()==Blocks.CALIBRATED_SCULK_SENSOR && found.getBlock()==Blocks.CALIBRATED_SCULK_SENSOR)
                 return expected;
             return found;
         });
         //Ignore mirrored windows
-        BlockMatcher.addPreprocessor((expected, found, world, pos) -> {
-            if(expected.getBlock() instanceof WindowBlock &&expected.getBlock()==found.getBlock()
-                    &&expected.getValue(IEProperties.FACING_ALL).getAxis()==found.getValue(IEProperties.FACING_ALL).getAxis())
-                return expected;
-            return found;
-        });
-        //Allow multiblocks to be formed under water
+        //BlockMatcher.addPreprocessor((expected, found, world, pos) -> {
+        //    if(expected.getBlock() instanceof WindowBlock && expected.getBlock() == found.getBlock()
+        //            &&expected.getValue(IEProperties.FACING_ALL).getAxis() == found.getValue(IEProperties.FACING_ALL).getAxis())
+        //        return expected;
+        //    return found;
+        //});
+        //Allow multiblocks to be formed underwater
         BlockMatcher.addPreprocessor((expected, found, world, pos) -> {
             // Un-waterlog if the expected state is dry, but the found one is not
             if(expected.hasProperty(WATERLOGGED)&&found.hasProperty(WATERLOGGED)

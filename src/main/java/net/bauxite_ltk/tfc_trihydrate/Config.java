@@ -1,34 +1,28 @@
 package net.bauxite_ltk.tfc_trihydrate;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import blusunrize.immersiveengineering.api.crafting.*;
+import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
 import net.bauxite_ltk.tfc_trihydrate.crafting.FlotationCellRecipe;
 import net.bauxite_ltk.tfc_trihydrate.crafting.HydrocycloneRecipe;
 import net.bauxite_ltk.tfc_trihydrate.crafting.ThickenerRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
 public class Config {
-
-
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     public static final Machines MACHINES = new Machines(BUILDER);
 
     public static class Machines
     {
-        public final MultiblockRecipe.RecipeMultiplier ballMillConfig;
-        public final MultiblockRecipe.RecipeMultiplier hydrocycloneConfig;
-        public final MultiblockRecipe.RecipeMultiplier flotationCellConfig;
-        public final MultiblockRecipe.RecipeMultiplier thickenerConfig;
+        public final IEServerConfig.Machines.MachineRecipeConfig<BallMillRecipe> ballMillConfig;
+        public final IEServerConfig.Machines.MachineRecipeConfig<HydrocycloneRecipe> hydrocycloneConfig;
+        public final IEServerConfig.Machines.MachineRecipeConfig<FlotationCellRecipe> flotationCellConfig;
+        public final IEServerConfig.Machines.MachineRecipeConfig<ThickenerRecipe> thickenerConfig;
 
-        Machines(ModConfigSpec.Builder builder)
+        Machines(ForgeConfigSpec.Builder builder)
         {
             builder.push("machines");
 
@@ -40,37 +34,22 @@ public class Config {
             builder.pop();
         }
 
-        private MultiblockRecipe.RecipeMultiplier addMachineEnergyTimeModifiers(ModConfigSpec.Builder builder, String machine)
-        {
-            return addMachineEnergyTimeModifiers(builder, machine, true);
-        }
-
-        private MultiblockRecipe.RecipeMultiplier addMachineEnergyTimeModifiers(ModConfigSpec.Builder builder, String machine, boolean popCategory)
+        private <T extends MultiblockRecipe> IEServerConfig.Machines.MachineRecipeConfig<T> addMachineEnergyTimeModifiers(ForgeConfigSpec.Builder builder, String machine)
         {
             builder.push(machine.replace(' ', '_'));
-            ModConfigSpec.DoubleValue energy = builder
+            ForgeConfigSpec.DoubleValue energy = builder
                     .comment("A modifier to apply to the energy costs of every "+machine+" recipe")
                     .worldRestart()
                     .defineInRange("energyModifier", 1, 1e-3, 1e3);
-            ModConfigSpec.DoubleValue time = builder
+            ForgeConfigSpec.DoubleValue time = builder
                     .comment("A modifier to apply to the time of every "+machine+" recipe")
                     .defineInRange("timeModifier", 1, 1e-3, 1e3);
-            if(popCategory)
                 builder.pop();
-            return new MultiblockRecipe.RecipeMultiplier(time::get, energy::get);
-        }
-
-
-        public void populateAPI()
-        {
-            BallMillRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(ballMillConfig.timeModifier(),ballMillConfig.energyModifier());
-            HydrocycloneRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(hydrocycloneConfig.timeModifier(),hydrocycloneConfig.energyModifier());
-            FlotationCellRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(flotationCellConfig.timeModifier(),flotationCellConfig.energyModifier());
-            ThickenerRecipe.MULTIPLIERS = () -> new MultiblockRecipe.RecipeMultiplier(thickenerConfig.timeModifier(),thickenerConfig.energyModifier());
+            return new IEServerConfig.Machines.MachineRecipeConfig<>(energy, time);
         }
     }
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    static final ForgeConfigSpec SPEC = BUILDER.build();
 
     private static boolean validateItemName(final Object obj) {
         return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));

@@ -18,7 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.data.ModelData;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -117,7 +117,7 @@ public class TFCTHMultiblockProperties implements ClientMultiblocks.MultiblockMa
                     RANDOM_SOURCE.setSeed(42L);
                     List<BakedQuad> quads = bakedmodel.getQuads(null, direction, RANDOM_SOURCE, ModelData.EMPTY, null);
                     for(BakedQuad quad: quads){
-                        vertexConsumer.putBulkData(last, quad, 1.0F, 1.0F, 1.0F, 1.0F, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+                        vertexConsumer.putBulkData(last, quad, 1.0F, 1.0F, 1.0F, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
                     }
                 }
             }

@@ -1,6 +1,5 @@
 package net.bauxite_ltk.tfc_trihydrate.block.multiblock.logic;
 
-
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.ComparatorManager;
@@ -12,7 +11,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.tool.MachineInterfaceHandler;
+import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.*;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.IESounds;
@@ -24,22 +23,23 @@ import net.bauxite_ltk.tfc_trihydrate.block.multiblock.process.TFCTHMultiblockPr
 import net.bauxite_ltk.tfc_trihydrate.block.multiblock.shapes.BallMillShapes;
 import net.bauxite_ltk.tfc_trihydrate.crafting.BallMillRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.IFluidTank;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class BallMillLogic implements
         IMultiblockLogic<BallMillLogic.State>,
@@ -72,8 +71,6 @@ public class BallMillLogic implements
     public static final int TANK_CAPACITY = 24 * FluidType.BUCKET_VOLUME;
     public static final int ENERGY_CAPACITY = 96000;
 
-
-
     public BallMillLogic.State createInitialState(IInitialMultiblockContext<BallMillLogic.State> capabilitySource) {
         return new BallMillLogic.State(capabilitySource);
     }
@@ -91,7 +88,7 @@ public class BallMillLogic implements
         if(context.getLevel().shouldTickModulo(8))
             handleItemOutput(context);
         FluidUtils.multiblockFluidOutput(
-                state.fluidOutput.get(), state.tanks.output,
+                state.fluidOutput, state.tanks.output,
                 -1, -1,null
         );
     }
@@ -118,7 +115,7 @@ public class BallMillLogic implements
                 continue;
             stack = stack.copy();
             stack.shrink(usedInvSlots[slot]);
-            RecipeHolder<BallMillRecipe> recipe = BallMillRecipe.findRecipe(level, stack, inputFluid);
+            BallMillRecipe recipe = BallMillRecipe.findRecipe(level, stack, inputFluid);
             if(recipe!=null){
                 TFCTHMultiblockProcessInMachine<BallMillRecipe> process = new TFCTHMultiblockProcessInMachine<>(recipe, slot);
                 if(!inputFluid.isEmpty()){
@@ -159,27 +156,32 @@ public class BallMillLogic implements
     }
 
     @Override
-    public void registerCapabilities(CapabilityRegistrar<BallMillLogic.State> register)
+    public <T> LazyOptional<T> getCapability(IMultiblockContext<BallMillLogic.State> ctx, CapabilityPosition position, Capability<T> cap)
     {
-        register.registerAtOrNull(Capabilities.EnergyStorage.BLOCK, ENERGY_INPUT, state -> state.energy);
-        register.registerAtOrNull(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_CAP, state -> state.fluidOutputCap);
-        register.registerAtOrNull(Capabilities.FluidHandler.BLOCK, INPUT_FLUID_CAP, state -> state.fluidInputCap);
-        register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
-            if(OUTPUT_CAP.equals(position))
-                return state.itemOutputCap;
-            else if(INPUT_CAP.equals(position))
-                return state.itemInputCap;
-            else
-                return null;
-        });
-        register.registerAtBlockPos(MachineInterfaceHandler.IMachineInterfaceConnection.CAPABILITY, REDSTONE_POS, state -> state.mifHandler);
+        final State state = ctx.getState();
+        if (cap == ForgeCapabilities.ENERGY && ENERGY_INPUT.equalsOrNullFace(position))
+            return state.energyCap.cast(ctx);
+        if (cap == ForgeCapabilities.FLUID_HANDLER)
+        {
+            if (OUTPUT_FLUID_CAP.equals(position))
+                return state.fluidOutputCap.cast(ctx);
+            if (INPUT_FLUID_CAP.equals(position))
+                return state.fluidInputCap.cast(ctx);
+        }
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
+        {
+            if (OUTPUT_CAP.equals(position))
+                return state.itemOutputCap.cast(ctx);
+            if (INPUT_CAP.equals(position))
+                return state.itemInputCap.cast(ctx);
+        }
+        return LazyOptional.empty();
     }
 
     @Override
     public void dropExtraItems(State state, Consumer<ItemStack> drop) {
         MBInventoryUtils.dropItems(state.inventory, drop);
     }
-
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType)
@@ -194,8 +196,6 @@ public class BallMillLogic implements
         );
     }
 
-
-
     public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<BallMillRecipe>
     {
         private final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
@@ -207,16 +207,15 @@ public class BallMillLogic implements
         private final SlotwiseItemHandler inventory;
         public final BallMillTanks tanks = new BallMillTanks();
 
-
         private final IFluidTank[] tankArray = {tanks.input, tanks.output};
-        private final Supplier<@Nullable IItemHandler> itemOutput;
-        private final Supplier<@Nullable IFluidHandler> fluidOutput;
-        private final IItemHandler itemInputCap;
-        private final IItemHandler itemOutputCap;
-        private final IFluidHandler fluidInputCap;
-        private final IFluidHandler fluidOutputCap;
+        private final CapabilityReference<@Nullable IItemHandler> itemOutput;
+        private final CapabilityReference<@Nullable IFluidHandler> fluidOutput;
+        private final StoredCapability<IEnergyStorage> energyCap;
+        private final StoredCapability<IItemHandler> itemInputCap;
+        private final StoredCapability<IItemHandler> itemOutputCap;
+        private final StoredCapability<IFluidHandler> fluidInputCap;
+        private final StoredCapability<IFluidHandler> fluidOutputCap;
         private BooleanSupplier isPlayingSound = () -> false;
-        private final MachineInterfaceHandler.IMachineInterfaceConnection mifHandler;
 
         public State(IInitialMultiblockContext<BallMillLogic.State> ctx)
         {
@@ -225,67 +224,60 @@ public class BallMillLogic implements
                     new SlotwiseItemHandler.IOConstraintGroup(SlotwiseItemHandler.IOConstraint.NO_CONSTRAINT, NUM_INPUT_SLOTS),
                     new SlotwiseItemHandler.IOConstraintGroup(SlotwiseItemHandler.IOConstraint.OUTPUT, 1)
             ), markDirty);
-            this.itemOutput = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, OUTPUT_OFFSET);
-            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, OUTPUT_FLUID_OFFSET);
+            this.itemOutput = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, OUTPUT_OFFSET);
+            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, OUTPUT_FLUID_OFFSET);
             this.processor = new MultiblockProcessor.InMachineProcessor<>(
                     NUM_INPUT_SLOTS, 0, NUM_INPUT_SLOTS, markDirty, BallMillRecipe.RECIPES::getById
             );
-            this.itemInputCap = new WrappingItemHandler(
+            this.energyCap = new StoredCapability<>(this.energy);
+            this.itemInputCap = new StoredCapability<>(new WrappingItemHandler(
                     getInventory(), true, false, new WrappingItemHandler.IntRange(0, NUM_INPUT_SLOTS)
-            );
-            this.itemOutputCap = new WrappingItemHandler(
+            ));
+            this.itemOutputCap = new StoredCapability<>(new WrappingItemHandler(
                     getInventory(), false, true, new WrappingItemHandler.IntRange(OUTPUT_SLOT, OUTPUT_SLOT+1)
-            );
-            this.fluidInputCap = new ArrayFluidHandler(
+            ));
+            this.fluidInputCap = new StoredCapability<>(new ArrayFluidHandler(
                     false, true, markDirty, tanks.input
-            );
-            this.fluidOutputCap = ArrayFluidHandler.drainOnly(tanks.output, markDirty);
-            this.mifHandler = () -> new MachineInterfaceHandler.MachineCheckImplementation[]{
-                    new MachineInterfaceHandler.MachineCheckImplementation<>((BooleanSupplier)() -> this.active, MachineInterfaceHandler.BASIC_ACTIVE),
-                    //new MachineInterfaceHandler.MachineCheckImplementation<>(processor, MachineInterfaceHandler.BASIC_ITEM_IN, processor.getMachineInterfaceOptions(true)),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(energy, MachineInterfaceHandler.BASIC_ENERGY),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(itemInputCap, MachineInterfaceHandler.BASIC_ITEM_IN),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(itemOutputCap, MachineInterfaceHandler.BASIC_ITEM_OUT),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(fluidInputCap, MachineInterfaceHandler.BASIC_FLUID_IN),
-                    new MachineInterfaceHandler.MachineCheckImplementation<>(fluidOutputCap, MachineInterfaceHandler.BASIC_FLUID_OUT)
-            };
+            ));
+            this.fluidOutputCap = new StoredCapability<>(ArrayFluidHandler.drainOnly(tanks.output, markDirty));
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void writeSaveNBT(CompoundTag nbt)
         {
-            nbt.put("energy", energy.serializeNBT(provider));
-            nbt.put("inventory", inventory.serializeNBT(provider));
-            nbt.put("tanks", tanks.toNBT(provider));
-            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("energy", energy.serializeNBT());
+            nbt.put("inventory", inventory.serializeNBT());
+            nbt.put("tanks", tanks.toNBT());
+            nbt.put("processor", processor.toNBT());
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            energy.deserializeNBT(provider, nbt.get("energy"));
-            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+        public void readSaveNBT(CompoundTag nbt) {
+            energy.deserializeNBT(nbt.get("energy"));
+            inventory.deserializeNBT(nbt.getCompound("inventory"));
             processor.fromNBT(
                     nbt.get("processor"),
-                    (getRecipe, data, p) -> new TFCTHMultiblockProcessInMachine<>(getRecipe, data),
-                    provider
+                    TFCTHMultiblockProcessInMachine::new
             );
-            tanks.readNBT(provider, nbt.getCompound("tanks"));
+            tanks.readNBT(nbt.getCompound("tanks"));
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void writeSyncNBT(CompoundTag nbt)
         {
             nbt.putBoolean("active", active);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
+        public void readSyncNBT(CompoundTag nbt)
         {
             active = nbt.getBoolean("active");
         }
 
         @Override
-        public AveragingEnergyStorage getEnergy() { return energy; }
+        public AveragingEnergyStorage getEnergy() {
+            return energy;
+        }
 
         @Override
         public IItemHandlerModifiable getInventory()
@@ -320,30 +312,27 @@ public class BallMillLogic implements
         {
             return barrelAngle;
         }
-
     }
-
 
     public record BallMillTanks(FluidTank input, FluidTank output)
     {
-
         public BallMillTanks()
         {
             this(new FluidTank(TANK_CAPACITY), new FluidTank(TANK_CAPACITY));
         }
 
-        public Tag toNBT(HolderLookup.Provider provider)
+        public Tag toNBT()
         {
             CompoundTag tag = new CompoundTag();
-            tag.put("in", input.writeToNBT(provider, new CompoundTag()));
-            tag.put("out", output.writeToNBT(provider, new CompoundTag()));
+            tag.put("in", input.writeToNBT(new CompoundTag()));
+            tag.put("out", output.writeToNBT(new CompoundTag()));
             return tag;
         }
 
-        public void readNBT(HolderLookup.Provider provider, CompoundTag tag)
+        public void readNBT(CompoundTag tag)
         {
-            input.readFromNBT(provider, tag.getCompound("in"));
-            output.readFromNBT(provider, tag.getCompound("out"));
+            input.readFromNBT(tag.getCompound("in"));
+            output.readFromNBT(tag.getCompound("out"));
         }
     }
 }
